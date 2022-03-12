@@ -15,6 +15,13 @@ svg {
     width: 100%;
 }
 
+#nav2 {
+    width: 165px;
+    position: fixed;
+    z-index: 10;
+
+}
+
 .navbar-fixed-left {
     width: 80px;
     position: fixed;
@@ -37,10 +44,10 @@ svg {
     margin-left: 140px;
     }
 
-.icon-play{
+.icon-brand{
     background-image : url(./assets/icons/iVzDgRJPRAKkrmJnpu86mU-970-80V7.png);
     background-size: cover;
-/* display: inline-block; */
+    display: inline-block;
     height: 45px;
     width: 45px;
-    }
+}

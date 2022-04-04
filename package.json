@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "jquery-csv": "^1.0.21",
+    "swiss-maps": "^4.1.0"
+  }
+}

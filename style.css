@@ -1,53 +1,133 @@
-svg {
-    height: 98.5%;
-}
-
-.circle {
-    fill: green;
-    cursor: pointer;
-}
-
-#nav1{
-    transition: transform .5s cubic-bezier(.4,0,.2,1); 
-    z-index: 9; 
-    position: absolute; 
-    max-width: 80px; 
-    width: 100%;
-}
-
-#nav2 {
-    width: 165px;
-    position: fixed;
-    z-index: 10;
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color: #495057;
+  background-color: whitesmoke;
+  border-color: #dee2e6 #dee2e6 #fff;
+  opacity: 100%;
 
 }
 
-.navbar-fixed-left {
-    width: 80px;
-    position: fixed;
-    border-radius: 0;
-    height: 100%;
+.nav-tabs .nav-link {
+  color: white;
+  border-color: #dee2e6 #dee2e6 #fff;
+  border-bottom-left-radius: 1.2rem;
+  border-bottom-right-radius: 1.2rem;
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
+  margin-bottom: 0.4rem;
+  border-color: transparent;
+  opacity: 80%;
+  margin-right: 0.3rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px !important;
 }
 
-.navbar-fixed-left .navbar-nav > li {
-    float: none;  /* Cancel default li float: left */
-    width: 139px;
+#subtabs {
+  opacity: 80%;
+  color: whitesmoke;
+  margin-right: auto;
+  border-bottom-left-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
 }
 
-.navbar-fixed-left + .container {
-    padding-left: 80px;
+#subtabs.nav-link.active {
+  opacity: 100%;
+  color: whitesmoke;
+  background-color: white;
+  border-color: transparent;
 }
 
-/* On using dropdown menu (To right shift popuped) */
-.navbar-fixed-left .navbar-nav > li > .dropdown-menu {
-    margin-top: -50px;
-    margin-left: 140px;
-    }
-
-.icon-brand{
-    background-image : url(./assets/icons/iVzDgRJPRAKkrmJnpu86mU-970-80V7.png);
-    background-size: cover;
-    display: inline-block;
-    height: 45px;
-    width: 45px;
+#geoui {
+  border-bottom-left-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
+  z-index: 999;
 }
+
+a {
+  color: whitesmoke;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.navbar-brand {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 30px !important;
+  display: inline-block;
+  padding: 0px;
+  margin-left: 1.4rem;
+  /* margin-bottom: 2rem; */
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.icon-swiss {
+  /* background-position:50% 50%; */
+  height: 60px;
+  width: auto;
+  background-size: contains;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.btn {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+#svgcontainer {
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}
+
+.country {
+  fill: black;
+}
+
+.canton-boundaries {
+  fill: black;
+  stroke: #fff;
+  stroke-width: 1;
+  z-index: -100;
+}
+
+.municipality-boundaries {
+  fill: black;
+  stroke: #fff;
+  stroke-width: .3;
+}
+
+.lakes {
+  fill: black;
+  stroke: black;
+  stroke-width: .3;
+}
+
+.tooltip {
+  background-color: #d3d3d370;
+  color: black;
+  padding: none;
+  pointer-events: none;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: .2rem;
+  background: #FFFFFF;
+  color: #313639;
+  border: 0.5px solid #7a7a7a;
+  border-radius: 3px;
+  pointer-events: none;
+  font-size: 1.3rem;
+  font-weight: 100;
+  font-family: 'Times New Roman', Times, serif;
+  z-index: 1000;
+}
+

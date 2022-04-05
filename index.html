@@ -21,7 +21,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <img src="./assets/Logo_Universität_Bern.png" width="360px" height="91px" class="icon-swiss"></img>
-    <a href="#" class="navbar-brand text-white">Bundesamt für Energie - Open Data Project 2022</a>
+    <a href="/index.html" class="navbar-brand text-white">Bundesamt für Energie - Open Data Project 2022</a>
     <ul class="nav nav-tabs ml-auto no style" style="border-bottom:0px" id="myTab">
       <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#visualization"><i
@@ -48,27 +48,27 @@
   <div class="container-fluid mt-2 px-2 mx-0">
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane fade show active" id="visualization">
-        <div class="row container-fluid mx-0 px-1" style="height: 60%;">
+        <div class="row container-fluid mx-0 px-1" style="height: 80%;">
           <div class="card col col-md-2 py-2 bg-light">
             <span> Statistics </span>
           </div>
-          <div class="card col mx-2 px-0">
-            <div id="svgcontainer"> 
-              <div id="map"></div> 
-              <div id="loader">
-                <svg id="loading" width="960" height="500">
-                  <defs>
-                    <clipPath id="clip-upper">
-                      <rect id="loadingrect" width="960" height="305" x="-480" y="-305"></rect>
-                    </clipPath>
-                    <clipPath id="clip-lower">
-                      <rect id="loadingrect" width="960" height="195" x="-480" y="0"></rect>
-                    </clipPath>
-                  </defs>
-                  <g clip-path="url(#clip-upper)" transform="translate(480,305)"></g>
-                  <g clip-path="url(#clip-lower)" transform="translate(480,305)"></g>
-                </svg>
-                <div id="textbox"><span id="loadingText">LOADING</span></div>
+            <div class="card col mx-2 px-0">
+              <div id="svgcontainer"> 
+                <div id="map"></div> 
+                <div id="loader">
+                  <svg id="loading" width="960" height="500">
+                    <defs>
+                      <clipPath id="clip-upper">
+                        <rect id="loadingrect" width="960" height="305" x="-480" y="-305"></rect>
+                      </clipPath>
+                      <clipPath id="clip-lower">
+                        <rect id="loadingrect" width="960" height="195" x="-480" y="0"></rect>
+                      </clipPath>
+                    </defs>
+                    <g clip-path="url(#clip-upper)" transform="translate(480,305)"></g>
+                    <g clip-path="url(#clip-lower)" transform="translate(480,305)"></g>
+                  </svg>
+                  <a id="loadingText">LOADING</a>
             </div>
           </div>
           </div>

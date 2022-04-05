@@ -6,7 +6,7 @@ var svg = mapContainer.append('svg')
   .attr("id", "mapsvg")
   .attr("width", 100 +"%")
   .attr("height", 100 + "%")
-  .call(zoomFunction(country))
+  .attr("viewBox", [55, 360, 1080, 1])
 
 var projection = d3.geoMercator()
   .center([-172.3, 47.2])
@@ -33,19 +33,19 @@ var tooltip = mapContainer.append("div")
   .style("opacity", 0);
 
 
+const zoom = d3.zoom()
+    .scaleExtent([1, 40])
+    .on("zoom", zoomed);
 
 function main() {
-  $('#map').hide()
-  $('#loader').show();
   populateMap()
-  country.call(zoomFunction(country))
-  canton.call(zoomFunction(canton))
-  municipalities.call(zoomFunction(municipalities));
+  svg.call(zoom);
   transitionMap()
-
 }
 
 function populateMap() {
+  $('#map').hide()
+  $('#loader').show();
   d3.json("./node_modules/swiss-maps/2021-07/ch-combined.json").then(function (ch) {
     d3.csv("./node_modules/swiss-maps/2021-07/cantonsV3.csv").then(function (ct) {
       var x = 0;
@@ -79,7 +79,6 @@ function populateMap() {
         .on("mouseover", handleMouseOver)
         .on("mouseout", handleMouseOut)
         .on("click", handleClick)
-
     })
 
     country.selectAll("path")
@@ -93,6 +92,7 @@ function populateMap() {
       .on("click", handleClick)
 
   });
+ 
 }
 
 function transitionMap() {
@@ -135,11 +135,17 @@ function handleMouseOut(d, i) {
 }
 
 function handleClick(d, i) {
+  centroid = getBoundingBoxCenter(d3.select(this))
   d3.selectAll("path")
     .style("fill", "black")
   d3.select(this)
     .style("fill", "orange")
-  recentClick = d['target']
+  d.stopPropagation();
+  svg.transition().duration(750).call(
+    zoom.transform,
+    d3.zoomIdentity.translate(width/2, height/2).scale(5).translate(-centroid[0]+48, -centroid[1]+24),
+    d3.pointer(d)
+  )
 }
 
 function visibilitytoggler(d) {
@@ -148,20 +154,34 @@ function visibilitytoggler(d) {
   municipalities.attr("visibility", "hidden")
   if (d == 1) {
     country.attr("visibility", "visible")
+    reset()
   } if (d == 2) {
     canton.attr("visibility", "visible")
+    reset()
   } if (d == 3) {
     municipalities.attr("visibility", "visible")
+    reset()
   }
 }
-function zoomFunction(d) {
-  return d3.zoom()
-    .scaleExtent([1, 8])
-    .on('zoom', function (event) {
-      d.selectAll('path')
-        .attr('transform', event.transform);
-    });
+
+function zoomed({transform}) {
+  country.attr("transform", transform);
+  canton.attr("transform", transform);
+  municipalities.attr("transform", transform);
 }
 
+function reset() {
+  svg.transition().duration(750).call(
+    zoom.transform,
+    d3.zoomIdentity,
+    d3.zoomTransform(svg.node()).invert([width / 2, height / 2])
+  );
+}
+
+function getBoundingBoxCenter (selection) {
+  var element = selection.node();
+  var bbox = element.getBBox();
+  return [bbox.x + bbox.width/2, bbox.y + bbox.height/2];
+}
 
 main();

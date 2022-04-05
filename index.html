@@ -18,7 +18,7 @@
   <script src="./node_modules/jquery-csv/src/jquery.csv.js"></script>
 </head>
 
-<body>
+<body oncontextmenu="javascript:reset();return false;">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <img src="./assets/Logo_Universität_Bern.png" width="360px" height="91px" class="icon-swiss"></img>
     <a href="/index.html" class="navbar-brand text-white">Bundesamt für Energie - Open Data Project 2022</a>
@@ -55,7 +55,7 @@
             <div class="card col px-0" style="border-left:hidden; border-right:hidden">
               <div id="svgcontainer"> 
                 <div id="map"></div> 
-                <div id="loader" >
+                <div id="loader">
                   <svg id="loading" width="960" height="500">
                     <defs>
                       <clipPath id="clip-upper">

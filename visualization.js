@@ -1,13 +1,12 @@
 
-var mapContainer = d3.select('#map').style("opacity", 0)
+var mapContainer = d3.select('#map')
+  .style("opacity", 0)
+  .style("overflow-x","hidden")
 
 var svg = mapContainer.append('svg')
-var bbox = mapContainer.node().getBoundingClientRect();
-var svgWidth = bbox.width;
-var svgHeight = bbox.height;
-
-svg.attr("width", svgWidth)
-  .attr("height", svgHeight)
+  .attr("id", "mapsvg")
+  .attr("width", 100 +"%")
+  .attr("height", 100 + "%")
   .call(zoomFunction(country))
 
 var projection = d3.geoMercator()
@@ -104,7 +103,6 @@ function transitionMap() {
     .transition()
     .duration(10000)
     .style("opacity", 100)
-
 
   d3.select("#loader")
     .transition()

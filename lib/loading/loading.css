@@ -1,14 +1,6 @@
 /* Loading */
 @import url('https://fonts.googleapis.com/css?family=Inconsolata');
 
-#loading .svg {
-  position: fixed;
-  margin: 0 auto;
-  display: block;
-  text-align: center;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 300;
-}
 
 #loading {
   position: absolute;
@@ -18,7 +10,6 @@
   right: 0;
   bottom: 0;
   z-index: 2;
-  /* margin-top: 0em; */
   transform: scale(.5);
 }
 
@@ -26,37 +17,15 @@ rect {
   fill: #fff;
   stroke: black;
 }
-#textbox {
-  position: absolute;
-  height: 40px;
-  margin: auto;
-  top: -25%;
-  left: 49.5%;
-  right: 50.5%;
-  bottom: 0%;
+
+#loadingtext {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 31px;
+  width: 100%;
   text-transform: uppercase;
-  text-align: center;
-  text-anchor: middle ;
+  letter-spacing: 3px;
 
 }
-#loadingText {
-  position: absolute;
-  height: 40px;
-  margin: auto;
-  top: -20%;
-  left: 50%;
-  right: 50%;
-  bottom: 0%;
-  text-transform: uppercase;
-  text-align: center;
-  text-anchor: middle ;
-  
-  letter-spacing: 0.1em;
-  font-size: 14px;
-  color: #000;
-  z-index: 999;
-  font-family: 'Times New Roman', Times, serif;
-  }
   /* ::after {
   animation: rt 2s infinite;
   content: "";

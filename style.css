@@ -131,3 +131,8 @@ div.tooltip {
   z-index: 1000;
 }
 
+*, ::after, ::before {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+

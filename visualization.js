@@ -1,4 +1,3 @@
-
 var mapContainer = d3.select('#map')
   .style("opacity", 0)
   .style("overflow-x","hidden")
@@ -10,8 +9,8 @@ var svg = mapContainer.append('svg')
   .call(zoomFunction(country))
 
 var projection = d3.geoMercator()
-  .center([-171.79, 46.85])
-  .scale(9500)
+  .center([-172.3, 47.2])
+  .scale(11000)
   .rotate([-180, 0]);
 
 var path = d3.geoPath()
@@ -40,7 +39,7 @@ function main() {
   $('#loader').show();
   populateMap()
   country.call(zoomFunction(country))
-  canton.call(zoomFunction(canton));
+  canton.call(zoomFunction(canton))
   municipalities.call(zoomFunction(municipalities));
   transitionMap()
 
@@ -163,5 +162,6 @@ function zoomFunction(d) {
         .attr('transform', event.transform);
     });
 }
+
 
 main();

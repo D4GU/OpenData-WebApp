@@ -46,15 +46,17 @@ function main() {
 function populateMap() {
   d3.json("./node_modules/swiss-maps/2021-07/ch-combined.json").then(function (ch) {
     d3.csv("./data/ogd6_kev-bezueger.csv").then(function(pt) {
-      console.log(pt)
       d3.csv("./node_modules/swiss-maps/2021-07/cantonsV3.csv").then(function (name) {
         var x = 0;
+        console.log()
         canton.selectAll("path")
           .data(topojson.feature(ch, ch.objects.cantons).features)
           .enter().append("path")
           .each(function (d) {
             d3.select(this)
+              .attr("abbreviation", name[x]['abbreviation'])
               .attr("name", name[x++]['name'])
+              
           })
           .attr("class", "canton-boundaries")
           .attr("d", path)
@@ -114,12 +116,9 @@ function transitionMap() {
 
 function handleMouseOver(d, i) {
   d3.select(this)
-    .style("opacity", 0.9)
-    .style("stroke","black")
-    .raise()
-    .transition()
-      .duration(400)
-        .attr("transform", "scale(1.002,1.002)")
+    .style("opacity", 0.7)
+    
+
 
   tooltip.transition()
     .duration(100)
@@ -134,10 +133,7 @@ function handleMouseOver(d, i) {
 function handleMouseOut(d, i) {
   d3.select(this)
     .style("opacity", 1)
-    .style("stroke","white")
-    .transition()
-      .duration(400)
-        .attr("transform", "scale(1,1)")
+
         
   tooltip.transition()
     .duration('100')
@@ -148,12 +144,21 @@ function handleClick(d, i) {
   centroid = getBoundingBoxCenter(d3.select(this))
   d3.selectAll("path")
     .style("fill", "#343a40")
+    .style("stroke-width",".3")
+    .transition()
+    .duration(400)
+      .attr("transform", "scale(1,1)")
   d3.select(this)
     .style("fill", "orange")
+    .style("stroke-width","2.5")
+    .raise()
+    .transition()
+      .duration(400)
+        .attr("transform", "scale(1.002,1.002)")
   d.stopPropagation();
   svg.transition().duration(750).call(
     zoom.transform,
-    d3.zoomIdentity.translate(width/2, height/2).scale(5).translate(-centroid[0]+48, -centroid[1]+24),
+    d3.zoomIdentity.translate(width/2, height/2).scale(2).translate(-centroid[0]+120, -centroid[1]+85),
     d3.pointer(d)
   )
 }

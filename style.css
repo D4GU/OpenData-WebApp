@@ -87,24 +87,24 @@ a {
 }
 
 .country {
-  fill: black;
+  fill: #343a40;
 }
 
 .canton-boundaries {
-  fill: black;
+  fill: #343a40;
   stroke: #fff;
   stroke-width: 1;
   z-index: -100;
 }
 
 .municipality-boundaries {
-  fill: black;
+  fill: #343a40;
   stroke: #fff;
   stroke-width: .3;
 }
 
 .lakes {
-  fill: black;
+  fill: #343a40;
   stroke: black;
   stroke-width: .3;
 }

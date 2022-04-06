@@ -44,55 +44,55 @@ function main() {
 }
 
 function populateMap() {
-  $('#map').hide()
-  $('#loader').show();
   d3.json("./node_modules/swiss-maps/2021-07/ch-combined.json").then(function (ch) {
-    d3.csv("./node_modules/swiss-maps/2021-07/cantonsV3.csv").then(function (ct) {
-      var x = 0;
-      canton.selectAll("path")
-        .data(topojson.feature(ch, ch.objects.cantons).features)
+    d3.csv("./data/ogd6_kev-bezueger.csv").then(function(pt) {
+      console.log(pt)
+      d3.csv("./node_modules/swiss-maps/2021-07/cantonsV3.csv").then(function (name) {
+        var x = 0;
+        canton.selectAll("path")
+          .data(topojson.feature(ch, ch.objects.cantons).features)
+          .enter().append("path")
+          .each(function (d) {
+            d3.select(this)
+              .attr("name", name[x++]['name'])
+          })
+          .attr("class", "canton-boundaries")
+          .attr("d", path)
+          .on("mouseover", handleMouseOver)
+          .on("mouseout", handleMouseOut)
+          .on("click", handleClick)
+  
+  
+      })
+  
+      d3.csv("./node_modules/swiss-maps/2021-07/municipalitiesV3.csv").then(function (name) {
+        var y = 0;
+        municipalities.selectAll("path")
+          .data(topojson.feature(ch, ch.objects.municipalities).features)
+          .enter().append("path")
+          .each(function () {
+            d3.select(this)
+              .attr("name", name[y++]['name'])
+          })
+          .attr("class", "municipality-boundaries")
+          .attr("d", path)
+          .on("mouseover", handleMouseOver)
+          .on("mouseout", handleMouseOut)
+          .on("click", handleClick)
+      })
+  
+      country.selectAll("path")
+        .data(topojson.feature(ch, ch.objects.country).features)
         .enter().append("path")
-        .each(function (d) {
-          d3.select(this)
-            .attr("name", ct[x++]['name'])
-        })
-        .attr("class", "canton-boundaries")
+        .attr("class", "country")
+        .attr("name", "Switzerland")
         .attr("d", path)
         .on("mouseover", handleMouseOver)
         .on("mouseout", handleMouseOut)
         .on("click", handleClick)
 
-
     })
-
-    d3.csv("./node_modules/swiss-maps/2021-07/municipalitiesV3.csv").then(function (ct) {
-      var y = 0;
-      municipalities.selectAll("path")
-        .data(topojson.feature(ch, ch.objects.municipalities).features)
-        .enter().append("path")
-        .each(function () {
-          d3.select(this)
-            .attr("name", ct[y++]['name'])
-        })
-        .attr("class", "municipality-boundaries")
-        .attr("d", path)
-        .on("mouseover", handleMouseOver)
-        .on("mouseout", handleMouseOut)
-        .on("click", handleClick)
-    })
-
-    country.selectAll("path")
-      .data(topojson.feature(ch, ch.objects.country).features)
-      .enter().append("path")
-      .attr("class", "country")
-      .attr("name", "Switzerland")
-      .attr("d", path)
-      .on("mouseover", handleMouseOver)
-      .on("mouseout", handleMouseOut)
-      .on("click", handleClick)
-
   });
- 
 }
 
 function transitionMap() {
@@ -114,11 +114,16 @@ function transitionMap() {
 
 function handleMouseOver(d, i) {
   d3.select(this)
-    .style("opacity", 0.5);
+    .style("opacity", 0.9)
+    .style("stroke","black")
+    .raise()
+    .transition()
+      .duration(400)
+        .attr("transform", "scale(1.002,1.002)")
 
   tooltip.transition()
     .duration(100)
-    .style("opacity", .9);
+    .style("opacity", .8);
 
   tooltip.html(d3.select(this).attr("name"))
     .style("left", (d['pageX'] - 400) + "px")
@@ -129,6 +134,11 @@ function handleMouseOver(d, i) {
 function handleMouseOut(d, i) {
   d3.select(this)
     .style("opacity", 1)
+    .style("stroke","white")
+    .transition()
+      .duration(400)
+        .attr("transform", "scale(1,1)")
+        
   tooltip.transition()
     .duration('100')
     .style("opacity", 0);
@@ -137,7 +147,7 @@ function handleMouseOut(d, i) {
 function handleClick(d, i) {
   centroid = getBoundingBoxCenter(d3.select(this))
   d3.selectAll("path")
-    .style("fill", "black")
+    .style("fill", "#343a40")
   d3.select(this)
     .style("fill", "orange")
   d.stopPropagation();

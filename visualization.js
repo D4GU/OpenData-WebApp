@@ -45,10 +45,10 @@ function main() {
 
 function populateMap() {
   d3.json("./node_modules/swiss-maps/2021-07/ch-combined.json").then(function (ch) {
-    d3.csv("./data/ogd6_kev-bezueger.csv").then(function(pt) {
+    d3.json("./lib/preprocessing/combined_results.json").then(function(pt) {
       d3.csv("./node_modules/swiss-maps/2021-07/cantonsV3.csv").then(function (name) {
+        console.log(pt)
         var x = 0;
-        console.log()
         canton.selectAll("path")
           .data(topojson.feature(ch, ch.objects.cantons).features)
           .enter().append("path")
@@ -65,8 +65,8 @@ function populateMap() {
           .on("click", handleClick)
   
   
-      })
-  
+      });
+
       d3.csv("./node_modules/swiss-maps/2021-07/municipalitiesV3.csv").then(function (name) {
         var y = 0;
         municipalities.selectAll("path")
@@ -82,7 +82,6 @@ function populateMap() {
           .on("mouseout", handleMouseOut)
           .on("click", handleClick)
       })
-  
       country.selectAll("path")
         .data(topojson.feature(ch, ch.objects.country).features)
         .enter().append("path")
@@ -93,8 +92,9 @@ function populateMap() {
         .on("mouseout", handleMouseOut)
         .on("click", handleClick)
 
-    })
+    });
   });
+
 }
 
 function transitionMap() {

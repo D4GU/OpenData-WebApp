@@ -12,8 +12,13 @@ map = json.load(open("../../node_modules/swiss-maps/2021-07/ch-combined.json"))
 cantons = pd.read_csv("../../node_modules/swiss-maps/2021-07/cantonsV3.csv")
 municipalities = pd.read_csv("../../node_modules/swiss-maps/2021-07/municipalitiesV3.csv")
 
-input = input.rename(columns={'Jahr':'year', 'Anlage_kanton':"abbreviation", 'Anlage_ort':"municipality"})
+def MergeFunction(df, data , year, attribute, mergecriteria):
+    newdf = pd.DataFrame(data.loc[year][attribute].apply(list, axis=1), columns = [attribute])
+    df = df.merge(newdf, on=[mergecriteria])
+    df = df.rename(columns= {str(attribute): str(year) + "_" + str(attribute)})
+    return df
 
+input = input.rename(columns={'Jahr':'year', 'Anlage_kanton':"abbreviation", 'Anlage_ort':"municipality"})
 
 result_country = input.groupby(['year']).agg({
     'Leistung_kw':['max','min',np.mean,np.std, "count"],
@@ -43,48 +48,16 @@ result_municipalities = input.groupby(['year','municipality']).agg({
     'Verguetung_chf': ['max','min',np.mean,np.std],
     'Anlage_energietraeger': Counter,
     'Anlagentyp': Counter,
-    'Anlage_projekt-bezeichnung': Counter,
+    'Anlage_projekt-bezeichnung': Counter
     })
 
-
-def MergeFunction(cantons, data , year, attribute):
-    newdf = pd.DataFrame(data.loc[year][attribute].apply(list, axis=1), columns = [attribute])
-    cantons = cantons.merge(newdf, on=["abbreviation"])
-    cantons = cantons.rename(columns= {str(attribute): str(year) + "_" + str(attribute)})
-    return cantons
-
-
-
-display(result_canton.loc[2011]["Anlage_projekt-bezeichnung"]["_SpecialGenericAlias"]["AG"])
-
-# display(result_canton.loc[2011]["Leistung_kw"].apply(list, axis=1))
-
-# for x in range(2011,2021):
-#     cantons = MergeFunction(cantons, result_canton , x, "Leistung_kw")
-#     cantons = MergeFunction(cantons, result_canton , x, "Produktion_kwh")
-#     cantons = MergeFunction(cantons, result_canton , x, "Verguetung_chf")
-#     cantons = MergeFunction(cantons, result_canton , x, "Anlage_energietraeger")
-#     cantons = MergeFunction(cantons, result_canton , x, "Anlagentyp")
-#     cantons = MergeFunction(cantons, result_canton , x, "Anlage_projekt-bezeichnung")
-
-
-# display(cantons)
-# display(cantons)
-
-# display(result_canton)
-
-
-# result_canton.set_index
-# # print(municipalities)
-# for row in cantons:
-#     print(row)
-
-# for x in range(2011,2021):
-#     cantons = MergeFunction(cantons, result_canton, x, "max_power_kw")
-
-# display(MergeFunction(cantons, result_canton, 2011, "max_power_kw"))
-# for x in range(2011,2021):
-
+for x in range(2011,2022):
+    cantons = MergeFunction(cantons, result_canton , x, "Leistung_kw", "abbreviation")
+    cantons = MergeFunction(cantons, result_canton , x, "Produktion_kwh", "abbreviation")
+    cantons = MergeFunction(cantons, result_canton , x, "Verguetung_chf", "abbreviation")
+    cantons = MergeFunction(cantons, result_canton , x, "Anlage_energietraeger", "abbreviation")
+    cantons = MergeFunction(cantons, result_canton , x, "Anlagentyp", "abbreviation")
+    cantons = MergeFunction(cantons, result_canton , x, "Anlage_projekt-bezeichnung", "abbreviation")
 
 
 # display(result_canton.loc[2011]["max_power_kw"])

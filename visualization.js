@@ -34,10 +34,11 @@ var tooltip = mapContainer.append("div")
 
 
 const zoom = d3.zoom()
-    .scaleExtent([1, 40])
-    .on("zoom", zoomed);
+  .scaleExtent([1, 40])
+  .on("zoom", zoomed);
 
 function main() {
+  console.log(getColorscale(0,1))
   populateMap()
   svg.call(zoom);
   transitionMap()
@@ -47,7 +48,7 @@ function populateMap() {
   d3.json("./node_modules/swiss-maps/2021-07/ch-combined.json").then(function (ch) {
     d3.json("./lib/preprocessing/combined_results.json").then(function(pt) {
       d3.csv("./node_modules/swiss-maps/2021-07/cantonsV3.csv").then(function (name) {
-        console.log(pt)
+
         var x = 0;
         canton.selectAll("path")
           .data(topojson.feature(ch, ch.objects.cantons).features)
@@ -56,14 +57,15 @@ function populateMap() {
             d3.select(this)
               .attr("abbreviation", name[x]['abbreviation'])
               .attr("name", name[x++]['name'])
-              
+              console.log(d3.select(this).data())
           })
+          
           .attr("class", "canton-boundaries")
           .attr("d", path)
           .on("mouseover", handleMouseOver)
           .on("mouseout", handleMouseOut)
           .on("click", handleClick)
-  
+          
   
       });
 
@@ -117,8 +119,6 @@ function transitionMap() {
 function handleMouseOver(d, i) {
   d3.select(this)
     .style("opacity", 0.7)
-    
-
 
   tooltip.transition()
     .duration(100)
@@ -138,6 +138,13 @@ function handleMouseOut(d, i) {
   tooltip.transition()
     .duration('100')
     .style("opacity", 0);
+}
+
+function getColorscale(min, avg, max) {
+  let colorScale = d3.scaleThreshold()
+    .domain([min, max*0.25, avg, max*0.75,max])
+    .range(d3.schemeBlues[7])
+  return colorScale
 }
 
 function handleClick(d, i) {

@@ -46,17 +46,18 @@ function main() {
 
 function populateMap() {
   d3.json("./node_modules/swiss-maps/2021-07/ch-combined.json").then(function (ch) {
-    d3.json("./lib/preprocessing/combined_results.json").then(function(pt) {
-      d3.csv("./node_modules/swiss-maps/2021-07/cantonsV3.csv").then(function (name) {
-
+      d3.csv("./lib/preprocessing/cantonscombined.csv").then(function (data) {
         var x = 0;
         canton.selectAll("path")
           .data(topojson.feature(ch, ch.objects.cantons).features)
           .enter().append("path")
           .each(function (d) {
             d3.select(this)
-              .attr("abbreviation", name[x]['abbreviation'])
-              .attr("name", name[x++]['name'])
+              .attr("abbreviation", data[x]['abbreviation'])
+              .attr("name", data[x]['name'])
+              .attr("LeistungKw11", data[x++]['2011_Leistung_kw'])
+              // console.log(data)
+             
               console.log(d3.select(this).data())
           })
           
@@ -84,18 +85,21 @@ function populateMap() {
           .on("mouseout", handleMouseOut)
           .on("click", handleClick)
       })
+
+      d3.csv("./lib/preprocessing/countrycombined.csv").then(function (data) {
       country.selectAll("path")
         .data(topojson.feature(ch, ch.objects.country).features)
         .enter().append("path")
         .attr("class", "country")
-        .attr("name", "Switzerland")
+        .attr("name", data[0].name)
+        .attr("abbreviation", data[0].abbreviation)
         .attr("d", path)
         .on("mouseover", handleMouseOver)
         .on("mouseout", handleMouseOut)
         .on("click", handleClick)
 
+      });
     });
-  });
 
 }
 

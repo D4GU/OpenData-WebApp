@@ -12,10 +12,15 @@ map = json.load(open("../../node_modules/swiss-maps/2021-07/ch-combined.json"))
 cantons = pd.read_csv("../../node_modules/swiss-maps/2021-07/cantonsV3.csv")
 municipalities = pd.read_csv("../../node_modules/swiss-maps/2021-07/municipalitiesV3.csv")
 
-def MergeFunction(df, data , year, attribute, mergecriteria):
+def MergeFunctionCountry(df, data , year, attribute):
+    df[attribute] = [data.loc[year][attribute].tolist()]
+    df = df.rename(columns= {str(attribute): str(attribute) + str(year)})
+    return df
+
+def MergeFunctionCanton(df, data , year, attribute, mergecriteria):
     newdf = pd.DataFrame(data.loc[year][attribute].apply(list, axis=1), columns = [attribute])
     df = df.merge(newdf, on=[mergecriteria])
-    df = df.rename(columns= {str(attribute): str(year) + "_" + str(attribute)})
+    df = df.rename(columns= {str(attribute): str(attribute) + str(year)})
     return df
 
 input = input.rename(columns={'Jahr':'year', 'Anlage_kanton':"abbreviation", 'Anlage_ort':"municipality"})
@@ -28,6 +33,11 @@ result_country = input.groupby(['year']).agg({
     'Anlagentyp': Counter,
     'Anlage_projekt-bezeichnung': Counter,
     })
+
+result_country["Anlage_energietraeger"] = result_country["Anlage_energietraeger"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
+result_country["Anlagentyp"] = result_country["Anlagentyp"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
+result_country["Anlage_projekt-bezeichnung"] = result_country["Anlage_projekt-bezeichnung"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
+
 
 result_canton = input.groupby(['year','abbreviation']).agg({
     'Leistung_kw':['max','min',np.mean,np.std, "count"],
@@ -52,17 +62,30 @@ result_municipalities = input.groupby(['year','municipality']).agg({
     })
 
 for x in range(2011,2022):
-    cantons = MergeFunction(cantons, result_canton , x, "Leistung_kw", "abbreviation")
-    cantons = MergeFunction(cantons, result_canton , x, "Produktion_kwh", "abbreviation")
-    cantons = MergeFunction(cantons, result_canton , x, "Verguetung_chf", "abbreviation")
-    cantons = MergeFunction(cantons, result_canton , x, "Anlage_energietraeger", "abbreviation")
-    cantons = MergeFunction(cantons, result_canton , x, "Anlagentyp", "abbreviation")
-    cantons = MergeFunction(cantons, result_canton , x, "Anlage_projekt-bezeichnung", "abbreviation")
+    cantons = MergeFunctionCanton(cantons, result_canton , x, "Leistung_kw", "abbreviation")
+    cantons = MergeFunctionCanton(cantons, result_canton , x, "Produktion_kwh", "abbreviation")
+    cantons = MergeFunctionCanton(cantons, result_canton , x, "Verguetung_chf", "abbreviation")
+    cantons = MergeFunctionCanton(cantons, result_canton , x, "Anlage_energietraeger", "abbreviation")
+    cantons = MergeFunctionCanton(cantons, result_canton , x, "Anlagentyp", "abbreviation")
+    cantons = MergeFunctionCanton(cantons, result_canton , x, "Anlage_projekt-bezeichnung", "abbreviation")
+
+# display(cantons)
+
+country = pd.DataFrame({'name': ['Switzerland'], 'abbreviation':['CH']})
+for y in range(2011,2022):
+    country = MergeFunctionCountry(country, result_country , y, "Leistung_kw")
+    country = MergeFunctionCountry(country, result_country , y, "Produktion_kwh")
+    country = MergeFunctionCountry(country, result_country , y, "Verguetung_chf")
+    country = MergeFunctionCountry(country, result_country , y, "Anlage_energietraeger")
+    country = MergeFunctionCountry(country, result_country , y, "Anlagentyp")
+    country = MergeFunctionCountry(country, result_country , y, "Anlage_projekt-bezeichnung")
 
 
-# display(result_canton.loc[2011]["max_power_kw"])
+cantons.to_csv('cantonscombined.csv')
 
-# dfs = [result_country,result_canton,result_municipalities]
+country.to_csv('countrycombined.csv')
+
+
 
 # combined_dfs = pd.DataFrame(dfs, index=['country','canton', 'municipalities'])
 # combined_dfs.to_json('combined_results.json')

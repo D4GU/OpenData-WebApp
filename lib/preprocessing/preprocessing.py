@@ -85,6 +85,11 @@ for y in range(2011,2022):
 
 # country.to_csv('countrycombined.csv')
 
+cantons.to_json('cantonscombined.json')
+
+country.to_json('countrycombined.json')
+
+
 
 
 # combined_dfs = pd.DataFrame(dfs, index=['country','canton', 'municipalities'])

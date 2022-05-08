@@ -18,15 +18,16 @@ var path = d3.geoPath()
 
 var country = svg.append("g")
   .attr("visibility", "visible")
+  .attr("id", "country")
 
 
 var canton = svg.append("g")
   .attr("visibility", "hidden")
-
+  .attr("id", "canton")
 
 var municipalities = svg.append("g")
   .attr("visibility", "hidden")
-
+  .attr("id", "municipality")
 
 var tooltip = mapContainer.append("div")
   .attr("class", "tooltip")
@@ -38,10 +39,13 @@ const zoom = d3.zoom()
   .on("zoom", zoomed);
 
 function main() {
-  console.log(getColorscale(0,1))
+  console.log(getColorscale(1))
   populateMap()
   svg.call(zoom);
-  transitionMap()
+  transitionMap();
+  setTimeout(function () {
+    updateColor();
+  }, 400);
 }
 
 function populateMap() {
@@ -53,12 +57,10 @@ function populateMap() {
           .enter().append("path")
           .each(function (d) {
             d3.select(this)
-              .attr("abbreviation", data[x]['abbreviation'])
-              .attr("name", data[x]['name'])
-              .attr("LeistungKw11", data[x++]['2011_Leistung_kw'])
-              // console.log(data)
-             
-              console.log(d3.select(this).data())
+              .attr("abbreviation", data[x].abbreviation)
+              .attr("name", data[x].name)
+              .attr("data", data[x++])
+            
           })
           
           .attr("class", "canton-boundaries")
@@ -86,24 +88,48 @@ function populateMap() {
           .on("click", handleClick)
       })
 
-      d3.csv("./lib/preprocessing/countrycombined.csv").then(function (data) {
+      d3.json("./lib/preprocessing/countrycombined.json").then(function (data) {
+        console.log(data)
       country.selectAll("path")
         .data(topojson.feature(ch, ch.objects.country).features)
         .enter().append("path")
         .attr("class", "country")
-        .attr("name", data[0].name)
-        .attr("abbreviation", data[0].abbreviation)
+        .attr("abbreviation", data.abbreviation[0])
+        .attr("name", data.name[0])
+        .attr("data", JSON.stringify(data))
         .attr("d", path)
         .on("mouseover", handleMouseOver)
         .on("mouseout", handleMouseOut)
         .on("click", handleClick)
 
       });
+
     });
+
 
 }
 
+function updateColor() {
+  console.log(d3.selectAll('g#country').selectAll("*"))
+  let selection = d3.selectAll('g#country').selectAll("*")
+  let colorScale = getColorscale(10000)
+  console.log(JSON.parse(selection.attr("data")).Leistung_kw2011[0])
+
+  selection
+    .transition()
+    .duration(1000)
+    .style("fill", function (d) {
+      return colorScale(JSON.parse(selection.attr("data")).Leistung_kw2011[0])
+    })
+  // console.log(d3.select('#map #mapsvg #country').node())
+  // country.selectAll("path")
+    
+ 
+    
+}
+
 function transitionMap() {
+  console.log(d3.select('#map'))
   $('#map').show()
   d3.select('#map')
     .attr("visibility", "visible")
@@ -144,15 +170,17 @@ function handleMouseOut(d, i) {
     .style("opacity", 0);
 }
 
-function getColorscale(min, avg, max) {
+function getColorscale(max) {
   let colorScale = d3.scaleThreshold()
-    .domain([min, max*0.25, avg, max*0.75,max])
+    .domain([0, max*0.25, max*0.5, max*0.75,max])
     .range(d3.schemeBlues[7])
   return colorScale
 }
 
 function handleClick(d, i) {
+  console.log(d3.selectAll('g#country').selectAll("*"))
   centroid = getBoundingBoxCenter(d3.select(this))
+  console.log(d3.select(this))
   d3.selectAll("path")
     .style("fill", "#343a40")
     .style("stroke-width",".3")

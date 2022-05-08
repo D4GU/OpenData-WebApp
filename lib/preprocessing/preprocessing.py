@@ -26,9 +26,9 @@ def MergeFunctionCanton(df, data , year, attribute, mergecriteria):
 input = input.rename(columns={'Jahr':'year', 'Anlage_kanton':"abbreviation", 'Anlage_ort':"municipality"})
 
 result_country = input.groupby(['year']).agg({
-    'Leistung_kw':['max','min',np.mean,np.std, "count"],
-    'Produktion_kwh': ['max','min',np.mean,np.std],
-    'Verguetung_chf': ['max','min',np.mean,np.std],
+    'Leistung_kw':['max','min',np.mean,np.std, "count", "sum"],
+    'Produktion_kwh': ['max','min',np.mean,np.std, "sum"],
+    'Verguetung_chf': ['max','min',np.mean,np.std, "sum"],
     'Anlage_energietraeger': Counter,
     'Anlagentyp': Counter,
     'Anlage_projekt-bezeichnung': Counter,
@@ -40,9 +40,9 @@ result_country["Anlage_projekt-bezeichnung"] = result_country["Anlage_projekt-be
 
 
 result_canton = input.groupby(['year','abbreviation']).agg({
-    'Leistung_kw':['max','min',np.mean,np.std, "count"],
-    'Produktion_kwh': ['max','min',np.mean,np.std],
-    'Verguetung_chf': ['max','min',np.mean,np.std],
+    'Leistung_kw':['max','min',np.mean,np.std, "count", "sum"],
+    'Produktion_kwh': ['max','min',np.mean,np.std, "sum"],
+    'Verguetung_chf': ['max','min',np.mean,np.std, "sum"],
     'Anlage_energietraeger': Counter,
     'Anlagentyp': Counter,
     'Anlage_projekt-bezeichnung': Counter,
@@ -81,9 +81,9 @@ for y in range(2011,2022):
     country = MergeFunctionCountry(country, result_country , y, "Anlage_projekt-bezeichnung")
 
 
-cantons.to_csv('cantonscombined.csv')
+# cantons.to_csv('cantonscombined.csv')
 
-country.to_csv('countrycombined.csv')
+# country.to_csv('countrycombined.csv')
 
 
 

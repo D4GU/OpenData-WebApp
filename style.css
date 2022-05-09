@@ -86,9 +86,9 @@ a {
   height: 100%;
 }
 
-.country {
+/* .country {
   fill: #343a40;
-}
+} */
 
 .canton-boundaries {
   fill: #343a40;
@@ -118,14 +118,15 @@ a {
 
 div.tooltip {
   position: absolute;
-  text-align: center;
-  padding: .2rem;
+  text-align: left;
+  padding:none;
+  margin:none;
   background: #FFFFFF;
   color: #313639;
   border: 0.5px solid #7a7a7a;
   border-radius: 3px;
   pointer-events: none;
-  font-size: 1.3rem;
+  font-size: 100%;
   font-weight: 100;
   font-family: 'Times New Roman', Times, serif;
   z-index: 1000;
@@ -136,3 +137,18 @@ div.tooltip {
   overflow: hidden;
 }
 
+g#colorScaleBar {
+  transform: translate(30%,700px) rotate(-90deg);
+  z-index: 1000;
+}
+
+text#description {
+  transform: rotate(90deg);
+  font-family: 'Times New Roman', Times, serif;
+  text-align: left;
+}
+
+g#g-runoff{
+  transform: translate(24.9px, -0.5px) rotate(-270deg) ;
+  stroke-width: 0.5px;
+}

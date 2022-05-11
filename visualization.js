@@ -138,7 +138,7 @@ function populateMap() {
 // Underconstruction
 
 function createBar() {
-  var colors = d3.schemeBlues[5];
+  var colors = d3.schemeYlOrBr[5];
 
   var grad = colorScaleBar.append('defs')
     .append('linearGradient')
@@ -312,7 +312,6 @@ function updateValues(attribute, year, fnc, dataset) {
 
   if (staticdataset == 'dataset1') {
     updateColorBar(0, window.dataset1[identifier][0][staticfnc], getTitles()[0], getTitles()[1])
-    console.log("here")
   } if (staticdataset == 'dataset2') {
     updateColorBar(localmin2, localmax2, getTitles()[0], getTitles()[1])
   } if (staticdataset == 'dataset3') {
@@ -395,7 +394,7 @@ function handleMouseOver(d, i) {
 
   tooltip.transition()
     .duration(100)
-    .style("opacity", .8);
+    .style("opacity", 0.90);
 
   tooltip.html(d3.select(this).attr("name") + "<br>Value: " + Number(d3.select(this).attr("currentObs")).toFixed(1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'"))
     .style("left", (d['pageX'] - 400) + "px")
@@ -417,7 +416,7 @@ function handleMouseOut(d, i) {
 function getColorscale(min, max) {
   let colorScale = d3.scaleThreshold()
     .domain([min, max * 0.2, max * 0.4, max * 0.6, max * 0.8, max])
-    .range(d3.schemeBlues[5])
+    .range(d3.schemeYlOrBr[5])
   return colorScale
 }
 

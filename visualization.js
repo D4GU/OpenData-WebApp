@@ -1,3 +1,13 @@
+
+$(document).ready(function() {
+  $('.dropdown-item').click(function(e) {
+    e.stopPropagation();
+    $(this).siblings('.dropdown-item').removeClass('active')
+    $(this).toggleClass('active');
+  });
+});
+
+
 var mapContainer = d3.select('#map')
   .style("opacity", 0)
   .style("overflow-x","hidden")
@@ -104,14 +114,16 @@ function populateMap() {
       });
 
       d3.csv("./node_modules/swiss-maps/2021-07/municipalitiesV3.csv").then(function (name) {
+        d3.json("./lib/preprocessing/municipalities.json").then(function (data) {
         var y = 0;
-        // window.dataset3 = data
+        window.dataset3 = data
         municipalities.selectAll("path")
           .data(topojson.feature(ch, ch.objects.municipalities).features)
           .enter().append("path")
           .each(function () {
             d3.select(this)
-              .attr("name", name[y++]['name'])
+              .attr("name", name[y]['name'])
+              .attr("nameclean", name[y++]['nameclean'])
           })
           .attr("class", "municipality-boundaries")
           .attr("d", path)
@@ -119,7 +131,7 @@ function populateMap() {
           .on("mouseout", handleMouseOut)
           .on("click", handleClick)
       })
-
+      });
     });
 
 
@@ -230,8 +242,28 @@ function updateValues() {
         })
     })
   
-  // selection3
-  //   .each()
+    selection3
+    .each(function () {
+      selectionName = d3.select(this).attr("nameclean")
+      d3.select(this)
+        .transition()
+        .duration(1000)
+        .attr("currentObs", function(d) {
+          if (selectionName in window.dataset3["Leistung_kw2011"]){
+            return window.dataset3["Leistung_kw2011"][selectionName][0]
+          } else {
+            return "N/A"
+          }
+      
+      })
+        .style("fill", function (d) {
+          if (selectionName in window.dataset3["Leistung_kw2011"]){
+            return colorScale2(window.dataset3["Leistung_kw2011"][selectionName][0])
+          } else {
+            return colorScale2(0)
+          }
+        })
+    })
  
 
   updateColorBar(localmin, localmax, Object.keys(window.dataset2)[5])
@@ -239,6 +271,7 @@ function updateValues() {
 
 }
 
+ 
 
 
 // Underconstruction

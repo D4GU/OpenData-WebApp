@@ -135,7 +135,9 @@ div.tooltip {
 *, ::after, ::before {
   box-sizing: border-box;
   overflow: hidden;
+
 }
+
 
 g#colorScaleBar {
   transform: translate(30%,700px) rotate(-90deg);
@@ -151,4 +153,22 @@ text#description {
 g#g-runoff{
   transform: translate(24.9px, -0.5px) rotate(-270deg) ;
   stroke-width: 0.5px;
+}
+
+#bootstrap-overrides-dropdownmenu {
+  min-width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+#bootstrap-overrides-dropdownitem {
+  padding: 0.25rem 1rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 500;
+
+}
+
+.dropdown-item.active{
+  background-color: orange;
+
 }

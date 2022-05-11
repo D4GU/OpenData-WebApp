@@ -64,14 +64,13 @@ function main() {
   mapsvg.call(zoom);
   transitionMap();
   setTimeout(function () {
-    updateValues();
+    updateValues("Leistung_kw", 2011, 0)
   }, 400);
   
 }
 
 function populateMap() {
   d3.json("./node_modules/swiss-maps/2021-07/ch-combined.json").then(function (ch) {
-    
     d3.json("./lib/preprocessing/countrycombined.json").then(function (data) {
     window.dataset1 = data
     country.selectAll("path")
@@ -139,7 +138,7 @@ function populateMap() {
 // Underconstruction
 
 function createBar() {
-  var colors = d3.schemeBlues[9];
+  var colors = d3.schemeBlues[5];
 
   var grad = colorScaleBar.append('defs')
     .append('linearGradient')
@@ -160,73 +159,148 @@ function createBar() {
 
   colorScaleBar.append('rect')
     .attr('width', 25)
-    .attr('height', 550)
+    .attr('height', 900)
     .style('border', 'none')
     .style('fill', 'url(#grad)')
     .raise()
-
-  // d3.select('g#colorScaleBar rect').append('text')
 
   colorScaleBar.append('text')
     .attr('id', 'description')
     .attr('x', '0.5%')
     .attr('y', '-32px')
     .text('Placeholder')
-
+  
+  colorScaleBar.append('text')
+    .attr('id', 'function')
+    .attr('x', '66%')
+    .attr('y', '-32px')
+    .text('Placeholder')
 
   d3.select('g#colorScaleBar').raise()
 
 }
-function updateColorBar(min,max, title) {
+
+function updateColorBar(min, max, title, fnc) {
   d3.select('g#colorScaleBar').select('text#description')
     .text(title)
 
-    console.log([min, max*0.01,max*0.05 ,max*0.1, max*0.2, max*0.4, max*0.6, max*0.8, max])
-  var x = d3.scaleLinear()
-    .domain([min, max])
-    .range([0, 550])
+  d3.select('g#colorScaleBar').select('text#function')
+    .text(fnc)
   
-  var axis = d3.axisBottom(x);
+  let x = d3.scaleLinear()
+    .domain([min, max])
+    .range([0, 900])
+  
+  
+  console.log()
+  d3.select('g#g-runoff').remove()
+    
+
+  let axis = d3.axisBottom(x);
   d3.select('g#colorScaleBar')
     .attr("class", "axis")
     .attr("width", 160)
     .attr("height", 40)
   .append("g")
     .attr("id", "g-runoff")
-    
     .call(axis);
 
 }
 
 
+function getTitles() {
+  var title;
+  var fncname;
 
-function updateValues() {
+  switch(staticattribute) {
+    case 'Leistung_kw':
+      title = "Registered power (kW) in the year "+ staticyear
+      break;
+    case 'Verguetung_chf':
+      title = "Feed-in remunaration (CHF) in the year "+ staticyear
+      break;
+    case 'Produktion_kwh':
+      title = "Registered production (kWh) in the year "+ staticyear
+      break;
+  }
+
+  switch(staticfnc) {
+    case 0:
+      fncname = "Function: Maximum"
+      break;
+    case 1:
+      fncname = "Function: Minimum"
+      break;
+    case 2:
+      fncname = "Function: Mean"
+      break;
+    case 3:
+      fncname = "Function: Standard deviation"
+      break;
+    case 4:
+      fncname = "Function: Count"
+      break;
+    case 5:
+      fncname = "Function: Summation"
+      break;
+  }
+
+  return [title, fncname]
+}
+  
+
+
+var staticattribute = "";
+var staticyear = "";
+var staticfnc = null;
+
+function updateValues(attribute, year, fnc) {
+  
+  if (attribute != '') {
+    staticattribute = attribute;
+  }
+  if (year != '') {
+    staticyear = year;
+  }
+  if (fnc != null) {
+    staticfnc = fnc;
+  }
+
+  console.log(staticattribute)
+  
+
+  
+  
+  let identifier = staticattribute + staticyear
+
   let selection = d3.selectAll('g#country').selectAll("*")
   let selection2 = d3.selectAll('g#canton').selectAll("*")
   let selection3 = d3.selectAll('g#municipality').selectAll("*")
   
-
   var localmax = 0;
-  var localmin = window.dataset2.Leistung_kw2011[0][0];
+  var localmin = window.dataset2[identifier][0][staticfnc];
 
-  for (let x = 0; x<Object.keys(window.dataset2.Leistung_kw2011).length; x++) {
-    if (localmax < window.dataset2.Leistung_kw2011[x][0]) {
-      localmax = window.dataset2.Leistung_kw2011[x][0]
+  
+
+  for (let x = 0; x<Object.keys(window.dataset2[identifier]).length; x++) {
+    if (localmax < window.dataset2[identifier][x][staticfnc]) {
+      localmax = window.dataset2[identifier][x][staticfnc]
     }
-    if (localmin > window.dataset2.Leistung_kw2011[x][0]) {
-      localmin = window.dataset2.Leistung_kw2011[x][0]
+    if (localmin > window.dataset2[identifier][x][staticfnc]) {
+      localmin = window.dataset2[identifier][x][staticfnc]
     }
   }
 
-  var colorScale1= getColorscale(0, window.dataset1.Leistung_kw2011[0][0])
+  console.log(getTitles())
+  updateColorBar(localmin, localmax, getTitles()[0], getTitles()[1])
+
+  var colorScale1= getColorscale(0, window.dataset1[identifier][0][staticfnc])
   var colorScale2 = getColorscale(localmin, localmax)
 
   selection
-    .transition()
-    .duration(1000)
-    .attr("currentObs", window.dataset1["Leistung_kw2011"][0][0])
+    .attr("currentObs", window.dataset1[identifier][0][staticfnc])
     .style("fill", function (d) {
-      return colorScale1(window.dataset1.Leistung_kw2011[0][0])
+      return colorScale1(window.dataset1[identifier][0][staticfnc])
     })
 
   selection2
@@ -234,44 +308,38 @@ function updateValues() {
       selectionID = parseInt(d3.select(this).attr("id"))
 
       d3.select(this)
-        .transition()
-        .duration(1000)
-        .attr("currentObs", window.dataset2["Leistung_kw2011"][selectionID][0])
+        .attr("currentObs", window.dataset2[identifier][selectionID][staticfnc])
         .style("fill", function (d) {
-          return colorScale2(window.dataset2["Leistung_kw2011"][selectionID][0])
+          return colorScale2(window.dataset2[identifier][selectionID][staticfnc])
         })
     })
-  
-    selection3
-    .each(function () {
-      selectionName = d3.select(this).attr("nameclean")
-      d3.select(this)
-        .transition()
-        .duration(1000)
-        .attr("currentObs", function(d) {
-          if (selectionName in window.dataset3["Leistung_kw2011"]){
-            return window.dataset3["Leistung_kw2011"][selectionName][0]
-          } else {
-            return "N/A"
-          }
+
+    // selection3
+    // .each(function () {
+    //   selectionName = d3.select(this).attr("nameclean")
       
-      })
-        .style("fill", function (d) {
-          if (selectionName in window.dataset3["Leistung_kw2011"]){
-            return colorScale2(window.dataset3["Leistung_kw2011"][selectionName][0])
-          } else {
-            return colorScale2(0)
-          }
-        })
-    })
- 
+    //   d3.select(this)
+    //     .attr("currentObs", function(d) {
+    //       if (selectionName in window.dataset3[identifier]){
+    //         try {return window.dataset3[identifier][selectionName][staticfnc]
+    //         } catch (error) { 
+    //           return "0"
+    //         }
+    //       } else {
+    //         return "0"
+    //       }
+    //   })
+    //     .style("fill", function (d) {
+    //       if (selectionName in window.dataset3[identifier]){
+    //         return colorScale2(window.dataset3[identifier][selectionName][staticfnc])
+    //       } else {
+    //         return colorScale2(0)
+    //       }
+    //     })
+    // })
 
-  updateColorBar(localmin, localmax, Object.keys(window.dataset2)[5])
-
-
+  
 }
-
- 
 
 
 // Underconstruction
@@ -301,7 +369,7 @@ function handleMouseOver(d, i) {
     .duration(100)
     .style("opacity", .8);
 
-  tooltip.html(d3.select(this).attr("name") + "<br>Value: " + d3.select(this).attr("currentObs") )
+  tooltip.html(d3.select(this).attr("name") + "<br>Value: " + Number(d3.select(this).attr("currentObs")).toFixed(1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'"))
     .style("left", (d['pageX'] - 400) + "px")
     .style("top", (d['pageY'] - 130) + "px")
     .style("padding", 2 + "px")
@@ -319,10 +387,9 @@ function handleMouseOut(d, i) {
 }
 
 function getColorscale(min, max) {
-  console.log(d3.schemeBlues[9])
   let colorScale = d3.scaleThreshold()
-    .domain([min,max*0.01,max*0.05 ,max*0.1, max*0.2, max*0.4, max*0.6, max*0.8, max])
-    .range(d3.schemeBlues[9])
+    .domain([min, max*0.2, max*0.4, max*0.6, max*0.8, max])
+    .range(d3.schemeBlues[5])
   return colorScale
 }
 

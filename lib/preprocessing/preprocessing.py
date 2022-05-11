@@ -33,8 +33,8 @@ input = input.rename(columns={'Jahr':'year', 'Anlage_kanton':"abbreviation", 'An
 
 result_country = input.groupby(['year']).agg({
     'Leistung_kw':['max','min',np.mean,np.std, "count", "sum"],
-    'Produktion_kwh': ['max','min',np.mean,np.std, "sum"],
-    'Verguetung_chf': ['max','min',np.mean,np.std, "sum"],
+    'Produktion_kwh': ['max','min',np.mean,np.std,"count", "sum"],
+    'Verguetung_chf': ['max','min',np.mean,np.std,"count", "sum"],
     'Anlage_energietraeger': Counter,
     'Anlagentyp': Counter,
     'Anlage_projekt-bezeichnung': Counter,
@@ -47,8 +47,8 @@ result_country["Anlage_projekt-bezeichnung"] = result_country["Anlage_projekt-be
 
 result_canton = input.groupby(['year','abbreviation']).agg({
     'Leistung_kw':['max','min',np.mean,np.std, "count", "sum"],
-    'Produktion_kwh': ['max','min',np.mean,np.std, "sum"],
-    'Verguetung_chf': ['max','min',np.mean,np.std, "sum"],
+    'Produktion_kwh': ['max','min',np.mean,np.std,"count", "sum"],
+    'Verguetung_chf': ['max','min',np.mean,np.std,"count", "sum"],
     'Anlage_energietraeger': Counter,
     'Anlagentyp': Counter,
     'Anlage_projekt-bezeichnung': Counter,
@@ -59,9 +59,9 @@ result_canton["Anlagentyp"] = result_canton["Anlagentyp"]["_SpecialGenericAlias"
 result_canton["Anlage_projekt-bezeichnung"] = result_canton["Anlage_projekt-bezeichnung"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
 
 result_municipalities = input.groupby(['year','municipalityclean']).agg({
-    'Leistung_kw':['max','min',np.mean,np.std, "count"],
-    'Produktion_kwh': ['max','min',np.mean,np.std],
-    'Verguetung_chf': ['max','min',np.mean,np.std],
+    'Leistung_kw':['max','min',np.mean,np.std, "count", "sum"],
+    'Produktion_kwh': ['max','min',np.mean,np.std,"count", "sum"],
+    'Verguetung_chf': ['max','min',np.mean,np.std,"count", "sum"],
     'Anlage_energietraeger': Counter,
     'Anlagentyp': Counter,
     'Anlage_projekt-bezeichnung': Counter
@@ -102,11 +102,11 @@ display(municipalities)
 
 # country.to_csv('countrycombined.csv')
 
-# cantons.to_json('cantonscombined.json')
+cantons.to_json('cantonscombined.json')
 
-# country.to_json('countrycombined.json')
+country.to_json('countrycombined.json')
 
-# municipalities.to_json('municipalities.json')
+municipalities.to_json('municipalities.json')
 
 
 # combined_dfs = pd.DataFrame(dfs, index=['country','canton', 'municipalities'])

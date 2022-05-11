@@ -140,11 +140,17 @@ div.tooltip {
 
 
 g#colorScaleBar {
-  transform: translate(30%,700px) rotate(-90deg);
+  transform: translate(12%,700px) rotate(-90deg);
   z-index: 1000;
 }
 
 text#description {
+  transform: rotate(90deg);
+  font-family: 'Times New Roman', Times, serif;
+  text-align: left;
+}
+
+text#function {
   transform: rotate(90deg);
   font-family: 'Times New Roman', Times, serif;
   text-align: left;

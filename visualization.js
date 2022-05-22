@@ -61,12 +61,11 @@ const zoom = d3.zoom()
 function main() {
   createBar()
   populateMap()
-  mapsvg.call(zoom);
-  transitionMap();
   setTimeout(function () {
     updateValues("Leistung_kw", 2011, 0, "dataset1")
-  }, 400);
-
+    transitionMap();
+  }, 600);
+  
 }
 
 function populateMap() {
@@ -122,7 +121,7 @@ function populateMap() {
           .each(function () {
             d3.select(this)
               .attr("name", name[y]['name'])
-              .attr("nameclean", name[y++]['nameclean'])
+              .attr("id", name[y++]['id'])
           })
           .attr("class", "municipality-boundaries")
           .attr("d", path)
@@ -132,13 +131,14 @@ function populateMap() {
       })
     });
   });
+  mapsvg.call(zoom);
 
 
 }
 // Underconstruction
 
 function createBar() {
-  var colors = d3.schemeYlOrBr[5];
+  var colors = d3.schemeYlOrBr[9];
 
   var grad = colorScaleBar.append('defs')
     .append('linearGradient')
@@ -154,7 +154,7 @@ function createBar() {
     .append('stop')
     .style('stop-color', function (d) { return d; })
     .attr('offset', function (d, i) {
-      return 100 * (i / (colors.length - 1)) + '%';
+      return 125 * (i / (colors.length - 1)) + '%';
     })
 
   colorScaleBar.append('rect')
@@ -275,11 +275,9 @@ function updateValues(attribute, year, fnc, dataset) {
   let selection3 = d3.selectAll('g#municipality').selectAll("*")
 
   console.log(identifier + " " + staticfnc + " " + staticdataset)
-  // unnecessary redundancy :P
-
 
   var localmax2 = 0;
-  var localmin2 = window.dataset2[identifier][0][staticfnc];
+  var localmin2 = 1000000000000000;
 
   for (let x = 0; x < Object.keys(window.dataset2[identifier]).length; x++) {
     if (localmax2 < window.dataset2[identifier][x][staticfnc]) {
@@ -289,7 +287,6 @@ function updateValues(attribute, year, fnc, dataset) {
       localmin2 = window.dataset2[identifier][x][staticfnc]
     }
   }
-
 
   var localmax3 = 0;
   var localmin3 = 100000000000000;
@@ -304,11 +301,9 @@ function updateValues(attribute, year, fnc, dataset) {
         localmin3 = window.dataset3[identifier][entry][staticfnc]
       }
     } catch (error) {
-      console.log("Ignored:", error)
+      // console.log("Ignored:", error)
     }
-
   }
-  // unnecessary redundancy :P
 
   if (staticdataset == 'dataset1') {
     updateColorBar(0, window.dataset1[identifier][0][staticfnc], getTitles()[0], getTitles()[1])
@@ -341,30 +336,33 @@ function updateValues(attribute, year, fnc, dataset) {
 
   selection3
     .each(function () {
-      selectionName = d3.select(this).attr("nameclean")
+      munId = d3.select(this).attr("id")
 
       d3.select(this)
         .attr("currentObs", function (d) {
-          if (selectionName in window.dataset3[identifier]) {
+          if (munId in window.dataset3[identifier]) {
             try {
-              return window.dataset3[identifier][selectionName][staticfnc]
+              return window.dataset3[identifier][munId][staticfnc]
             } catch (error) {
-              console.log("Ignored:", error)
-              return "0"
+              // console.log( error)
+              return 0
             }
           } else {
-            return "0"
+            return 0
           }
         })
         .style("fill", function (d) {
-          if (selectionName in window.dataset3[identifier]) {
-            return colorScale2(window.dataset3[identifier][selectionName][staticfnc])
+          if (munId in window.dataset3[identifier]) {
+            try {
+              return colorScale3(window.dataset3[identifier][munId][staticfnc])
+            } catch (error) {
+              return colorScale3(0)
+            }
           } else {
-            return colorScale2(0)
+            return colorScale3(0)
           }
         })
     })
-
 
 }
 
@@ -376,13 +374,13 @@ function transitionMap() {
   d3.select('#map')
     .attr("visibility", "visible")
     .transition()
-    .duration(10000)
+    .duration(7000)
     .style("opacity", 100)
 
   d3.select("#loader")
     .transition()
     .style("opacity", 0)
-    .duration(1000)
+    .duration(500)
     .on("end", function () {
       $('#loader').hide()
     });
@@ -416,7 +414,7 @@ function handleMouseOut(d, i) {
 function getColorscale(min, max) {
   let colorScale = d3.scaleThreshold()
     .domain([min, max * 0.2, max * 0.4, max * 0.6, max * 0.8, max])
-    .range(d3.schemeYlOrBr[5])
+    .range(d3.schemeYlOrBr[7])
   return colorScale
 }
 

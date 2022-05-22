@@ -13,18 +13,18 @@ var mapContainer = d3.select('#map')
   .style("overflow-x", "hidden")
 
 var statisticsContainer = d3.select('#statistics')
-  .style("overflow-x", "hidden")
+  .style("overflow-x", "visible")
 
-var statsvg = statisticsContainer.append('svg')
-  .attr("id", "statisticssvg")
-  .attr("width", 100 + "%")
-  .attr("height", 100 + "%")
+// var statsvg = statisticsContainer.append('svg')
+//   .attr("id", "statisticssvg")
+//   .attr("width", 100 + "%")
+//   .attr("height", 100 + "%")
 
 var mapsvg = mapContainer.append('svg')
   .attr("id", "mapsvg")
   .attr("width", 100 + "%")
   .attr("height", 100 + "%")
-  .attr("viewBox", [55, 360, 1080, 1])
+  .attr("viewBox", [-10, 415, 1150, 1])
 
 var projection = d3.geoMercator()
   .center([-172.3, 47.2])
@@ -65,7 +65,7 @@ function main() {
     updateValues("Leistung_kw", 2011, 0, "dataset1")
     transitionMap();
   }, 600);
-  
+  updateDonutChart()
 }
 
 function populateMap() {
@@ -135,7 +135,100 @@ function populateMap() {
 
 
 }
-// Underconstruction
+// Piechart
+function updateDonutChart(selection) {
+    var dwidth = 310
+        dheight = 310
+        dmargin = 40
+
+    var radius = Math.min(dwidth, dheight) / 2 - dmargin
+
+    // append the svg object to the div called 'my_dataviz'
+    var dsvg = d3.select("div#statistics")
+      .append("svg")
+        .attr("width", dwidth)
+        .attr("height", dheight)
+      .append("g")
+        .attr("transform", "translate(" + dwidth / 2 + "," + dheight / 2 + ")");
+    
+      // Create dummy data
+    var data = [{name:"test1", value: 9}, {name:"test2", value: 20}, {name:"test3", value: 30}, {name:"test4", value: 8}, {name:"test5", value: 12}]
+    
+    // set the color scale
+    var color = d3.scaleOrdinal()
+      .domain(Object.keys(data))
+      .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"])
+      
+
+    // Compute the position of each group on the pie:
+    var pie = d3.pie().value(d=> d.value)
+    console.log(data.value)
+
+    var data_ready = pie(data)
+    console.log(data_ready)
+
+    var arc = d3.arc()
+      .innerRadius(radius * 0.5)         // This is the size of the donut hole
+      .outerRadius(radius * 0.8)
+
+    var outerArc = d3.arc()
+      .innerRadius(radius * 0.9)
+      .outerRadius(radius * 0.9)
+
+    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+
+    dsvg
+      .selectAll('allSlices')
+      .data(data_ready)
+      .enter()
+      .append('path')
+      .attr('d', arc)
+      .attr('fill', function(d){ return(color(d.data)) })
+      .attr("stroke", "black")
+      .style("stroke-width", "2px")
+      .style("opacity", 0.7)
+
+      dsvg
+        .selectAll('allPolylines')
+        .data(data_ready)
+        .enter()
+        .append('polyline')
+          .attr("stroke", "black")
+          .style("fill", "none")
+          .attr("stroke-width", 1)
+          .attr('points', function(d) {
+            var posA = arc.centroid(d) // line insertion in the slice
+            var posB = outerArc.centroid(d) // line break: we use the other arc generator that has been built only for that
+            var posC = outerArc.centroid(d); // Label position = almost the same as posB
+            var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
+            posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+            return [posA, posB, posC]
+          })
+
+        dsvg
+          .selectAll('allLabels')
+          .data(data_ready)
+          .enter()
+          .append('text')
+            .text( function(d) { console.log(d.data.name) ; return d.data.name} )
+            .attr('transform', function(d) {
+                var pos = outerArc.centroid(d);
+                var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+                pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
+                return 'translate(' + pos + ')';
+            })
+            .style('text-anchor', function(d) {
+                var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+                return (midangle < Math.PI ? 'start' : 'end')
+            })
+}
+
+
+
+// Piechart
+
+
+// Colorbar and Updater
 
 function createBar() {
   var colors = d3.schemeYlOrBr[9];
@@ -367,7 +460,7 @@ function updateValues(attribute, year, fnc, dataset) {
 }
 
 
-// Underconstruction
+// Colorbar and Updater
 
 function transitionMap() {
   $('#map').show()

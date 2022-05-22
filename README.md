@@ -6,7 +6,7 @@
 # To-Dos 2.0
 - Better country overview
 - Change Title and add descriptions and intro
-- Fix municipalities with PLZ
-- Second viz for hover
+- Fix municipalities with PLZ --> Done
+- Second viz for hover 7 click --> mostly Done
 - Fix loading -> Temporarily fixed
 

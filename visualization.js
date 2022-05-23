@@ -66,7 +66,7 @@ function main() {
     updateValues("Leistung_kw", 2011, 0, "dataset1")
     transitionMap();
   }, 600);
-  
+
 }
 
 function populateMap() {
@@ -138,229 +138,271 @@ function populateMap() {
 }
 // Piechart
 function updateDonutChart(selection) {
-    
-    d3.select("svg#currentEnergydonut").remove()
-    d3.select("svg#currentTypedonut").remove()
 
-    let currentEnergy = "Anlage_energietraeger" + staticyear
-    let currentAnlagenType = "Anlagentyp" + staticyear
-    let EneryData = [];
-    let TypeData = [];
-    
+  d3.select("svg#currentEnergydonut").remove()
+  d3.select("svg#currentTypedonut").remove()
 
-    // staticyear
-    // staticdataset
+  let currentEnergy = "Anlage_energietraeger" + staticyear
+  let currentAnlagenType = "Anlagentyp" + staticyear
+  let EneryData = [];
+  let TypeData = [];
 
-    var dwidth = 500
-        dheight = 500
-        dmargin = 170
 
-    var radius = Math.min(dwidth, dheight) / 2 - dmargin
+  // staticyear
+  // staticdataset
 
-    // append the svg object to the div called 'my_dataviz'
-    var dsvg = d3.select("div#statistics")
+  var dwidth = 550
+  dheight = 550
+  dmargin = 140
+
+
+  var radius = Math.min(dwidth, dheight) / 2 - dmargin
+
+  // append the svg object to the div called 'my_dataviz'
+  var dsvg = d3.select("div#statistics")
       .append("svg")
         .attr("id", "currentEnergydonut")
+        .attr("viewBox", [100, -50, 550, 550])
         .attr("width", dwidth)
         .attr("height", dheight)
+        .style("position", "absolute")
+        .style("transform", "translate(-35px, -35%)")
         .style('pointer-events', 'none')
-      .append("g")
+        .append("g")
         .attr("transform", "translate(" + dwidth / 2 + "," + dheight / 2 + ")")
         .style('pointer-events', 'none')
 
-    var csvg = d3.select("div#statistics")
-      .append("svg")
-        .attr("id", "currentTypedonut")
-        .attr("width", dwidth)
-        .attr("height", dheight)
-        .style('pointer-events', 'none')
+  var csvg = d3.select("div#statistics")
+    .append("svg")
+      .attr("id", "currentTypedonut")
+      .attr("viewBox", [100, -50, 550, 550])
+      .attr("width", dwidth)
+      .attr("height", dheight)
+      .style("position", "absolute")
+      .style("transform", "translate(-35px,8%)")
+      .style('pointer-events', 'none')
       .append("g")
-        .attr("transform", "translate(" + dwidth / 2 + "," + dheight / 2 + ")")
-        .style('pointer-events', 'none')
-    
-      // Create dummy data
-    
-    // set the color scale
-    var TypeColor = d3.scaleOrdinal()
-      .domain(Object.keys(TypeData))
-      .range(d3.schemeBlues[9])
-    
-    var EnergyColor = d3.scaleOrdinal()
-      .domain(Object.keys(EneryData))
-      .range(d3.schemePurples[5])
+      .attr("transform", "translate(" + dwidth / 2 + "," + dheight / 2 + ")")
+      .style('pointer-events', 'none')
 
-    // Compute the position of each group on the pie:
-    var pie = d3.pie().value(d=> d.value)
+  // Create dummy data
 
-    if(staticdataset == 'dataset1') {
-      for([key, val] of Object.entries(window[staticdataset][currentEnergy][0][0])) {
+  // set the color scale
+  var TypeColor = d3.scaleOrdinal()
+    .domain(Object.keys(TypeData))
+    .range(d3.schemeBlues[9])
+
+  var EnergyColor = d3.scaleOrdinal()
+    .domain(Object.keys(EneryData))
+    .range(d3.schemePurples[5])
+
+  // Compute the position of each group on the pie:
+  var pie = d3.pie().value(d => d.value)
+
+  if (staticdataset == 'dataset1') {
+    for ([key, val] of Object.entries(window[staticdataset][currentEnergy][0][0])) {
+      EneryData.push({
+        name: key,
+        value: val
+      })
+
+    }
+    for ([key, val] of Object.entries(window[staticdataset][currentAnlagenType][0][0])) {
+      TypeData.push({
+        name: key,
+        value: val
+      })
+    }
+  } if (staticdataset == 'dataset2') {
+    try {
+      for ([key, val] of Object.entries(window[staticdataset][currentEnergy][selection.data()[0].id - 1][0])) {
         EneryData.push({
           name: key,
           value: val
         })
-
       }
-      for([key, val] of Object.entries(window[staticdataset][currentAnlagenType][0][0])) {
+      for ([key, val] of Object.entries(window[staticdataset][currentAnlagenType][selection.data()[0].id - 1][0])) {
         TypeData.push({
           name: key,
           value: val
         })
       }
-    }if(staticdataset == 'dataset2') {
-      try {
-        for([key, val] of Object.entries(window[staticdataset][currentEnergy][selection.data()[0].id - 1][0])) {
-          EneryData.push({
-            name: key,
-            value: val
-          })
-        }
-        for([key, val] of Object.entries(window[staticdataset][currentAnlagenType][selection.data()[0].id - 1][0])) {
-          TypeData.push({
-            name: key,
-            value: val
-          })
-        }
-      } catch {
-        // Unavailable text here
-          
-      }
-    }if(staticdataset == 'dataset3') {
-      try {
-        for([key, val] of Object.entries(window[staticdataset][currentEnergy][selection.data()[0].id][0])) {
-          EneryData.push({
-            name: key,
-            value: val
-          })
-        }
-        for([key, val] of Object.entries(window[staticdataset][currentAnlagenType][selection.data()[0].id][0])) {
-          TypeData.push({
-            name: key,
-            value: val
-          })
-        }
-      } catch {
-        // Unavailable text here
-          
-      }
+    } catch {
+      // Unavailable text here
+
     }
-    console.log(TypeData)
-    var EnergyData_ready = pie(EneryData)
-    var TypeDataData_ready = pie(TypeData)
+  } if (staticdataset == 'dataset3') {
+    try {
+      for ([key, val] of Object.entries(window[staticdataset][currentEnergy][selection.data()[0].id][0])) {
+        EneryData.push({
+          name: key,
+          value: val
+        })
+      }
+      for ([key, val] of Object.entries(window[staticdataset][currentAnlagenType][selection.data()[0].id][0])) {
+        TypeData.push({
+          name: key,
+          value: val
+        })
+      }
+    } catch {
+      // Unavailable text here
 
-    var arc = d3.arc()
-      .innerRadius(radius * 0.5)         // This is the size of the donut hole
-      .outerRadius(radius * 0.8)
+    }
+  }
+  console.log(EneryData)
+  var EnergyData_ready = pie(EneryData)
+  var TypeDataData_ready = pie(TypeData)
 
-    var outerArc = d3.arc()
-      .innerRadius(radius * 0.9)
-      .outerRadius(radius * 0.9)
+  var arc = d3.arc()
+    .innerRadius(radius * 0.4)       
+    .outerRadius(radius * 0.8)
 
-    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+  var outerArc = d3.arc()
+    .innerRadius(radius * 0.9)
+    .outerRadius(radius * 0.9)
 
-    createEnergiePie(dsvg, EnergyData_ready, arc, EnergyColor, outerArc, radius);
-    createTypePie(csvg, TypeDataData_ready, arc, TypeColor, outerArc, radius);
+
+  createEnergiePie(dsvg, EnergyData_ready, arc, EnergyColor, outerArc, radius, dwidth);
+  createTypePie(csvg, TypeDataData_ready, arc, TypeColor, outerArc, radius, dwidth);
 }
 
 
 
-function createEnergiePie(dsvg, data_ready, arc, color, outerArc, radius) {
+function createEnergiePie(dsvg, data_ready, arc, color, outerArc, radius, width) {
+  dsvg
+    .selectAll('allSlices')
+    .data(data_ready)
+    .enter()
+    .append('path')
+    .attr('d', arc)
+    .attr('fill', function (d) { return (color(d.data.value)); })
+    .attr("stroke", "black")
+    .style('pointer-events', 'none')
+    .style("stroke-width", "10px")
+    .style("opacity", 1);
+
+
+  dsvg
+    .selectAll('counts')
+    .data(data_ready)
+    .enter()
+    .append('text')
+
+    .text(function (d) {
+      console.log(d)
+      var pieValue = ((d.endAngle - d.startAngle) * 100) / (2 * Math.PI);
+      if (pieValue < 4) {
+        d3.select(this).remove()
+      } else {
+        return d.data.value
+      }
+    })
+    .attr("transform", function (d) { return "translate(" + arc.centroid(d) + 1 + ")"; })
+    .style("text-anchor", "middle")
+    .style("font-weight", 700)
+    .style("font-size", 12)
+
+
+  dsvg.selectAll('Tags')
+    .data(data_ready)
+    .attr("class", "tag")
+    .enter()
+
+    .append("rect") // make a matching color rect
+    .attr("transform", function (d, i) {
+      return "translate(" + (width - 435) + "," + (i * 16 - 105) + ")";
+    })
+    .attr("stroke-width", "0.2px")
+    .attr("width", 12)
+    .attr("height", 12)
+    .style("fill", function (d, i) {
+      return color(d.data.value);
+    })
+  dsvg.selectAll('allLegends')
+    .data(data_ready)
+    .attr("class", "legend")
+    .enter()
+    .append("text")
+    .text(function (d) {
+      return d.data.value + "    " + d.data.name;
+    })
+    .attr("transform", function (d, i) {
+      return "translate(" + (width - 430) + "," + (i * 16 - 104.5) + ")";
+    })
+    .style("font-size", 14)
+    .attr("y", 10)
+    .attr("x", 11)
+    .style("font-weight", 500)
+}
+
+function createTypePie(dsvg, data_ready, arc, color, outerArc, radius, width) {
   dsvg
     .selectAll('allSlices')
     .data(data_ready)
     .enter()
     .append('path')
       .attr('d', arc)
-      .attr('fill', function (d) { return (color(d.data)); })
+      .attr('fill', function (d) { return (color(d.data.value)); })
       .attr("stroke", "black")
       .style('pointer-events', 'none')
       .style("stroke-width", "10px")
-      .style("opacity", 0.9);
+      .style("opacity", 1)
+    .exit()
 
   dsvg
-    .selectAll('allPolylines')
-    .data(data_ready)
-    .enter()
-    .append('polyline')
-      .attr("stroke", "black")
-      .style("fill", "none")
-      .style('pointer-events', 'none')
-      .attr("stroke-width", 1)
-      .attr('points', function (d) {
-        var posA = arc.centroid(d); // line insertion in the slice
-        var posB = outerArc.centroid(d); // line break: we use the other arc generator that has been built only for that
-        var posC = outerArc.centroid(d); // Label position = almost the same as posB
-        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2; // we need the angle to see if the X position will be at the extreme right or extreme left
-        posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
-        return [posA, posB, posC];
-      });
-
-  dsvg
-    .selectAll('allLabels')
+    .selectAll('counts')
     .data(data_ready)
     .enter()
     .append('text')
-      .text(function (d) { return d.data.name; })
-      .attr('transform', function (d) {
-        var pos = outerArc.centroid(d);
-        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-        pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
-        return 'translate(' + pos + ')';
-      })
-      .style('pointer-events', 'none')
-      .style('text-anchor', function (d) {
-        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-        return (midangle < Math.PI ? 'start' : 'end');
-      });
-}
 
-function createTypePie(dsvg, data_ready, arc, color, outerArc, radius) {
-  dsvg
-    .selectAll('allSlices')
-    .data(data_ready)
-    .enter()
-      .append('path')
-      .attr('d', arc)
-      .attr('fill', function (d) { return (color(d.data)); })
-      .attr("stroke", "black")
-      .style('pointer-events', 'none')
-      .style("stroke-width", "10px")
-      .style("opacity", 0.9);
+    .text(function (d) {
+      console.log(d)
+      var pieValue = ((d.endAngle - d.startAngle) * 100) / (2 * Math.PI);
+      if (pieValue < 4) {
+        d3.select(this).remove()
+      } else {
+        return d.data.value
+      }
+    })
+    .attr("transform", function (d) { return "translate(" + arc.centroid(d) + 1 + ")"; })
+    .style("text-anchor", "middle")
+    .style("font-size", 12)
+    .style("font-weight", 700)
 
-  dsvg
-    .selectAll('allPolylines')
-    .data(data_ready)
-    .enter()
-    .append('polyline')
-      .attr("stroke", "black")
-      .style("fill", "none")
-      .style('pointer-events', 'none')
-      .attr("stroke-width", 1)
-      .attr('points', function (d) {
-        var posA = arc.centroid(d); // line insertion in the slice
-        var posB = outerArc.centroid(d); // line break: we use the other arc generator that has been built only for that
-        var posC = outerArc.centroid(d); // Label position = almost the same as posB
-        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2; // we need the angle to see if the X position will be at the extreme right or extreme left
-        posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
-        return [posA, posB, posC];
-    });
 
-  dsvg
-    .selectAll('allLabels')
+  dsvg.selectAll('Tags')
     .data(data_ready)
+    .attr("class", "tag")
     .enter()
-    .append('text')
-      .text(function (d) { return d.data.name; })
-      .attr('transform', function (d) {
-        var pos = outerArc.centroid(d);
-        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-        pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
-        return 'translate(' + pos + ')';
-      })
-      .style('pointer-events', 'none')
-      .style('text-anchor', function (d) {
-        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-        return (midangle < Math.PI ? 'start' : 'end');
-      });
+
+    .append("rect") // make a matching color rect
+    .attr("transform", function (d, i) {
+      return "translate(" + (width - 435) + "," + (i * 16 - 105) + ")";
+    })
+    .attr("stroke-width", "0.2px")
+    .attr("width", 12)
+    .attr("height", 12)
+    .style("fill", function (d, i) {
+      return color(d.data.value);
+    })
+
+  dsvg.selectAll('allLegends')
+    .data(data_ready)
+    .attr("class", "legend")
+    .enter()
+    .append("text")
+    .text(function (d) {
+      return d.data.value + "    " + d.data.name;
+    })
+    .attr("transform", function (d, i) {
+      return "translate(" + (width - 430) + "," + (i * 16 - 104.5) + ")";
+    })
+    .style("font-size", 14)
+    .attr("y", 10)
+    .attr("x", 11)
+    .style("font-weight", 500)
+
 }
 // Piechart
 
@@ -635,7 +677,7 @@ function handleMouseOut(d, i) {
   d3.select(this)
     .style("opacity", 1)
 
-  
+
   tooltip.transition()
     .duration('100')
     .style("opacity", 0);
@@ -693,19 +735,19 @@ function zoomed({ transform }) {
 }
 
 function reset() {
-  
+
   d3.select("svg#currentEnergydonut")
     .transition()
-      .duration(1000)
-      .style("opacity", 0)
-      .remove()
+    .duration(1000)
+    .style("opacity", 0)
+    .remove()
 
   d3.select("svg#currentTypedonut")
     .transition()
-      .duration(1000)
-      .style("opacity", 0)
-      .remove()
-      
+    .duration(1000)
+    .style("opacity", 0)
+    .remove()
+
   mapsvg.transition().duration(750).call(
     zoom.transform,
     d3.zoomIdentity,

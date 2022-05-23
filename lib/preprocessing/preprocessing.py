@@ -47,9 +47,9 @@ result_country = input.groupby(['year']).agg({
     'Anlage_projekt-bezeichnung': Counter,
     })
 
-result_country["Anlage_energietraeger"] = result_country["Anlage_energietraeger"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
-result_country["Anlagentyp"] = result_country["Anlagentyp"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
-result_country["Anlage_projekt-bezeichnung"] = result_country["Anlage_projekt-bezeichnung"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
+result_country["Anlage_energietraeger"] = result_country["Anlage_energietraeger"]["_SpecialGenericAlias"].transform(lambda x: dict(x.most_common()))
+result_country["Anlagentyp"] = result_country["Anlagentyp"]["_SpecialGenericAlias"].transform(lambda x: dict(x.most_common()))
+result_country["Anlage_projekt-bezeichnung"] = result_country["Anlage_projekt-bezeichnung"]["_SpecialGenericAlias"].transform(lambda x: dict(x.most_common()))
 
 
 result_canton = input.groupby(['year','abbreviation']).agg({
@@ -61,9 +61,9 @@ result_canton = input.groupby(['year','abbreviation']).agg({
     'Anlage_projekt-bezeichnung': Counter,
     })
 
-result_canton["Anlage_energietraeger"] = result_canton["Anlage_energietraeger"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
-result_canton["Anlagentyp"] = result_canton["Anlagentyp"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
-result_canton["Anlage_projekt-bezeichnung"] = result_canton["Anlage_projekt-bezeichnung"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
+result_canton["Anlage_energietraeger"] = result_canton["Anlage_energietraeger"]["_SpecialGenericAlias"].transform(lambda x: dict(x.most_common()))
+result_canton["Anlagentyp"] = result_canton["Anlagentyp"]["_SpecialGenericAlias"].transform(lambda x: dict(x.most_common()))
+result_canton["Anlage_projekt-bezeichnung"] = result_canton["Anlage_projekt-bezeichnung"]["_SpecialGenericAlias"].transform(lambda x: dict(x.most_common()))
 
 result_municipalities = inputV2.groupby(['year','GDENR']).agg({
     'Leistung_kw':['max','min',np.mean, np.std, "count", "sum"],
@@ -74,9 +74,9 @@ result_municipalities = inputV2.groupby(['year','GDENR']).agg({
     'Anlage_projekt-bezeichnung': Counter
     })
 
-result_municipalities["Anlage_energietraeger"] = result_municipalities["Anlage_energietraeger"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
-result_municipalities["Anlagentyp"] = result_municipalities["Anlagentyp"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
-result_municipalities["Anlage_projekt-bezeichnung"] = result_municipalities["Anlage_projekt-bezeichnung"]["_SpecialGenericAlias"].transform(lambda x: dict(x))
+result_municipalities["Anlage_energietraeger"] = result_municipalities["Anlage_energietraeger"]["_SpecialGenericAlias"].transform(lambda x: dict(x.most_common()))
+result_municipalities["Anlagentyp"] = result_municipalities["Anlagentyp"]["_SpecialGenericAlias"].transform(lambda x: dict(x.most_common()))
+result_municipalities["Anlage_projekt-bezeichnung"] = result_municipalities["Anlage_projekt-bezeichnung"]["_SpecialGenericAlias"].transform(lambda x: dict(x.most_common()))
 result_municipalities["Leistung_kw"] = result_municipalities["Leistung_kw"].fillna(0)
 result_municipalities["Produktion_kwh"] = result_municipalities["Produktion_kwh"].fillna(0)
 result_municipalities["Verguetung_chf"] = result_municipalities["Verguetung_chf"].fillna(0)
@@ -110,16 +110,15 @@ for y in range(2011,2022):
     municipalities = MergeFunctionMunicipalities(municipalities, result_municipalities , y, "Anlage_projekt-bezeichnung")
 
 
-display(municipalities)
 # cantons.to_csv('cantonscombined.csv')
 
 # country.to_csv('countrycombined.csv')
 
-# cantons.to_json('cantonscombined.json')
+cantons.to_json('cantonscombined.json')
 
-# country.to_json('countrycombined.json')
+country.to_json('countrycombined.json')
 
-# municipalities.to_json('municipalities.json')
+municipalities.to_json('municipalities.json')
 
 
 # combined_dfs = pd.DataFrame(dfs, index=['country','canton', 'municipalities'])

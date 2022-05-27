@@ -32,7 +32,33 @@ def MergeFunctionMunicipalities(df, data , year, attribute):
     return df
 
 input = input.rename(columns={'Jahr':'year', 'Anlage_kanton':"abbreviation", 'Anlage_ort':"municipality", 'Anlage_plz':'PLZ4'})
+input["Anlage_energietraeger"].replace('', 'Not available', inplace=True)
+input["Anlage_energietraeger"].replace(np.nan, 'Not available', inplace=True)
+input["Anlage_energietraeger"].replace('Photovoltaik', 'Photovoltaic', inplace=True)
+input["Anlage_energietraeger"].replace('Wasserkraft', 'Hydropower', inplace=True)
+input["Anlage_energietraeger"].replace('Biomasse', 'Biomass', inplace=True)
 
+input["Anlagentyp"].replace('', 'Not available', inplace=True)
+input["Anlagentyp"].replace(np.nan, 'Not available', inplace=True)
+input["Anlagentyp"].replace('Angebaute Anlage', 'Attached photovoltaic plant', inplace=True)
+input["Anlagentyp"].replace('Integrierte Anlage', 'Integrated photovoltaic plant', inplace=True)
+input["Anlagentyp"].replace('Trinkwasserkraftwerk', 'Drinking water hydropower plant', inplace=True)
+input["Anlagentyp"].replace('Durchlaufkraftwerk', 'Flow hydropower plant', inplace=True)
+input["Anlagentyp"].replace('WKK-Prozess', 'CHP power plant', inplace=True)
+input["Anlagentyp"].replace('Ausleitkraftwerk', 'Diversion hydropower plant', inplace=True)
+input["Anlagentyp"].replace('Klärgasanlage', 'Sewage gas power plant', inplace=True)
+input["Anlagentyp"].replace('Freistehende Anlage', 'Detached photovoltaic plant', inplace=True)
+input["Anlagentyp"].replace('Windenergieanlage', 'Wind turbine', inplace=True)
+input["Anlagentyp"].replace('Dotierwasserkraftwerk', 'Doping hydropower plant', inplace=True)
+input["Anlagentyp"].replace('Biomassenutzung', 'Biomass utilization plant', inplace=True)
+input["Anlagentyp"].replace('Dampfprozess', 'Steam hydropower plant', inplace=True)
+input["Anlagentyp"].replace('Abwasserkraftwerk', 'Wastewater power plant', inplace=True)
+input["Anlagentyp"].replace('Kehrichtverbrennungsanlage', 'Waste incineration plant', inplace=True)
+input["Anlagentyp"].replace('nicht bekannt', 'Not available', inplace=True)
+input["Anlagentyp"].replace('Abwasserreinigung', 'Wastewater power plant', inplace=True)
+input["Anlagentyp"].replace('Deponiegasanlage', 'Landfill gas plant', inplace=True)
+input["Anlagentyp"].replace('Schlammverbrennungsanlage', 'CHP power plant', inplace=True)
+input["Anlagentyp"].replace('Kehrichtverbrennung', 'Waste incineration plant', inplace=True)
 
 inputV2 = input.merge(transformation, left_on='PLZ4', right_on='PLZ4', how='left')
 

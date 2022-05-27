@@ -1,3 +1,6 @@
+let dataset1;
+let dataset2;
+let dataset3;
 
 $(document).ready(function () {
   $('.dropdown-item').click(function (e) {
@@ -7,6 +10,21 @@ $(document).ready(function () {
   });
 });
 
+$("select").on("change", function() {
+  updateValues('', '2011', null, this.value)
+  switch(this.value){
+    case ('dataset1') :
+      return visibilitytoggler(1)
+    case ('dataset2') :
+      return visibilitytoggler(2)
+    case ('dataset3') :
+      return visibilitytoggler(3)
+  }
+});
+
+function test () {
+  console.log("Does this work?")
+}
 
 var mapContainer = d3.select('#map')
   .style("opacity", 0)
@@ -16,16 +34,12 @@ var statisticsContainer = d3.select('#statistics')
   .style("overflow-x", "visible")
   .style('pointer-events', 'none')
 
-// var statsvg = statisticsContainer.append('svg')
-//   .attr("id", "statisticssvg")
-//   .attr("width", 100 + "%")
-//   .attr("height", 100 + "%")
 
 var mapsvg = mapContainer.append('svg')
   .attr("id", "mapsvg")
   .attr("width", 100 + "%")
   .attr("height", 100 + "%")
-  .attr("viewBox", [-10, 415, 1150, 1])
+  .attr("viewBox", [-80, 415, 1250, 1])
 
 var projection = d3.geoMercator()
   .center([-172.3, 47.2])
@@ -56,12 +70,12 @@ var tooltip = mapContainer.append("div")
 
 
 const zoom = d3.zoom()
-  .scaleExtent([1, 40])
+  .scaleExtent([1, 2])
   .on("zoom", zoomed);
 
-function main() {
+async function main() {
   createBar()
-  populateMap()
+  await populateMap();
   setTimeout(function () {
     updateValues("Leistung_kw", 2011, 0, "dataset1")
     transitionMap();
@@ -69,75 +83,126 @@ function main() {
 
 }
 
-function populateMap() {
-  d3.json("./node_modules/swiss-maps/2021-07/ch-combined.json").then(function (ch) {
-    d3.json("./lib/preprocessing/countrycombined.json").then(function (data) {
-      window.dataset1 = data
-      country.selectAll("path")
-        .data(topojson.feature(ch, ch.objects.country).features)
-        .enter().append("path")
-        .attr("class", "country")
-        .attr("abbreviation", data.abbreviation[0])
-        .attr("name", data.name[0])
-        .attr("data", JSON.stringify(data))
-        .attr("d", path)
-        .on("mouseover", handleMouseOver)
-        .on("mouseout", handleMouseOut)
-        .on("click", handleClick)
-
-    });
+async function populateMap() {
+  const ch = await d3.json("./node_modules/swiss-maps/2021-07/ch-combined.json");
+  const countryCombinedData = await d3.json("./lib/preprocessing/countrycombined.json")
+  dataset1 = countryCombinedData;
+  country.selectAll("path")
+    .data(topojson.feature(ch, ch.objects.country).features)
+    .enter().append("path")
+    .attr("class", "country")
+    .attr("abbreviation", countryCombinedData.abbreviation[0])
+    .attr("name", countryCombinedData.name[0])
+    .attr("data", JSON.stringify(countryCombinedData))
+    .attr("d", path)
+    .on("mouseover", handleMouseOver)
+    .on("mouseout", handleMouseOut)
+    .on("click", handleClick)
 
 
-    d3.json("./lib/preprocessing/cantonscombined.json").then(function (data) {
-      var x = 0;
-      window.dataset2 = data
-      canton.selectAll("path")
-        .data(topojson.feature(ch, ch.objects.cantons).features)
-        .enter().append("path")
-        .each(function (d) {
+  const cantonsCombinedData = await d3.json("./lib/preprocessing/cantonscombined.json")
+  var x = 0;
+  dataset2 = cantonsCombinedData
+  canton.selectAll("path")
+    .data(topojson.feature(ch, ch.objects.cantons).features)
+    .enter().append("path")
+    .each(function (d) {
 
-          d3.select(this)
-            .attr("abbreviation", data.abbreviation[x])
-            .attr("name", data.name[x])
-            .attr("id", x)
-          x++
-        })
+      d3.select(this)
+        .attr("abbreviation", cantonsCombinedData.abbreviation[x])
+        .attr("name", cantonsCombinedData.name[x])
+        .attr("id", x)
+      x++
+    })
 
-        .attr("class", "canton-boundaries")
-        .attr("d", path)
-        .on("mouseover", handleMouseOver)
-        .on("mouseout", handleMouseOut)
-        .on("click", handleClick)
+    .attr("class", "canton-boundaries")
+    .attr("d", path)
+    .on("mouseover", handleMouseOver)
+    .on("mouseout", handleMouseOut)
+    .on("click", handleClick)
 
 
-    });
-
-    d3.csv("./node_modules/swiss-maps/2021-07/municipalitiesV3.csv").then(function (name) {
-      d3.json("./lib/preprocessing/municipalities.json").then(function (data) {
-        var y = 0;
-        window.dataset3 = data
-        municipalities.selectAll("path")
-          .data(topojson.feature(ch, ch.objects.municipalities).features)
-          .enter().append("path")
-          .each(function () {
-            d3.select(this)
-              .attr("name", name[y]['name'])
-              .attr("id", name[y++]['id'])
-          })
-          .attr("class", "municipality-boundaries")
-          .attr("d", path)
-          .on("mouseover", handleMouseOver)
-          .on("mouseout", handleMouseOut)
-          .on("click", handleClick)
-      })
-    });
-  });
+  const name = await d3.csv("./node_modules/swiss-maps/2021-07/municipalitiesV3.csv");
+  const munciplaltiesData = await d3.json("./lib/preprocessing/municipalities.json")
+  var y = 0;
+  dataset3 = munciplaltiesData
+  municipalities.selectAll("path")
+    .data(topojson.feature(ch, ch.objects.municipalities).features)
+    .enter().append("path")
+    .each(function () {
+      d3.select(this)
+        .attr("name", name[y]['name'])
+        .attr("id", name[y++]['id'])
+    })
+    .attr("class", "municipality-boundaries")
+    .attr("d", path)
+    .on("mouseover", handleMouseOver)
+    .on("mouseout", handleMouseOut)
+    .on("click", handleClick);
   mapsvg.call(zoom);
-
 
 }
 // Piechart
-function updateDonutChart(selection) {
+var selection = undefined;
+
+function colorselector (entry) {
+  switch (entry) {
+    case 'Wind':
+      return 15
+    case 'Hydropower':
+      return 14
+    case 'Photovoltaic':
+      return 9
+    case 'Biomass':
+      return 6
+
+    case 'Wind turbine':
+      return 15
+    case 'Attached photovoltaic plant':
+      return 9
+    case 'Integrated photovoltaic plant':
+      return 8
+    case 'Detached photovoltaic plant':
+      return 7
+    case 'Drinking water hydropower plant':
+      return 14
+    case 'Flow hydropower plant':
+      return 13
+    case 'Diversion hydropower plant':
+      return 12
+    case 'Doping hydropower plant':
+      return 11
+    case 'Steam hydropower plant':
+      return 10
+    case 'Sewage gas power plant':
+      return 6
+    case 'CHP power plant':
+      return 5
+    case 'Wastewater power plant':
+      return 4
+    case 'Waste incineration plant':
+      return 3
+    case 'Biomass utilization plant':
+      return 4
+    case 'Landfill gas plant':
+      return 2
+    case 'Not available':
+      return 1
+  }
+}
+
+
+
+function updateDonutChart(temp) {
+
+  if (temp == undefined) {
+    if (selection == undefined) {
+      return;
+    }
+    temp = selection;
+  } else {
+    selection = temp;
+  }
 
   d3.select("svg#currentEnergydonut").remove()
   d3.select("svg#currentTypedonut").remove()
@@ -147,10 +212,6 @@ function updateDonutChart(selection) {
   let EneryData = [];
   let TypeData = [];
 
-
-  // staticyear
-  // staticdataset
-
   var dwidth = 550
   dheight = 550
   dmargin = 140
@@ -158,7 +219,6 @@ function updateDonutChart(selection) {
 
   var radius = Math.min(dwidth, dheight) / 2 - dmargin
 
-  // append the svg object to the div called 'my_dataviz'
   var dsvg = d3.select("div#statistics")
       .append("svg")
         .attr("id", "currentEnergydonut")
@@ -166,7 +226,7 @@ function updateDonutChart(selection) {
         .attr("width", dwidth)
         .attr("height", dheight)
         .style("position", "absolute")
-        .style("transform", "translate(-35px, -35%)")
+        .style("transform", "translate(-35px, -33%)")
         .style('pointer-events', 'none')
         .append("g")
         .attr("transform", "translate(" + dwidth / 2 + "," + dheight / 2 + ")")
@@ -179,35 +239,34 @@ function updateDonutChart(selection) {
       .attr("width", dwidth)
       .attr("height", dheight)
       .style("position", "absolute")
-      .style("transform", "translate(-35px,8%)")
+      .style("transform", "translate(-35px,13%)")
       .style('pointer-events', 'none')
       .append("g")
       .attr("transform", "translate(" + dwidth / 2 + "," + dheight / 2 + ")")
       .style('pointer-events', 'none')
 
   // Create dummy data
-
+  
   // set the color scale
   var TypeColor = d3.scaleOrdinal()
-    .domain(Object.keys(TypeData))
-    .range(d3.schemeBlues[9])
+    .domain([15,14,13,12,11,10,9,8,7,6,5,4,3,2,1])
+    .range(['#76b7b2','#4e79a7','#5f94cd','#70aff3', '#75aeff','#749bff','#edc949', '#ffe44e','#fffb4e','#9c755f','#c29176', '#e8ad8d', '#ffc49a','#ffd19a','#bab0ab'])
 
-  var EnergyColor = d3.scaleOrdinal()
-    .domain(Object.keys(EneryData))
-    .range(d3.schemePurples[5])
-
+  // wind, hydro ,solar ,biomass ,unavailable
   // Compute the position of each group on the pie:
   var pie = d3.pie().value(d => d.value)
+  var eCount = 0
 
   if (staticdataset == 'dataset1') {
-    for ([key, val] of Object.entries(window[staticdataset][currentEnergy][0][0])) {
+    for ([key, val] of Object.entries(dataset1[currentEnergy][0][0])) {
       EneryData.push({
         name: key,
         value: val
       })
 
+    eCount += val;
     }
-    for ([key, val] of Object.entries(window[staticdataset][currentAnlagenType][0][0])) {
+    for ([key, val] of Object.entries(dataset1[currentAnlagenType][0][0])) {
       TypeData.push({
         name: key,
         value: val
@@ -215,42 +274,46 @@ function updateDonutChart(selection) {
     }
   } if (staticdataset == 'dataset2') {
     try {
-      for ([key, val] of Object.entries(window[staticdataset][currentEnergy][selection.data()[0].id - 1][0])) {
+      for ([key, val] of Object.entries(dataset2[currentEnergy][selection.data()[0].id - 1][0])) {
         EneryData.push({
           name: key,
           value: val
         })
+        eCount += val;
       }
-      for ([key, val] of Object.entries(window[staticdataset][currentAnlagenType][selection.data()[0].id - 1][0])) {
+      for ([key, val] of Object.entries(dataset2[currentAnlagenType][selection.data()[0].id - 1][0])) {
         TypeData.push({
           name: key,
           value: val
         })
       }
+      
     } catch {
       // Unavailable text here
 
     }
   } if (staticdataset == 'dataset3') {
     try {
-      for ([key, val] of Object.entries(window[staticdataset][currentEnergy][selection.data()[0].id][0])) {
+      for ([key, val] of Object.entries(dataset3[currentEnergy][selection.data()[0].id][0])) {
         EneryData.push({
           name: key,
           value: val
         })
       }
-      for ([key, val] of Object.entries(window[staticdataset][currentAnlagenType][selection.data()[0].id][0])) {
+      for ([key, val] of Object.entries(dataset3[currentAnlagenType][selection.data()[0].id][0])) {
         TypeData.push({
           name: key,
           value: val
         })
+        eCount += val;
       }
+     
     } catch {
       // Unavailable text here
 
     }
   }
-  console.log(EneryData)
+  
   var EnergyData_ready = pie(EneryData)
   var TypeDataData_ready = pie(TypeData)
 
@@ -263,23 +326,21 @@ function updateDonutChart(selection) {
     .outerRadius(radius * 0.9)
 
 
-  createEnergiePie(dsvg, EnergyData_ready, arc, EnergyColor, outerArc, radius, dwidth);
-  createTypePie(csvg, TypeDataData_ready, arc, TypeColor, outerArc, radius, dwidth);
+  createEnergiePie(dsvg, EnergyData_ready, arc, TypeColor, dwidth, eCount);
+  createTypePie(csvg, TypeDataData_ready, arc, TypeColor, dwidth, eCount);
 }
 
-
-
-function createEnergiePie(dsvg, data_ready, arc, color, outerArc, radius, width) {
+function createEnergiePie(dsvg, data_ready, arc, color, width, count) {
+  cx = 0
   dsvg
     .selectAll('allSlices')
     .data(data_ready)
     .enter()
     .append('path')
     .attr('d', arc)
-    .attr('fill', function (d) { return (color(d.data.value)); })
-    .attr("stroke", "black")
+    .attr('fill', function (d) { 
+      return (color(colorselector (d.data.name))); })
     .style('pointer-events', 'none')
-    .style("stroke-width", "10px")
     .style("opacity", 1);
 
 
@@ -290,7 +351,6 @@ function createEnergiePie(dsvg, data_ready, arc, color, outerArc, radius, width)
     .append('text')
 
     .text(function (d) {
-      console.log(d)
       var pieValue = ((d.endAngle - d.startAngle) * 100) / (2 * Math.PI);
       if (pieValue < 4) {
         d3.select(this).remove()
@@ -298,18 +358,19 @@ function createEnergiePie(dsvg, data_ready, arc, color, outerArc, radius, width)
         return d.data.value
       }
     })
-    .attr("transform", function (d) { return "translate(" + arc.centroid(d) + 1 + ")"; })
-    .style("text-anchor", "middle")
-    .style("font-weight", 700)
-    .style("font-size", 12)
+      .attr("transform", function (d) { return "translate(" + arc.centroid(d) + 1 + ")"; })
+      .style("text-anchor", "middle")
+      .style("font-weight", 800)
+      .style("font-size", 12)
+      .style('fill', 'black')
+      .style("font-family", 'Times New Roman, Times, serif')
 
-
+  
   dsvg.selectAll('Tags')
     .data(data_ready)
     .attr("class", "tag")
     .enter()
-
-    .append("rect") // make a matching color rect
+    .append("rect")
     .attr("transform", function (d, i) {
       return "translate(" + (width - 435) + "," + (i * 16 - 105) + ")";
     })
@@ -317,7 +378,7 @@ function createEnergiePie(dsvg, data_ready, arc, color, outerArc, radius, width)
     .attr("width", 12)
     .attr("height", 12)
     .style("fill", function (d, i) {
-      return color(d.data.value);
+      return color(colorselector (d.data.name));
     })
   dsvg.selectAll('allLegends')
     .data(data_ready)
@@ -333,20 +394,53 @@ function createEnergiePie(dsvg, data_ready, arc, color, outerArc, radius, width)
     .style("font-size", 14)
     .attr("y", 10)
     .attr("x", 11)
-    .style("font-weight", 500)
+    .style("font-weight", 600)
+    .style("font-family", 'Times New Roman, Times, serif')
+
+  d3.select("#currentEnergydonut > g").append("text")
+  .text(function (d) {
+    if (count > 0) {
+      return "Energy type";
+    } else {
+      return ""
+    }
+  })
+  .style("text-anchor", "middle")
+  .style("font-size", 24)
+  .attr("y", -114)
+  .attr("x", 175)
+  .style("font-weight", 600)
+  .style("font-family", 'Times New Roman, Times, serif')
+
+d3.select("#currentEnergydonut > g").append("text")
+
+  .text(function (d) {
+    if (count > 0) {
+      return count;
+    } else {
+      return "Not Available"
+    }
+    
+  })
+
+  .style("text-anchor", "middle")
+  .style("font-size", 26)
+  .attr("y", 7)
+  .attr("x", 2)
+  .style("font-weight", 600)
+  .style("font-family", 'Times New Roman, Times, serif')
+  
 }
 
-function createTypePie(dsvg, data_ready, arc, color, outerArc, radius, width) {
+function createTypePie(dsvg, data_ready, arc, color, width, count) {
   dsvg
     .selectAll('allSlices')
     .data(data_ready)
     .enter()
     .append('path')
       .attr('d', arc)
-      .attr('fill', function (d) { return (color(d.data.value)); })
-      .attr("stroke", "black")
+      .attr('fill', function (d) { return color(colorselector (d.data.name)) })
       .style('pointer-events', 'none')
-      .style("stroke-width", "10px")
       .style("opacity", 1)
     .exit()
 
@@ -357,7 +451,6 @@ function createTypePie(dsvg, data_ready, arc, color, outerArc, radius, width) {
     .append('text')
 
     .text(function (d) {
-      console.log(d)
       var pieValue = ((d.endAngle - d.startAngle) * 100) / (2 * Math.PI);
       if (pieValue < 4) {
         d3.select(this).remove()
@@ -368,15 +461,15 @@ function createTypePie(dsvg, data_ready, arc, color, outerArc, radius, width) {
     .attr("transform", function (d) { return "translate(" + arc.centroid(d) + 1 + ")"; })
     .style("text-anchor", "middle")
     .style("font-size", 12)
-    .style("font-weight", 700)
-
+    .style("font-weight", 800)
+    .style('fill', 'black')
+    .style("font-family", 'Times New Roman, Times, serif')
 
   dsvg.selectAll('Tags')
     .data(data_ready)
     .attr("class", "tag")
     .enter()
-
-    .append("rect") // make a matching color rect
+    .append("rect") 
     .attr("transform", function (d, i) {
       return "translate(" + (width - 435) + "," + (i * 16 - 105) + ")";
     })
@@ -384,7 +477,7 @@ function createTypePie(dsvg, data_ready, arc, color, outerArc, radius, width) {
     .attr("width", 12)
     .attr("height", 12)
     .style("fill", function (d, i) {
-      return color(d.data.value);
+      return color(colorselector (d.data.name));
     })
 
   dsvg.selectAll('allLegends')
@@ -401,16 +494,74 @@ function createTypePie(dsvg, data_ready, arc, color, outerArc, radius, width) {
     .style("font-size", 14)
     .attr("y", 10)
     .attr("x", 11)
-    .style("font-weight", 500)
+    .style("font-weight", 600)
+    .style("font-family", 'Times New Roman, Times, serif')
 
+    d3.select("#currentTypedonut > g").append("text")
+    .text(function (d) {
+      if (count > 0) {
+        return "Power plant type";
+      } else {
+        return ""
+      }
+    })
+    .style("text-anchor", "middle")
+    .style("font-size", 24)
+    .attr("y", -114)
+    .attr("x", 202)
+    .style("font-weight", 600)
+    .style("font-family", 'Times New Roman, Times, serif')
+
+
+  d3.select("#currentTypedonut > g").append("text")
+  .text(function (d) {
+    if (count > 0) {
+      return count;
+    } else {
+      return "Not Available"
+    }
+  })
+  .style("text-anchor", "middle")
+  .style("font-size", 26)
+  .attr("y", 7)
+  .attr("x", 2)
+  .style("font-weight", 600)
+  .style("font-family", 'Times New Roman, Times, serif')
 }
 // Piechart
+
+// Coloring
+var nanColor = '#8f8d86'
+var colorRange = ['#88bb88', '#ff8888']
+var colorRanges = [
+  ['#DCDCDC', '#ff7f0e'],
+  ['#DCDCDC', '#d62728'],
+  ['#DCDCDC', '#2ca02c']
+]
+function changeColorRange(staticattribute) {
+
+  switch (staticattribute) {
+    case 'Leistung_kw':
+      colorRange = colorRanges[0]
+      break;
+    case 'Verguetung_chf':
+      colorRange = colorRanges[1]
+      break;
+    case 'Produktion_kwh':
+      colorRange = colorRanges[2]
+      break;
+    default:
+      colorRange = colorRanges[0]
+  }
+
+}
 
 
 // Colorbar and Updater
 
 function createBar() {
-  var colors = d3.schemeYlOrBr[9];
+  //var colors = d3.schemeYlOrBr[9];
+
 
   var grad = colorScaleBar.append('defs')
     .append('linearGradient')
@@ -419,14 +570,15 @@ function createBar() {
     .attr('x2', '0%')
     .attr('y1', '0%')
     .attr('y2', '100%');
+  
 
   grad.selectAll('stop')
-    .data(colors)
+    .data(colorRange)
     .enter()
     .append('stop')
     .style('stop-color', function (d) { return d; })
     .attr('offset', function (d, i) {
-      return 125 * (i / (colors.length - 1)) + '%';
+      return 125 * (i / (colorRange.length - 1)) + '%';
     })
 
   colorScaleBar.append('rect')
@@ -453,20 +605,23 @@ function createBar() {
 }
 
 function updateColorBar(min, max, title, fnc) {
+  d3.select('g#colorScaleBar').selectAll("*").remove();
+  
+  createBar()
   d3.select('g#colorScaleBar').select('text#description')
     .text(title)
 
   d3.select('g#colorScaleBar').select('text#function')
     .text(fnc)
 
-  let x = d3.scaleLinear()
+  let x = d3.scaleLog()
     .domain([min, max])
     .range([0, 900])
+    .base(10)
 
   d3.select('g#g-runoff').remove()
 
-
-  let axis = d3.axisBottom(x);
+  let axis = d3.axisBottom(x)
   d3.select('g#colorScaleBar')
     .attr("class", "axis")
     .attr("width", 160)
@@ -519,11 +674,22 @@ function getTitles() {
 }
 
 
-
 var staticattribute = "";
 var staticyear = "";
 var staticfnc = null;
 var staticdataset = '';
+
+function colorizeSelection (value, colorScaleFnc, flag) {
+  color = nanColor
+  if (value < 1 && value > 0) {
+    value = Math.ceil(value)
+  }
+  value = parseInt(value)
+  if (value != 0 && isFinite(value) && !isNaN(value)) {
+    color = colorScaleFnc(Math.log10(value))
+  }
+  return color
+} 
 
 function updateValues(attribute, year, fnc, dataset) {
 
@@ -540,59 +706,70 @@ function updateValues(attribute, year, fnc, dataset) {
     staticdataset = dataset
   }
 
+  changeColorRange(staticattribute)
+
+  // Key to access precalculated sets
   let identifier = staticattribute + staticyear
 
-  let selection = d3.selectAll('g#country').selectAll("*")
+  let selection = d3.selectAll('g#country').selectAll("*")  
   let selection2 = d3.selectAll('g#canton').selectAll("*")
   let selection3 = d3.selectAll('g#municipality').selectAll("*")
 
-  console.log(identifier + " " + staticfnc + " " + staticdataset)
+  var localValues2 = [];
+  var localValues3 = [];
 
-  var localmax2 = 0;
-  var localmin2 = 1000000000000000;
-
-  for (let x = 0; x < Object.keys(window.dataset2[identifier]).length; x++) {
-    if (localmax2 < window.dataset2[identifier][x][staticfnc]) {
-      localmax2 = window.dataset2[identifier][x][staticfnc]
-    }
-    if (localmin2 > window.dataset2[identifier][x][staticfnc]) {
-      localmin2 = window.dataset2[identifier][x][staticfnc]
+  for (let cantonIndex = 0; cantonIndex < Object.keys(dataset2[identifier]).length; cantonIndex++) {
+    value = parseInt(dataset2[identifier][cantonIndex][staticfnc])
+    if (value > 0 && isFinite(value) && !isNaN(value)) {
+      localValues2.push(value)
     }
   }
-
-  var localmax3 = 0;
-  var localmin3 = 100000000000000;
-
-  x = 0;
-  for (entry in window.dataset3[identifier]) {
+  for (entry in dataset3[identifier]) {
     try {
-      if (localmax3 < window.dataset3[identifier][entry][staticfnc]) {
-        localmax3 = window.dataset3[identifier][entry][staticfnc]
+      value = parseInt(dataset3[identifier][entry][staticfnc])
+      if (value > 0 && isFinite(value) && !isNaN(value)) {
+        localValues3.push(value)
       }
-      if (localmin3 > window.dataset3[identifier][entry][staticfnc]) {
-        localmin3 = window.dataset3[identifier][entry][staticfnc]
-      }
-    } catch (error) {
-      // console.log("Ignored:", error)
+    } catch (e) {
+
     }
   }
 
   if (staticdataset == 'dataset1') {
-    updateColorBar(0, window.dataset1[identifier][0][staticfnc], getTitles()[0], getTitles()[1])
+    updateColorBar(0, dataset1[identifier][0][staticfnc], getTitles()[0], getTitles()[1])
   } if (staticdataset == 'dataset2') {
-    updateColorBar(localmin2, localmax2, getTitles()[0], getTitles()[1])
+    updateColorBar(d3.min(localValues2), d3.max(localValues2), getTitles()[0], getTitles()[1])
   } if (staticdataset == 'dataset3') {
-    updateColorBar(localmin3, localmax3, getTitles()[0], getTitles()[1])
+    updateColorBar(d3.min(localValues3), d3.max(localValues3), getTitles()[0], getTitles()[1])
   }
 
-  var colorScale1 = getColorscale(0, window.dataset1[identifier][0][staticfnc])
-  var colorScale2 = getColorscale(localmin2, localmax2)
-  var colorScale3 = getColorscale(localmin3, localmax3)
+  var colorScale1 = getColorscale(0, dataset1[identifier][0][staticfnc])
+  //var colorScale2 = getColorscale(localmin2, localmax2)
+  localValues2 = localValues2.map(x => Math.log10(x))
+  var colorScale2 = d3
+  .scaleLinear()
+  .domain([
+    d3.min(localValues2),
+    d3.max(localValues2)
+  ])
+  .range(colorRange);
+  
+  
+  //var colorScale3 = getColorscale(localmin3, localmax3)
+  localValues3 = localValues3.map(x => Math.log10(x))
+  var colorScale3 = d3
+  .scaleLinear()
+  .domain([
+    d3.min(localValues3),
+    d3.max(localValues3)
+  ])
+  .range(colorRange); 
+
 
   selection
-    .attr("currentObs", window.dataset1[identifier][0][staticfnc])
+    .attr("currentObs", dataset1[identifier][0][staticfnc])
     .style("fill", function (d) {
-      return colorScale1(window.dataset1[identifier][0][staticfnc])
+      return colorScale1(dataset1[identifier][0][staticfnc])
     })
 
   selection2
@@ -600,9 +777,9 @@ function updateValues(attribute, year, fnc, dataset) {
       selectionID = parseInt(d3.select(this).attr("id"))
 
       d3.select(this)
-        .attr("currentObs", window.dataset2[identifier][selectionID][staticfnc])
+        .attr("currentObs", dataset2[identifier][selectionID][staticfnc])
         .style("fill", function (d) {
-          return colorScale2(window.dataset2[identifier][selectionID][staticfnc])
+          return colorizeSelection(dataset2[identifier][selectionID][staticfnc], colorScale2, 2)
         })
     })
 
@@ -612,9 +789,9 @@ function updateValues(attribute, year, fnc, dataset) {
 
       d3.select(this)
         .attr("currentObs", function (d) {
-          if (munId in window.dataset3[identifier]) {
+          if (munId in dataset3[identifier]) {
             try {
-              return window.dataset3[identifier][munId][staticfnc]
+              return dataset3[identifier][munId][staticfnc]
             } catch (error) {
               // console.log( error)
               return 0
@@ -624,18 +801,18 @@ function updateValues(attribute, year, fnc, dataset) {
           }
         })
         .style("fill", function (d) {
-          if (munId in window.dataset3[identifier]) {
+          if (munId in dataset3[identifier]) {
             try {
-              return colorScale3(window.dataset3[identifier][munId][staticfnc])
+              return colorizeSelection(dataset3[identifier][munId][staticfnc], colorScale3, 3)
             } catch (error) {
-              return colorScale3(0)
+              return colorizeSelection(0, colorScale3, 3)
             }
           } else {
-            return colorScale3(0)
+            return colorizeSelection(0, colorScale3, 3)
           }
         })
     })
-
+    updateDonutChart()
 }
 
 

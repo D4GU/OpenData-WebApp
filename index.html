@@ -2,13 +2,18 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="./lib/loading/loading.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./node_modules/jquery-csv/src/jquery.csv.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/e5683e4490.js" crossorigin="anonymous"></script>
 </head>
 
@@ -42,99 +47,97 @@
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane fade show active" id="visualization">
         <div class="row container-fluid mx-0 px-0" style="height: 100%;">
-          <!-- <div class="card col col-md-2 py-2 bg-light" style="border-top-left-radius: 0;">
-            
-          </div> -->
-            <div class="card col px-0" style="height: 100%; border-left:hidden; border-bottom: hidden; border-right:hidden">
-              <div id="statistics"></div>
-              <div id="svgcontainer"> 
-                <div id="map"></div> 
-                <div id="loader">
-                  <svg id="loading" width="960" height="500">
-                    <defs>
-                      <clipPath id="clip-upper">
-                        <rect id="loadingrect" width="960" height="305" x="-480" y="-305"></rect>
-                      </clipPath>
-                      <clipPath id="clip-lower">
-                        <rect id="loadingrect" width="960" height="195" x="-480" y="0"></rect>
-                      </clipPath>
-                    </defs>
-                    <g clip-path="url(#clip-upper)" transform="translate(480,305)"></g>
-                    <g clip-path="url(#clip-lower)" transform="translate(480,305)"></g>
-                  </svg>
+
+          <div class="card col px-0"
+            style="height: 100%; border-left:hidden; border-bottom: hidden; border-right:hidden">
+            <div id="statistics"></div>
+            <div id="svgcontainer">
+              <div id="map"></div>
+              <div id="loader">
+                <svg id="loading" width="960" height="500">
+                  <defs>
+                    <clipPath id="clip-upper">
+                      <rect id="loadingrect" width="960" height="305" x="-480" y="-305"></rect>
+                    </clipPath>
+                    <clipPath id="clip-lower">
+                      <rect id="loadingrect" width="960" height="195" x="-480" y="0"></rect>
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#clip-upper)" transform="translate(480,305)"></g>
+                  <g clip-path="url(#clip-lower)" transform="translate(480,305)"></g>
+                </svg>
               </div>
+            </div>
+          </div>
+          <div id="geoui" class="card col col-md-auto py-1 px-1 bg-secondary"
+            style="overflow: hidden; border-top-right-radius: 0;">
+        
+            <ul class="nav no style" style="overflow:hidden">
+              <div class="card col col-md-auto py-0 px-0 pr-1 bg-secondary" style="text-align: center;  border-color:transparent">
+                <text id="Title" class="bg-dark rounded-top">Year</text>
+                <div class="list-group list-group" role="tablist">
+                  <a class="list-group-item list-group-item-action rounded-0 active" data-toggle="list"
+                    onclick="updateValues('', '2011', null,'')" href="">2011</a>
+                  <a class="list-group-item list-group-item-action" data-toggle="list"
+                    onclick="updateValues('', '2012', null,'')" href="">2012</a>
+                  <a class="list-group-item list-group-item-action" data-toggle="list"
+                    onclick="updateValues('', '2013', null,'')" href="">2013</a>
+                  <a class="list-group-item list-group-item-action" data-toggle="list"
+                    onclick="updateValues('', '2014', null,'')" href="">2014</a>
+                  <a class="list-group-item list-group-item-action" data-toggle="list"
+                    onclick="updateValues('', '2015', null,'')" href="">2015</a>
+                  <a class="list-group-item list-group-item-action" data-toggle="list"
+                    onclick="updateValues('', '2016', null,'')" href="">2016</a>
+                  <a class="list-group-item list-group-item-action" data-toggle="list"
+                    onclick="updateValues('', '2017', null,'')" href="">2017</a>
+                  <a class="list-group-item list-group-item-action" data-toggle="list"
+                    onclick="updateValues('', '2018', null,'')" href="">2018</a>
+                  <a class="list-group-item list-group-item-action" data-toggle="list"
+                    onclick="updateValues('', '2019', null,'')" href="">2019</a>
+                  <a class="list-group-item list-group-item-action" data-toggle="list"
+                    onclick="updateValues('', '2020', null,'')" href="">2020</a>
+                  <a class="list-group-item list-group-item-action" data-toggle="list"
+                    onclick="updateValues('', '2021', null,'')" href="">2021</a>
+                </div>
+              </div>
+              <div class="card col col-md-auto py-0 px-0 bg-secondary" style="text-align: center; border-color:transparent">
+                <select id="selectOptions" class="form-select bg-dark rounded" style="border:none; text-align: center; color:white; font-family: 'Times New Roman', Times, serif; font-size: 18;  padding-bottom: 2.73mm; padding-top: 2.73mm;"  aria-label=".form-select-lg example">
+                  <option id= "selection " selected value="dataset1">Country</option>
+                  <option id= "selection " value="dataset2">Canton</option>
+                  <option id= "selection " value="dataset3">Municipalities</option>
+                </select>
+                <div style="margin-bottom: 1.6mm; margin-top: 1.2mm;">
+                  <text id="Title" class="bg-dark rounded-top">Indicator</text>
+                  <div class="list-group" role="tablist">
+                    <a class="list-group-item list-group-item-action rounded-0 active" data-toggle="list"
+                      onclick="updateValues('Leistung_kw', '', null,'')" href="">Possible Output</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                      onclick="updateValues('Produktion_kwh', '', null,'')" href="">Production</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                      onclick="updateValues('Verguetung_chf', '', null,'')" href="">Remunaration</a>
+                  </div>
+                </div>
+                <div >
+                  <text id="Title" class="bg-dark rounded-top">Function</text>
+                  <div class="list-group" role="tablist">
+                    <a class="list-group-item list-group-item-action rounded-0 active" data-toggle="list"
+                      onclick="updateValues('', '', 0,'')" href="">Highest</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                      onclick="updateValues('', '', 1,'')" href="">Lowest</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                      onclick="updateValues('', '', 2,'')" href="">Mean</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                      onclick="updateValues('', '', 3,'')" href="">Standarddev.</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                      onclick="updateValues('', '', 4,'')" href="">Count</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                      onclick="updateValues('', '', 5,'')" href="">Summation</a>
+                  </div>
+                </div>
+               
               </div>
           </div>
-          
-          <div id="geoui" class="card col col-md-auto py-1 px-1 bg-secondary" style="overflow: hidden; border-top-right-radius: 0;">
-            <ul class="nav nav-tabs mx-auto no style" style="border-bottom:0px">
-              <li id="subitems" class="nav-item" onclick="visibilitytoggler(1), updateValues('', '2011', null,'dataset1')">
-                <a id="subtabs" class="nav-link bg-dark active mr-1" data-toggle="tab" href="#"><i
-                    class="fa-solid fa-chart-column mr-1"></i>Country</a>
-              </li>
-              <li id="subitems" class="nav-item" onclick="visibilitytoggler(2), updateValues('', '2011', null,'dataset2')">
-                <a id="subtabs" class="nav-link bg-dark mr-1" data-toggle="tab" href="#"><i
-                    class="fa-solid fa-circle-exclamation mr-1"></i>Canton</a>
-              </li>
-              <li id="subitems" class="nav-item" onclick="visibilitytoggler(3), updateValues('', '2011', null,'dataset3')">
-                <a id="subtabs" class="nav-link bg-dark" data-toggle="tab" href="#"><i
-                    class="fa-solid fa-circle-exclamation mr-1"></i>Municipalities</a>
-              </li>
-            </ul>
-
-
-            <ul class="nav no style"style="overflow:visible">
-              <li class="mr-1 " style="overflow:visible">
-                <div class="dropdown" style="overflow:visible">
-                  <button  type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
-                    Year  
-                  </button>
-                  <div class="dropdown-menu" id="bootstrap-overrides-dropdownmenu" style="overflow:visible">
-                    <a class="dropdown-item active" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '2011', null,'')">2011</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '2012', null,'')">2012</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '2013', null,'')">2013</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '2014', null,'')">2014</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '2015', null,'')">2015</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '2016', null,'')">2016</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '2017', null,'')">2017</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '2018', null,'')">2018</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '2019', null,'')">2019</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '2020', null,'')">2020</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '2021', null,'')">2021</a>
-                  </div>
-                </div>
-              </li>
-              
-              <li class="mr-1" style="overflow:visible">
-                <div class="dropdown" style="overflow:visible">
-                  <button  type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
-                    Attribute 
-                  </button>
-                  <div class="dropdown-menu" id="bootstrap-overrides-dropdownmenu" style="overflow:visible">
-                    <a class="dropdown-item active" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('Leistung_kw', '', null,'')">Output in Kw</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('Produktion_kwh', '', null,'')">Production in Kw/h</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('Verguetung_chf', '', null,'')">Remunaration in CHF</a>
-                  </div>
-                </div>
-              </li>
-
-              <li class="mr-1" style="overflow:visible">
-                <div class="dropdown" style="overflow:visible">
-                  <button  type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
-                    Function
-                  </button>
-                  <div class="dropdown-menu" id="bootstrap-overrides-dropdownmenu" style="overflow:visible">
-                    <a class="dropdown-item active" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '', 0,'')">Highest</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '', 1,'')">Lowest</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '', 2,'')">Mean</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '', 3,'')">Standarddeviation</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '', 4,'')">Count</a>
-                    <a class="dropdown-item" id="bootstrap-overrides-dropdownitem" href="#" onclick="updateValues('', '', 5,'')">Summation</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
+          </ul>
         </div>
       </div>
       <div role="tabpanel" class="tab-pane fade" id="information">
@@ -152,6 +155,8 @@
         <div class="alert alert-info">Contact</div>
       </div>
     </div>
+  </div>
+
   </div>
   </div>
 

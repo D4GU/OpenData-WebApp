@@ -174,7 +174,26 @@ g#g-runoff{
 
 }
 
-.dropdown-item.active{
+.list-group-item.active{
   background-color: orange;
+  border-color: transparent;
 
+}
+
+#Title {
+  color: white;
+  display: block;
+  padding: 0.5rem 1rem;
+  border-color: #dee2e6 #dee2e6 #fff;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px !important;
+  border: none;
+}
+
+input:focus,
+select:focus, .form-control:focus,
+textarea:focus,
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }

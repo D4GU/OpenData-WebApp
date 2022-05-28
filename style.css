@@ -18,7 +18,7 @@
   border-color: transparent;
   opacity: 80%;
   margin-right: 0.3rem;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 18px !important;
 }
 
@@ -54,7 +54,7 @@ a {
 }
 
 .navbar-brand {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 30px !important;
   display: inline-block;
   padding: 0px;
@@ -75,7 +75,7 @@ a {
 }
 
 .btn {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 #svgcontainer {
@@ -128,7 +128,7 @@ div.tooltip {
   pointer-events: none;
   font-size: 100%;
   font-weight: 800;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Roboto', sans-serif;
   z-index: 1000;
 }
 
@@ -146,13 +146,13 @@ g#colorScaleBar {
 
 text#description {
   transform: rotate(90deg);
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Roboto', sans-serif;
   text-align: left;
 }
 
 text#function {
   transform: rotate(90deg);
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Roboto', sans-serif;
   text-align: left;
 }
 
@@ -169,7 +169,7 @@ g#g-runoff{
 
 #bootstrap-overrides-dropdownitem {
   padding: 0.25rem 1rem;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
 
 }
@@ -185,7 +185,7 @@ g#g-runoff{
   display: block;
   padding: 0.5rem 1rem;
   border-color: #dee2e6 #dee2e6 #fff;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 18px !important;
   border: none;
 }

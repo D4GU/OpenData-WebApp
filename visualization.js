@@ -11,7 +11,7 @@ $(document).ready(function () {
 });
 
 $("select").on("change", function() {
-  updateValues('', '2011', null, this.value)
+  updateValues('', '', null, this.value)
   switch(this.value){
     case ('dataset1') :
       return visibilitytoggler(1)
@@ -22,9 +22,6 @@ $("select").on("change", function() {
   }
 });
 
-function test () {
-  console.log("Does this work?")
-}
 
 var mapContainer = d3.select('#map')
   .style("opacity", 0)
@@ -51,6 +48,7 @@ var path = d3.geoPath()
 
 var colorScaleBar = mapsvg.append("g")
   .attr("id", "colorScaleBar")
+  .style("opacity", 0)
 
 var country = mapsvg.append("g")
   .attr("visibility", "visible")
@@ -67,7 +65,6 @@ var municipalities = mapsvg.append("g")
 var tooltip = mapContainer.append("div")
   .attr("class", "tooltip")
   .style("opacity", 0);
-
 
 const zoom = d3.zoom()
   .scaleExtent([1, 2])
@@ -95,9 +92,7 @@ async function populateMap() {
     .attr("name", countryCombinedData.name[0])
     .attr("data", JSON.stringify(countryCombinedData))
     .attr("d", path)
-    .on("mouseover", handleMouseOver)
-    .on("mouseout", handleMouseOut)
-    .on("click", handleClick)
+    .attr("transform", "scale(0.65) translate(570,60)")
 
 
   const cantonsCombinedData = await d3.json("./lib/preprocessing/cantonscombined.json")
@@ -142,8 +137,193 @@ async function populateMap() {
   mapsvg.call(zoom);
 
 }
-// Piechart
+
+// time diagramm
+function areaChart() {
+  var margin = {top: 10, right: 30, bottom: 30, left: 50}
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// var width = 800
+// height = 800
+// margin = 140
+d3.select("svg#graph1").remove()
+d3.select("svg#graph2").remove()
+d3.select("svg#graph3").remove()
+data = dataset1
+ready_dataL = [[]]
+ready_dataP = [[]]
+ready_dataV = [[]]
+
+for (var [key, value] of Object.entries(data)) {
+  if (key.includes('Leistung') &&  staticfnc == 0) {
+    ready_dataL[0].push({
+      date : new Date(key.substring(11,15)),
+      value: value[0][0]
+    })
+  } if (key.includes('Leistung') &&  staticfnc == 1) {
+    ready_dataL[0].push({
+      date : new Date(key.substring(11,15)),
+      value: value[0][1]
+    })
+  } if (key.includes('Leistung') &&  staticfnc == 2) {
+    ready_dataL[0].push({
+      date : new Date(key.substring(11,15)),
+      value: value[0][2]
+    })
+  } if (key.includes('Leistung') && staticfnc == 3) {
+    ready_dataL[0].push({
+      date : new Date(key.substring(11,15)),
+      value: value[0][3]
+    })
+  } if (key.includes('Leistung') && staticfnc == 4) {
+    ready_dataL[0].push({
+      date : new Date(key.substring(11,15)),
+      value: value[0][4]
+    })
+  } if (key.includes('Leistung') && staticfnc == 5) {
+    ready_dataL[0].push({
+      date : new Date(key.substring(11,15)),
+      value: value[0][5]
+    })
+  } if (key.includes('Produktion') &&  staticfnc == 0) {
+    ready_dataP[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][0]
+    })
+  } if (key.includes('Produktion') &&  staticfnc == 1) {
+    ready_dataP[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][1]
+    })
+  } if (key.includes('Produktion') &&  staticfnc == 2) {
+    ready_dataP[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][2]
+    })
+  } if (key.includes('Produktion') && staticfnc == 3) {
+    ready_dataP[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][3]
+    })
+  } if (key.includes('Produktion') && staticfnc == 4) {
+    ready_dataP[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][4]
+    })
+  } if (key.includes('Produktion') && staticfnc == 5) {
+    ready_dataP[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][5]
+    })
+  } if (key.includes('Verguetung') &&  staticfnc == 0) {
+    ready_dataV[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][0]
+    })
+  } if (key.includes('Verguetung') &&  staticfnc == 1) {
+    ready_dataV[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][1]
+    })
+  } if (key.includes('Verguetung') &&  staticfnc == 2) {
+    ready_dataV[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][2]
+    })
+  } if (key.includes('Verguetung') && staticfnc == 3) {
+    ready_dataV[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][3]
+    })
+  } if (key.includes('Verguetung') && staticfnc == 4) {
+    ready_dataV[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][4]
+    })
+  } if (key.includes('Verguetung') && staticfnc == 5) {
+    ready_dataV[0].push({
+      date : new Date(key.substring(14,18)),
+      value: value[0][5]
+    })
+  }
+   
+  
+}
+
+// append the svg object to the body of the page
+  createGraph(margin, ready_dataL, 1, 0, 540, "Possible Output",'#feaa60');
+  createGraph(margin, ready_dataP, 2, 375, 540, "Production", '#88c688');
+  createGraph(margin, ready_dataV, 3, 750, 540, "Remunaration", '#e27172');
+}
+
+
+
 var selection = undefined;
+function createGraph(margin, ready_data, id, posx, posy, title, color) {
+
+  var dsvg = d3.select("div#statistics")
+    .append("svg")
+    .attr("id", "graph" + id)
+    .attr("viewBox", [-20, -20, 500, 500])
+    .style("x", 200)
+    .style("position", "absolute")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+      "translate(" + margin.left + "," + margin.top + ")");
+
+
+  // Add X axis --> it is a date format
+  var x = d3.scaleTime()
+    .domain(d3.extent(ready_data[0], function (d) { return d.date; }))
+    .range([0, width]);
+    dsvg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, d3.max(ready_data[0], function (d) { return +d.value; })])
+    .range([height, 0]);
+    dsvg.append("g")
+    .call(d3.axisLeft(y));
+
+
+
+    dsvg.append("path")
+    .datum(ready_data[0])
+    .attr("fill", color)
+    .attr("stroke", color)
+    .attr("stroke-width", 1.5)
+    .attr("d", d3.area()
+      .x(function (d) { return x(d.date); })
+      .y0(function() {
+        return y(0);
+      })
+      .y1(function (d) { 
+        if(d.value < 0) {
+          return y(0)
+        } else {
+          return y(d.value); 
+        }
+      })
+    );
+
+  d3.select('#graph' + id)
+    .attr("transform", "translate("+posx+","+posy+")");
+
+  d3.select("#graph"+id+" > g").append("text")
+
+  .text(title)
+  .style("text-anchor", "middle")
+  .style("font-size", 26)
+  .attr("y", 20)
+  .attr("x", 190)
+  .style("font-weight", 600)
+  .style("font-family", 'Roboto, sans-serif')
+}
 
 function colorselector (entry) {
   switch (entry) {
@@ -191,8 +371,7 @@ function colorselector (entry) {
   }
 }
 
-
-
+// Piechart
 function updateDonutChart(temp) {
 
   if (temp == undefined) {
@@ -206,6 +385,7 @@ function updateDonutChart(temp) {
 
   d3.select("svg#currentEnergydonut").remove()
   d3.select("svg#currentTypedonut").remove()
+  d3.select("#mapsel").remove()
 
   let currentEnergy = "Anlage_energietraeger" + staticyear
   let currentAnlagenType = "Anlagentyp" + staticyear
@@ -218,6 +398,13 @@ function updateDonutChart(temp) {
 
 
   var radius = Math.min(dwidth, dheight) / 2 - dmargin
+
+  if (start == 0) {
+    d3.select("div#statistics")
+      .style("opacity", 0)
+    start++
+  }
+
 
   var dsvg = d3.select("div#statistics")
       .append("svg")
@@ -289,6 +476,7 @@ function updateDonutChart(temp) {
       }
       
     } catch {
+      // console.log("error")
       // Unavailable text here
 
     }
@@ -326,12 +514,11 @@ function updateDonutChart(temp) {
     .outerRadius(radius * 0.9)
 
 
-  createEnergiePie(dsvg, EnergyData_ready, arc, TypeColor, dwidth, eCount);
+  createEnergiePie(dsvg, EnergyData_ready, arc, TypeColor, dwidth, eCount, selection);
   createTypePie(csvg, TypeDataData_ready, arc, TypeColor, dwidth, eCount);
 }
 
 function createEnergiePie(dsvg, data_ready, arc, color, width, count) {
-  cx = 0
   dsvg
     .selectAll('allSlices')
     .data(data_ready)
@@ -363,7 +550,7 @@ function createEnergiePie(dsvg, data_ready, arc, color, width, count) {
       .style("font-weight", 800)
       .style("font-size", 12)
       .style('fill', 'black')
-      .style("font-family", 'Times New Roman, Times, serif')
+      .style("font-family", 'Roboto, sans-serif')
 
   
   dsvg.selectAll('Tags')
@@ -395,7 +582,7 @@ function createEnergiePie(dsvg, data_ready, arc, color, width, count) {
     .attr("y", 10)
     .attr("x", 11)
     .style("font-weight", 600)
-    .style("font-family", 'Times New Roman, Times, serif')
+    .style("font-family", 'Roboto, sans-serif')
 
   d3.select("#currentEnergydonut > g").append("text")
   .text(function (d) {
@@ -410,7 +597,8 @@ function createEnergiePie(dsvg, data_ready, arc, color, width, count) {
   .attr("y", -114)
   .attr("x", 175)
   .style("font-weight", 600)
-  .style("font-family", 'Times New Roman, Times, serif')
+  .style("font-family", 'Roboto, sans-serif')
+
 
 d3.select("#currentEnergydonut > g").append("text")
 
@@ -418,7 +606,7 @@ d3.select("#currentEnergydonut > g").append("text")
     if (count > 0) {
       return count;
     } else {
-      return "Not Available"
+      return "No selection or data"
     }
     
   })
@@ -428,7 +616,9 @@ d3.select("#currentEnergydonut > g").append("text")
   .attr("y", 7)
   .attr("x", 2)
   .style("font-weight", 600)
-  .style("font-family", 'Times New Roman, Times, serif')
+  .style("font-family", 'Roboto, sans-serif')
+
+  d3.select("#currentEnergydonut > g").append("text")
   
 }
 
@@ -463,7 +653,7 @@ function createTypePie(dsvg, data_ready, arc, color, width, count) {
     .style("font-size", 12)
     .style("font-weight", 800)
     .style('fill', 'black')
-    .style("font-family", 'Times New Roman, Times, serif')
+    .style("font-family", 'Roboto, sans-serif')
 
   dsvg.selectAll('Tags')
     .data(data_ready)
@@ -495,7 +685,7 @@ function createTypePie(dsvg, data_ready, arc, color, width, count) {
     .attr("y", 10)
     .attr("x", 11)
     .style("font-weight", 600)
-    .style("font-family", 'Times New Roman, Times, serif')
+    .style("font-family", 'Roboto, sans-serif')
 
     d3.select("#currentTypedonut > g").append("text")
     .text(function (d) {
@@ -510,7 +700,7 @@ function createTypePie(dsvg, data_ready, arc, color, width, count) {
     .attr("y", -114)
     .attr("x", 202)
     .style("font-weight", 600)
-    .style("font-family", 'Times New Roman, Times, serif')
+    .style("font-family", 'Roboto, sans-serif')
 
 
   d3.select("#currentTypedonut > g").append("text")
@@ -518,7 +708,7 @@ function createTypePie(dsvg, data_ready, arc, color, width, count) {
     if (count > 0) {
       return count;
     } else {
-      return "Not Available"
+      return ""
     }
   })
   .style("text-anchor", "middle")
@@ -526,7 +716,7 @@ function createTypePie(dsvg, data_ready, arc, color, width, count) {
   .attr("y", 7)
   .attr("x", 2)
   .style("font-weight", 600)
-  .style("font-family", 'Times New Roman, Times, serif')
+  .style("font-family", 'Roboto, sans-serif')
 }
 // Piechart
 
@@ -569,7 +759,8 @@ function createBar() {
     .attr('x1', '0%')
     .attr('x2', '0%')
     .attr('y1', '0%')
-    .attr('y2', '100%');
+    .attr('y2', '100%')
+    
   
 
   grad.selectAll('stop')
@@ -580,6 +771,7 @@ function createBar() {
     .attr('offset', function (d, i) {
       return 125 * (i / (colorRange.length - 1)) + '%';
     })
+    
 
   colorScaleBar.append('rect')
     .attr('width', 25)
@@ -596,7 +788,7 @@ function createBar() {
 
   colorScaleBar.append('text')
     .attr('id', 'function')
-    .attr('x', '66%')
+    .attr('x', '60%')
     .attr('y', '-32px')
     .text('Placeholder')
 
@@ -604,7 +796,22 @@ function createBar() {
 
 }
 
-function updateColorBar(min, max, title, fnc) {
+function updateColorBar(min, max, title, fnc, dataset) {
+  switch(dataset){
+    case(1) :
+      d3.select('#colorScaleBar')
+        .style('opacity', 0)
+      break;
+    case(2) :
+      d3.select('#colorScaleBar')
+        .style('opacity', 100)
+      break;
+    case(3) :
+      d3.select('#colorScaleBar')
+        .style('opacity', 100)
+      break;
+  }
+
   d3.select('g#colorScaleBar').selectAll("*").remove();
   
   createBar()
@@ -691,6 +898,7 @@ function colorizeSelection (value, colorScaleFnc, flag) {
   return color
 } 
 
+var start = 0;
 function updateValues(attribute, year, fnc, dataset) {
 
   if (attribute != '') {
@@ -702,7 +910,7 @@ function updateValues(attribute, year, fnc, dataset) {
   if (fnc != null) {
     staticfnc = fnc;
   }
-  if (dataset != '') {
+  if (dataset != '' && staticdataset != dataset) {
     staticdataset = dataset
   }
 
@@ -710,7 +918,7 @@ function updateValues(attribute, year, fnc, dataset) {
 
   // Key to access precalculated sets
   let identifier = staticattribute + staticyear
-
+  console.log(identifier, staticdataset, staticfnc)
   let selection = d3.selectAll('g#country').selectAll("*")  
   let selection2 = d3.selectAll('g#canton').selectAll("*")
   let selection3 = d3.selectAll('g#municipality').selectAll("*")
@@ -736,15 +944,14 @@ function updateValues(attribute, year, fnc, dataset) {
   }
 
   if (staticdataset == 'dataset1') {
-    updateColorBar(0, dataset1[identifier][0][staticfnc], getTitles()[0], getTitles()[1])
+    updateColorBar(0, dataset1[identifier][0][staticfnc], getTitles()[0], getTitles()[1], 1)
   } if (staticdataset == 'dataset2') {
-    updateColorBar(d3.min(localValues2), d3.max(localValues2), getTitles()[0], getTitles()[1])
+    updateColorBar(d3.min(localValues2), d3.max(localValues2), getTitles()[0], getTitles()[1], 2)
   } if (staticdataset == 'dataset3') {
-    updateColorBar(d3.min(localValues3), d3.max(localValues3), getTitles()[0], getTitles()[1])
+    updateColorBar(d3.min(localValues3), d3.max(localValues3), getTitles()[0], getTitles()[1], 3)
   }
 
   var colorScale1 = getColorscale(0, dataset1[identifier][0][staticfnc])
-  //var colorScale2 = getColorscale(localmin2, localmax2)
   localValues2 = localValues2.map(x => Math.log10(x))
   var colorScale2 = d3
   .scaleLinear()
@@ -755,7 +962,6 @@ function updateValues(attribute, year, fnc, dataset) {
   .range(colorRange);
   
   
-  //var colorScale3 = getColorscale(localmin3, localmax3)
   localValues3 = localValues3.map(x => Math.log10(x))
   var colorScale3 = d3
   .scaleLinear()
@@ -769,7 +975,13 @@ function updateValues(attribute, year, fnc, dataset) {
   selection
     .attr("currentObs", dataset1[identifier][0][staticfnc])
     .style("fill", function (d) {
-      return colorScale1(dataset1[identifier][0][staticfnc])
+      if (staticattribute.includes("Leistung")) {
+        return "#feaa60"
+      } if (staticattribute.includes("Produktion")) {
+        return "#88c688"
+      } if (staticattribute.includes("Verguetung")) {
+        return "#e27172"
+      }
     })
 
   selection2
@@ -812,9 +1024,107 @@ function updateValues(attribute, year, fnc, dataset) {
           }
         })
     })
-    updateDonutChart()
-}
+    
+    
+    d3.select("#country").append("text")
+    .text(function (d) {
 
+        return "Switzerland";
+
+    })
+      .attr("id", "sel")
+      .style("text-anchor", "middle")
+      .style("font-size", 24)
+      .style("fill","white")
+      .attr("y", 200)
+      .attr("x", 750)
+      .style("font-weight", 600)
+      .style("font-family", 'Roboto, sans-serif')
+
+
+    d3.select("#country").append("text")
+      .text(function (d) {
+          if (staticfnc == 4) {
+            return Number(dataset1[identifier][0][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " Installations";
+          } if (staticattribute == "Leistung_kw") {
+            return Number(dataset1[identifier][0][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kW";
+          } if (staticattribute == "Produktion_kwh") {
+            return Number(dataset1[identifier][0][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh/year";
+          } if (staticattribute == "Verguetung_chf") {
+            return "CHF "+ Number(dataset1[identifier][0][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + ".-";
+          }
+          
+      })
+        .attr("id", "sel")  
+        .style("text-anchor", "middle")
+        .style("font-size", 24)
+        .style("fill","white")
+        .attr("y", 225)
+        .attr("x", 750)
+        .style("font-weight", 600)
+        .style("font-family", 'Roboto, sans-serif')
+
+    
+
+    let selId = 0
+    try {
+      selId = staticselection.attr("id")
+    } catch(error){
+    }
+    
+    try {
+      d3.select("#mapselv")
+    .text(function (d) {
+      if(staticdataset == "dataset2") {
+        if (staticfnc == 4) {
+          return Number(dataset2[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " Installations";
+        }else if (staticattribute == "Leistung_kw") {
+          return Number(dataset2[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kW";
+        }else if (staticattribute == "Produktion_kwh") {
+          return  Number(dataset2[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh/year";
+        }else if (staticattribute == "Verguetung_chf") {
+          return "CHF "+ Number(dataset2[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + ".-";
+        }
+      } else if (staticdataset == "dataset3") {
+        if (staticfnc == 4) {
+          return Number(dataset3[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " Installations";
+        }else if (staticattribute == "Leistung_kw") {
+          return Number(dataset3[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kW";
+        }else if (staticattribute == "Produktion_kwh") {
+          return  Number(dataset3[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh/year";
+        }else if (staticattribute == "Verguetung_chf") {
+          return "CHF "+ Number(dataset3[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + ".-";
+        }
+      }
+        
+    })
+    } catch {
+      
+    }
+    
+    
+    if (start == 0) {
+      
+      updateDonutChart(dataset1)
+    } else {
+      updateDonutChart()
+    }
+
+    if (staticdataset == 'dataset1') {
+      areaChart()
+      d3.select('#mapseln').style("opacity",0)
+      d3.select('#mapselv').style("opacity",0)
+    } else {
+      d3.select('#mapseln').style("opacity",1)
+      d3.select('#mapselv').style("opacity",1)
+      d3.select('svg#graph1').remove()
+      d3.select('svg#graph2').remove()
+      d3.select('svg#graph3').remove()
+      
+    }
+
+    d3.select("#country > path").attr("transform", "scale(0.65) translate(570,60)")
+}
 
 // Colorbar and Updater
 
@@ -833,6 +1143,12 @@ function transitionMap() {
     .on("end", function () {
       $('#loader').hide()
     });
+  
+  d3.select("div#statistics")
+    .transition()
+      .duration(7000)
+      .style("opacity", 100)
+    
 }
 
 function handleMouseOver(d, i) {
@@ -843,7 +1159,19 @@ function handleMouseOver(d, i) {
     .duration(100)
     .style("opacity", 0.90);
 
-  tooltip.html(d3.select(this).attr("name") + "<br>Value: " + Number(d3.select(this).attr("currentObs")).toFixed(1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'"))
+  let name = d3.select(this).attr("name")
+  let value = 0
+  if (staticfnc == 4) {
+    value = Number(d3.select(this).attr("currentObs")).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " Installations";
+  }else if (staticattribute == "Leistung_kw") {
+    value = Number(d3.select(this).attr("currentObs")).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kW";
+  }else if (staticattribute == "Produktion_kwh") {
+    value =  Number(d3.select(this).attr("currentObs")).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh/year";
+  }else if (staticattribute == "Verguetung_chf") {
+    value = "CHF "+ Number(d3.select(this).attr("currentObs")).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + ".-";
+  }
+  
+  tooltip.html(name + "<br>" + value)
     .style("left", (d['pageX'] - 130) + "px")
     .style("top", (d['pageY'] - 130) + "px")
     .style("padding", 2 + "px")
@@ -867,9 +1195,53 @@ function getColorscale(min, max) {
   return colorScale
 }
 
+function showClickSelection(name, value) {
+  d3.select('#mapseln').remove()
+  d3.select('#mapselv').remove()
+  d3.select("div#statistics").append("text")
+      .text(function (d) {
+          return name;
+      })
+        .attr("id", "mapseln")
+        
+        .style("text-anchor", "middle")
+        .style("font-size", 24)
+        .style("fill","black")
+        .style("position", "absolute")
+        .style("font-weight", 600)
+        .style("font-family", 'Roboto, sans-serif')
+        .style("transform", "translate(450px,5px)")
+      
+  d3.select("div#statistics").append("text")
+      .text(function (d) {
+        if (staticfnc == 4) {
+          return Number(value).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " Installations";
+        }else if (staticattribute == "Leistung_kw") {
+          return Number(value).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kW";
+        }else if (staticattribute == "Produktion_kwh") {
+          return  Number(value).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh/year";
+        }else if (staticattribute == "Verguetung_chf") {
+          return "CHF "+ Number(value).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + ".-";
+        }
+          
+      })
+        .attr("id", "mapselv")  
+        .style("text-anchor", "middle")
+        .style("font-size", 24)
+        .style("fill","black")
+        .style("position", "absolute")
+        .style("font-weight", 500)
+        .style("font-family", 'Roboto, sans-serif')
+        .style("transform", "translate(450px,29px)")
+}
+
+var staticselection
 function handleClick(d, i) {
+
+  staticselection = d3.select(this)
   centroid = getBoundingBoxCenter(d3.select(this))
   updateDonutChart(d3.select(this))
+  showClickSelection(d3.select(this).attr("name"), d3.select(this).attr("currentObs"))
   d3.selectAll("path")
     .style("stroke-width", ".3")
     .transition()
@@ -884,8 +1256,8 @@ function handleClick(d, i) {
   d.stopPropagation();
   mapsvg.transition().duration(750).call(
     zoom.transform,
-    d3.zoomIdentity.translate(width / 2, height / 2).scale(2).translate(-centroid[0] + 120, -centroid[1] + 85),
-    d3.pointer(d)
+    d3.zoomIdentity.translate(width / 2, height / 2).scale(2).translate(-centroid[0] + 200, -centroid[1] + 85),
+    d3.pointer(d), 
   )
 }
 
@@ -906,29 +1278,16 @@ function visibilitytoggler(d) {
 }
 
 function zoomed({ transform }) {
-  country.attr("transform", transform);
   canton.attr("transform", transform);
   municipalities.attr("transform", transform);
 }
 
 function reset() {
 
-  d3.select("svg#currentEnergydonut")
-    .transition()
-    .duration(1000)
-    .style("opacity", 0)
-    .remove()
-
-  d3.select("svg#currentTypedonut")
-    .transition()
-    .duration(1000)
-    .style("opacity", 0)
-    .remove()
-
   mapsvg.transition().duration(750).call(
     zoom.transform,
     d3.zoomIdentity,
-    d3.zoomTransform(mapsvg.node()).invert([width / 2, height / 2])
+    d3.zoomTransform(mapsvg.node()).invert([width / 2, height / 2]),
   );
 }
 

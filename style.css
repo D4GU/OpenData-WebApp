@@ -132,12 +132,15 @@ div.tooltip {
   z-index: 1000;
 }
 
-*, ::after, ::before {
+/* *, ::after, ::before {
   box-sizing: border-box;
   overflow: hidden;
 
-}
+} */
 
+body {
+  overflow: hidden;
+}
 
 g#colorScaleBar {
   transform: translate(12%,700px) rotate(-90deg);
@@ -196,4 +199,12 @@ textarea:focus,
 button:focus {
   outline: none !important;
   box-shadow: none !important;
+}
+
+#test {
+  overflow: visible !important;
+  left:auto;
+  top:auto;
+  margin-top: -5px;
+
 }

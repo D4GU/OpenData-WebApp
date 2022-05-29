@@ -22,6 +22,12 @@ $("select").on("change", function() {
   }
 });
 
+// $(document).ready(function () {
+//   $('#change').click(function (e) {
+//     $('#first').toggleClass('active')
+//   });
+// });
+
 
 var mapContainer = d3.select('#map')
   .style("opacity", 0)
@@ -36,7 +42,7 @@ var mapsvg = mapContainer.append('svg')
   .attr("id", "mapsvg")
   .attr("width", 100 + "%")
   .attr("height", 100 + "%")
-  .attr("viewBox", [-80, 415, 1250, 1])
+  .attr("viewBox", [-130, 415, 1250, 1])
 
 var projection = d3.geoMercator()
   .center([-172.3, 47.2])
@@ -254,7 +260,7 @@ for (var [key, value] of Object.entries(data)) {
 // append the svg object to the body of the page
   createGraph(margin, ready_dataL, 1, 0, 540, "Possible Output",'#feaa60');
   createGraph(margin, ready_dataP, 2, 375, 540, "Production", '#88c688');
-  createGraph(margin, ready_dataV, 3, 750, 540, "Remunaration", '#e27172');
+  createGraph(margin, ready_dataV, 3, 750, 540, "Remuneration", '#e27172');
 }
 
 
@@ -327,13 +333,13 @@ function createGraph(margin, ready_data, id, posx, posy, title, color) {
 
 function colorselector (entry) {
   switch (entry) {
-    case 'Wind':
+    case 'Wind energy':
       return 15
     case 'Hydropower':
       return 14
-    case 'Photovoltaic':
+    case 'Photovoltaic energy':
       return 9
-    case 'Biomass':
+    case 'Biomass energy':
       return 6
 
     case 'Wind turbine':
@@ -352,7 +358,7 @@ function colorselector (entry) {
       return 12
     case 'Doping hydropower plant':
       return 11
-    case 'Steam hydropower plant':
+    case 'Steam biomass plant':
       return 10
     case 'Sewage gas power plant':
       return 6
@@ -437,7 +443,7 @@ function updateDonutChart(temp) {
   // set the color scale
   var TypeColor = d3.scaleOrdinal()
     .domain([15,14,13,12,11,10,9,8,7,6,5,4,3,2,1])
-    .range(['#76b7b2','#4e79a7','#5f94cd','#70aff3', '#75aeff','#749bff','#edc949', '#ffe44e','#fffb4e','#9c755f','#c29176', '#e8ad8d', '#ffc49a','#ffd19a','#bab0ab'])
+    .range(['#76b7b2','#4e79a7','#5f94cd','#70aff3', '#75aeff','#c29176','#edc949', '#ffe44e','#fffb4e','#9c755f','#c29176', '#e8ad8d', '#ffc49a','#ffd19a','#bab0ab'])
 
   // wind, hydro ,solar ,biomass ,unavailable
   // Compute the position of each group on the pie:
@@ -849,7 +855,7 @@ function getTitles() {
       title = "Registered power (kW) in the year " + staticyear
       break;
     case 'Verguetung_chf':
-      title = "Feed-in remunaration (CHF) in the year " + staticyear
+      title = "Feed-in remuneration (CHF) in the year " + staticyear
       break;
     case 'Produktion_kwh':
       title = "Registered production (kWh) in the year " + staticyear

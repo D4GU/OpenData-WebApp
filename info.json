@@ -1,0 +1,11 @@
+{
+"title": "Verkehrszähldaten Visualisierung 2017",
+"description": "Diese App visaulisiert die Verkehrszähldaten der Stadt Basel im Jahr 2017. Dabei werden die Daten als fliessende Linien auf einer Karte dargestellt. Mithilfe zweier Auswahlboxen kann nach Verkehrsart und Spur gefiltert werden. Weiter kann entweder nach der Zeit und dem Datum (wobei der Wert zu dieser Stunde dargestellt wird) oder nach Temperatur und/oder Niederschlag (wobei der Durchschnitt für diese Werte angezeigt wird) gefiltert werden.",
+"authors": [
+    {"name": "Simon Kafader", "email": "simon.kafader@students.unibe.ch"},
+    {"name": "Angela Keller", "email": "angela.keller@students.unibe.ch"}
+],
+"date": "2018-05-31",
+"category": "traffic",
+"software_license": "GNU General Public License v3"
+}

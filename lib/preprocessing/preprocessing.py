@@ -34,9 +34,10 @@ def MergeFunctionMunicipalities(df, data , year, attribute):
 input = input.rename(columns={'Jahr':'year', 'Anlage_kanton':"abbreviation", 'Anlage_ort':"municipality", 'Anlage_plz':'PLZ4'})
 input["Anlage_energietraeger"].replace('', 'Not available', inplace=True)
 input["Anlage_energietraeger"].replace(np.nan, 'Not available', inplace=True)
-input["Anlage_energietraeger"].replace('Photovoltaik', 'Photovoltaic', inplace=True)
+input["Anlage_energietraeger"].replace('Photovoltaik', 'Photovoltaic energy', inplace=True)
 input["Anlage_energietraeger"].replace('Wasserkraft', 'Hydropower', inplace=True)
-input["Anlage_energietraeger"].replace('Biomasse', 'Biomass', inplace=True)
+input["Anlage_energietraeger"].replace('Biomasse', 'Biomass energy', inplace=True)
+input["Anlage_energietraeger"].replace('Wind', 'Wind energy', inplace=True)
 
 input["Anlagentyp"].replace('', 'Not available', inplace=True)
 input["Anlagentyp"].replace(np.nan, 'Not available', inplace=True)
@@ -51,7 +52,7 @@ input["Anlagentyp"].replace('Freistehende Anlage', 'Detached photovoltaic plant'
 input["Anlagentyp"].replace('Windenergieanlage', 'Wind turbine', inplace=True)
 input["Anlagentyp"].replace('Dotierwasserkraftwerk', 'Doping hydropower plant', inplace=True)
 input["Anlagentyp"].replace('Biomassenutzung', 'Biomass utilization plant', inplace=True)
-input["Anlagentyp"].replace('Dampfprozess', 'Steam hydropower plant', inplace=True)
+input["Anlagentyp"].replace('Dampfprozess', 'Steam biomass plant', inplace=True)
 input["Anlagentyp"].replace('Abwasserkraftwerk', 'Wastewater power plant', inplace=True)
 input["Anlagentyp"].replace('Kehrichtverbrennungsanlage', 'Waste incineration plant', inplace=True)
 input["Anlagentyp"].replace('nicht bekannt', 'Not available', inplace=True)
@@ -140,11 +141,11 @@ for y in range(2011,2022):
 
 # country.to_csv('countrycombined.csv')
 
-cantons.to_json('cantonscombined.json')
+# cantons.to_json('cantonscombined.json')
 
-country.to_json('countrycombined.json')
+# country.to_json('countrycombined.json')
 
-municipalities.to_json('municipalities.json')
+# municipalities.to_json('municipalities.json')
 
 
 # combined_dfs = pd.DataFrame(dfs, index=['country','canton', 'municipalities'])

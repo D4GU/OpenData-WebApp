@@ -87,7 +87,7 @@ async function main() {
 }
 
 async function populateMap() {
-  const ch = await d3.json("./node_modules/swiss-maps/2021-07/ch-combined.json");
+  const ch = await d3.json("./mapdata/swiss-maps/2021-07/ch-combined.json");
   const countryCombinedData = await d3.json("./lib/preprocessing/countrycombined.json")
   dataset1 = countryCombinedData;
   country.selectAll("path")
@@ -123,7 +123,7 @@ async function populateMap() {
     .on("click", handleClick)
 
 
-  const name = await d3.csv("./node_modules/swiss-maps/2021-07/municipalitiesV3.csv");
+  const name = await d3.csv("./mapdata/swiss-maps/2021-07/municipalitiesV3.csv");
   const munciplaltiesData = await d3.json("./lib/preprocessing/municipalities.json")
   var y = 0;
   dataset3 = munciplaltiesData
@@ -1055,7 +1055,7 @@ function updateValues(attribute, year, fnc, dataset) {
           } if (staticattribute == "Leistung_kw") {
             return Number(dataset1[identifier][0][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kW";
           } if (staticattribute == "Produktion_kwh") {
-            return Number(dataset1[identifier][0][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh/year";
+            return Number(dataset1[identifier][0][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh";
           } if (staticattribute == "Verguetung_chf") {
             return "CHF "+ Number(dataset1[identifier][0][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + ".-";
           }
@@ -1087,7 +1087,7 @@ function updateValues(attribute, year, fnc, dataset) {
         }else if (staticattribute == "Leistung_kw") {
           return Number(dataset2[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kW";
         }else if (staticattribute == "Produktion_kwh") {
-          return  Number(dataset2[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh/year";
+          return  Number(dataset2[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh";
         }else if (staticattribute == "Verguetung_chf") {
           return "CHF "+ Number(dataset2[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + ".-";
         }
@@ -1097,7 +1097,7 @@ function updateValues(attribute, year, fnc, dataset) {
         }else if (staticattribute == "Leistung_kw") {
           return Number(dataset3[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kW";
         }else if (staticattribute == "Produktion_kwh") {
-          return  Number(dataset3[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh/year";
+          return  Number(dataset3[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh";
         }else if (staticattribute == "Verguetung_chf") {
           return "CHF "+ Number(dataset3[identifier][selId][staticfnc]).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + ".-";
         }
@@ -1225,7 +1225,7 @@ function showClickSelection(name, value) {
         }else if (staticattribute == "Leistung_kw") {
           return Number(value).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kW";
         }else if (staticattribute == "Produktion_kwh") {
-          return  Number(value).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh/year";
+          return  Number(value).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kWh";
         }else if (staticattribute == "Verguetung_chf") {
           return "CHF "+ Number(value).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + ".-";
         }

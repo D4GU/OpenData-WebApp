@@ -58,6 +58,7 @@ a {
   color: whitesmoke;
   text-decoration: none;
   background-color: transparent;
+  z-index: 999999;
 }
 
 .navbar-brand {
@@ -93,6 +94,29 @@ a {
   height: 100%;
 }
 
+h6 {
+  font-size: 0.95vw;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1.1vw;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.3vw;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 1.6vw;
+  font-weight: 700;
+}
+
+p {
+  font-size: 0.9vw;
+}
 /* .country {
   fill: #343a40;
 } */
@@ -215,4 +239,24 @@ button:focus {
   top:auto;
   margin-top: -5px;
 
+}
+
+
+#home > div > div > div {
+  text-align: left;
+
+}
+#home > div > div {
+  background-color: white;
+  border-radius: 1.5rem;
+
+}
+
+#home > div {
+  padding-top: 15px;
+
+}
+
+#biomass {
+  font-size: 0.7vw;
 }

@@ -4,7 +4,6 @@
   background-color: whitesmoke;
   border-color: #dee2e6 #dee2e6 #fff;
   opacity: 100%;
-
 }
 
 .nav-tabs .nav-link {
@@ -20,6 +19,14 @@
   margin-right: 0.3rem;
   font-family: 'Roboto', sans-serif;
   font-size: 18px !important;
+
+}
+
+#myTab {
+  margin: -2;
+  display: flex;
+  min-width: 400px;
+
 }
 
 #subtabs {

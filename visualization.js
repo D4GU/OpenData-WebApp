@@ -37,6 +37,11 @@ var statisticsContainer = d3.select('#statistics')
   .style("overflow-x", "visible")
   .style('pointer-events', 'none')
 
+d3.select("svg#statsvg")
+  .attr("width", 100 + "%")
+  .attr("height", 100 + "%")
+  .attr("viewBox", [20, 0, 1500, 900])
+
 
 var mapsvg = mapContainer.append('svg')
   .attr("id", "mapsvg")
@@ -98,7 +103,7 @@ async function populateMap() {
     .attr("name", countryCombinedData.name[0])
     .attr("data", JSON.stringify(countryCombinedData))
     .attr("d", path)
-    .attr("transform", "scale(0.65) translate(570,60)")
+    .attr("transform", "scale(0.65) translate(600,60)")
 
 
   const cantonsCombinedData = await d3.json("./lib/preprocessing/cantonscombined.json")
@@ -147,8 +152,11 @@ async function populateMap() {
 // time diagramm
 function areaChart() {
   var margin = {top: 10, right: 30, bottom: 30, left: 50}
+    // width = 460 - margin.left - margin.right,
+    // height = 400 - margin.top - margin.bottom;
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
+  
 
 // var width = 800
 // height = 800
@@ -258,22 +266,28 @@ for (var [key, value] of Object.entries(data)) {
 }
 
 // append the svg object to the body of the page
-  createGraph(margin, ready_dataL, 1, 0, 540, "Possible Output",'#feaa60');
-  createGraph(margin, ready_dataP, 2, 375, 540, "Production", '#88c688');
-  createGraph(margin, ready_dataV, 3, 750, 540, "Remuneration", '#e27172');
+  createGraph(margin, ready_dataL, 1, 15, -320, "Possible Output",'#feaa60',"#fc8821");
+  createGraph(margin, ready_dataP, 2, -320, -320, "Production", '#88c688',"#22c722");
+  createGraph(margin, ready_dataV, 3, -655, -320, "Remuneration", '#e27172',"#db1a1c");
 }
 
 
 
 var selection = undefined;
-function createGraph(margin, ready_data, id, posx, posy, title, color) {
+function createGraph(margin, ready_data, id, posx, posy, title, color, stroke) {
 
-  var dsvg = d3.select("div#statistics")
+ d3.select("svg#statsvg")
     .append("svg")
     .attr("id", "graph" + id)
-    .attr("viewBox", [-20, -20, 500, 500])
-    .style("x", 200)
+    .attr("viewBox", [posx, posy, 800, 800])
+
+
+  var dsvg = d3.select("svg#graph"+ id)
+    .append("svg")
+    .attr("id", "graph" + id)
     .style("position", "absolute")
+    .attr("viewBox", [-120, 0, 550, 550])
+    .attr("font-weight", 600)
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -296,12 +310,10 @@ function createGraph(margin, ready_data, id, posx, posy, title, color) {
     dsvg.append("g")
     .call(d3.axisLeft(y));
 
-
-
     dsvg.append("path")
     .datum(ready_data[0])
     .attr("fill", color)
-    .attr("stroke", color)
+    .attr("stroke", stroke)
     .attr("stroke-width", 1.5)
     .attr("d", d3.area()
       .x(function (d) { return x(d.date); })
@@ -317,7 +329,7 @@ function createGraph(margin, ready_data, id, posx, posy, title, color) {
       })
     );
 
-  d3.select('#graph' + id)
+  d3.select("svg#graph"+ id)
     .attr("transform", "translate("+posx+","+posy+")");
 
   d3.select("#graph"+id+" > g").append("text")
@@ -1043,7 +1055,7 @@ function updateValues(attribute, year, fnc, dataset) {
       .style("font-size", 24)
       .style("fill","white")
       .attr("y", 200)
-      .attr("x", 750)
+      .attr("x", 655)
       .style("font-weight", 600)
       .style("font-family", 'Roboto, sans-serif')
 
@@ -1066,7 +1078,7 @@ function updateValues(attribute, year, fnc, dataset) {
         .style("font-size", 24)
         .style("fill","white")
         .attr("y", 225)
-        .attr("x", 750)
+        .attr("x", 655)
         .style("font-weight", 600)
         .style("font-family", 'Roboto, sans-serif')
 
@@ -1129,7 +1141,7 @@ function updateValues(attribute, year, fnc, dataset) {
       
     }
 
-    d3.select("#country > path").attr("transform", "scale(0.65) translate(570,60)")
+    d3.select("#country > path").attr("transform", "scale(0.65) translate(415,60)")
 }
 
 // Colorbar and Updater

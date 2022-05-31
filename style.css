@@ -56,9 +56,7 @@
 
 a {
   color: whitesmoke;
-  text-decoration: none;
-  background-color: transparent;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .navbar-brand {
@@ -243,20 +241,31 @@ button:focus {
 
 
 #home > div > div > div {
-  text-align: left;
+  text-align: center;
+  opacity: 95%;
 
 }
 #home > div > div {
   background-color: white;
-  border-radius: 1.5rem;
+  border-radius: 0.3rem;
+
+  opacity: 95%
 
 }
 
 #home > div {
   padding-top: 15px;
+  opacity: 95%;
+
 
 }
 
 #biomass {
   font-size: 0.7vw;
+}
+
+#attr {
+  margin-top: 10px;
+  border:4px #313639 !important;
+  padding:0;
 }

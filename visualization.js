@@ -266,9 +266,9 @@ for (var [key, value] of Object.entries(data)) {
 }
 
 // append the svg object to the body of the page
-  createGraph(margin, ready_dataL, 1, 15, -390, "Possible Output",'#feaa60',"#fc8821");
-  createGraph(margin, ready_dataP, 2, -320, -390, "Production", '#88c688',"#22c722");
-  createGraph(margin, ready_dataV, 3, -655, -390, "Remuneration", '#e27172',"#db1a1c");
+  createGraph(margin, ready_dataL, 1, 30, -430, "Possible Output",'#feaa60',"#fc8821");
+  createGraph(margin, ready_dataP, 2, -305, -430, "Production", '#88c688',"#22c722");
+  createGraph(margin, ready_dataV, 3, -640, -430, "Remuneration", '#e27172',"#db1a1c");
 }
 
 
@@ -279,7 +279,7 @@ function createGraph(margin, ready_data, id, posx, posy, title, color, stroke) {
  d3.select("svg#statsvg")
     .append("svg")
     .attr("id", "graph" + id)
-    .attr("viewBox", [posx, posy, 800, 800])
+    .attr("viewBox", [posx, posy, 830, 830])
 
 
   var dsvg = d3.select("svg#graph"+ id)

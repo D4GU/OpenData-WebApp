@@ -1,11 +1,10 @@
 {
-"title": "Verkehrszähldaten Visualisierung 2017",
-"description": "Diese App visaulisiert die Verkehrszähldaten der Stadt Basel im Jahr 2017. Dabei werden die Daten als fliessende Linien auf einer Karte dargestellt. Mithilfe zweier Auswahlboxen kann nach Verkehrsart und Spur gefiltert werden. Weiter kann entweder nach der Zeit und dem Datum (wobei der Wert zu dieser Stunde dargestellt wird) oder nach Temperatur und/oder Niederschlag (wobei der Durchschnitt für diese Werte angezeigt wird) gefiltert werden.",
+"title": "Bezügerinnen und Bezüger der Einspeisevergütung (KEV)",
+"description": "Diese App visualisiert die schweizweiten Daten über die Bezügerinnen und Bezüger der Einspeisevergütung KEV über eine Zeitspanne von 2011 bis 2021. Dabei werden die Daten auf Landes-, Kantons und Gemeindeebene abgebildet und anhand von tooltips, piecharts und areacharts Details sichtbar gemacht. Mithilfe des Menüs an der rechten Seite kann nach Jahr, Indikator und Berechnungsfunktion gefiltert werden. Neben dem, das die Bereiche auf den verschiedenen Ebenen entsprechend angefärbt, und anhand einer dynamischen Farbskala die Unterschiede ersichtlich werden, können sie auch selektiert werden womit die entsprechenden Werte angezeigt werden und die Aufteilung der Energie- und Installationstypen erscheint.",
 "authors": [
-    {"name": "Simon Kafader", "email": "simon.kafader@students.unibe.ch"},
-    {"name": "Angela Keller", "email": "angela.keller@students.unibe.ch"}
+    {"name": "Daniel Guggisberg", "email": "daniel.guggisberg1@students.unibe.ch"}
 ],
-"date": "2018-05-31",
-"category": "traffic",
+"date": "2022-05-31",
+"category": "development",
 "software_license": "GNU General Public License v3"
 }

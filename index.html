@@ -38,12 +38,10 @@
         <a class="nav-link " data-toggle="tab" href="#datasource"><i class="fa-solid fa-oil-well mr-2"></i>Data
           source</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#references"><i class="fa-solid fa-asterisk mr-2"></i>References</a>
-      </li>
+
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#contact" id="change"><i
-            class="fa-solid fa-id-card mr-2"></i>Contact</a>
+            class="fa-solid fa-id-card mr-2"></i>About</a>
       </li>
     </ul>
   </nav>
@@ -150,7 +148,7 @@
           </ul>
         </div>
       </div>
-      <div role="tabpanel" class="tab-pane fade" id="information">
+      <div role="tabpanel" class="tab-pane fade" id="information" style="text-align:center">
         <ul id="subbar" class="nav nav-tabs ml-auto bg-secondary"
           style="border-bottom:0px; zoom:85%; justify-content:center" id="myTab">
           <li class="nav-item" style="margin-top: 6px;" id="first">
@@ -162,7 +160,7 @@
           </li>
           <li class="nav-item" style="margin-top: 6px;">
             <a class="nav-link" data-toggle="tab" href="#Explanation">
-              Explanation</a>
+              Manual</a>
           </li>
           <li class="nav-item" style="margin-top: 6px;">
             <a class="nav-link " data-toggle="tab" href="#Implementation">Implementation</a>
@@ -187,7 +185,7 @@
   top: 0;">
 
             
-              <div class="container" id="home" style="height: 100%;">
+              <div class="container" id="home" style="height: 100%;" >
                 <div class="content">
                   <div class="row  bg-light">
                     <div class="col-md-12" style="margin-top:15px">
@@ -252,32 +250,36 @@
                         height: 100%; width:100%; background-size: contain; background-repeat: no-repeat;background-size: cover; display: block;
   position: absolute;
   left: 0;
-  top: 0;">
+  top: 0; z-index: 999">
 
           
           <div class="container-fluid">
                <div class="row" style="padding-top:15px">
-               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch">
-               <div class="card border-light">
+               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch" style="opacity:95%;">
+               <div class="card border-light" >
                    <div class="card-header text-center my-0 py-1"><h4 class="my-0 py-0">Photovoltaic</h4></div>
                    <div class="card-body bg-dark text-white rounded-bottom">
                     <h5>Attached photovoltaic plant</h5>
-                    <p >Solar cells are attached to the outer surface of buildings, roadways, railways and vehicles.</p>
+                    <p >The solar PV system is directly integrated with the electricity infrastructure. This is the cheapest mode of going solar but you are still dependent on energy from the grid since you have no way of storing it.</p>
                     <h5>Integrated photovoltaic plant</h5>
-                    <p >Integrated photovoltaics blend into the outer surface of buildings, roadways, railways, and vehicles, such that the solar cells are often no longer visible from outside.
+                    <p >The solar PV system is directly integrated with the electricity infrastructure and has its own battery back-up to store excess electricity that is generated. More expensive but less dependence on the grid.
                         </p>
                     <h5>Detached photovoltaic plant</h5>
-                        <p >Solar cells are installed separate from any structure
+                        <p >Completely detached from the electricity infrastructure, in this context it would probably still be able to feed energy but not consume any. Ideal for remote locations but generally the most pricey option.
                         </p>
                     <h5>More information</h5>
-                    <p >Links...
-                    </p>
+                    <div class="list-group bg-dark">
+                      <a href="https://science.nasa.gov/science-news/science-at-nasa/2002/solarcells#:~:text=Photovoltaics%20is%20the%20direct%20conversion,of%20light%20and%20release%20electrons." class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;">
+                        <p>Photovoltaics</p>
+                      </a>
+                      <a href="https://minusco2.in/solarinsider/types-of-solar-pv-systems/" class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;"><p>Integrated, Attached, Detached</p></a>
+                    </div>
                </div>
                </div>
                </div>
-               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch">
-               <div class="card border-light">
-                   <div class="card-header text-center my-0 py-1"><h4 class="my-0 py-0">Hydropower</h4></div>
+               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch" style="opacity:95%;">
+               <div class="card border-light" >
+                   <div class="card-header text-center my-0 py-1" ><h4 class="my-0 py-0">Hydropower</h4></div>
                    <div class="card-body bg-dark text-white rounded-bottom">
                     <h5>Drinking water hydropower plant</h5>
                     <p class="">Hydroelectricity production from a turbine utilizing water from the drinking water supply lines.</p>
@@ -285,20 +287,27 @@
                     <p class="">Hydroelectricity production from a turbine most commonly utilizing the current of a river.
                         </p>
                     <h5>Doping hydropower plant</h5>
-                        <p class="">Hydroelectricity production from a turbine most commonly utilizing a hydroelectric dam for blocking water and increasing water pressure.
+                        <p class="">Hydroelectricity production from a turbine most commonly utilizing a hydroelectric dam for blocking water. Electricity is produced by releasing water from the reservoir through a turbine, which activates a generator
                         </p>
                     <h5>Diversion hydropower plant</h5>
                     <p class="">Channels a portion of a river through a canal and/or a penstock to utilize the natural decline of the riverbed elevation to produce energy.
                     </p>
                     <h5>More information</h5>
+                    <div class="list-group bg-dark">
+                      <a href="https://www.energy.gov/eere/water/types-hydropower-plants#:~:text=There%20are%20three%20types%20of,renewable%20energy%20to%20the%20grid." class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;">
+                        <p>Doping, Diversion</p>
+                      </a>
+                      <a href="https://www.hydropower.org/iha/discover-types-of-hydropower" class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;"><p>Flow</p></a>
+                      <a href="https://www.alpiq.com/power-generation/new-renewable-energy-sources/small-scale-hydropower-plants/tomils" class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;"><p>Drinking water</p></a>
+                    </div>
                     
                </div>
                </div>
                </div>
-               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch">
-               <div class="card border-light" >
-                   <div class="card-header text-center my-0 py-1"><h4 class="my-0 py-0">Biomass</h4></div>
-                   <div class="card-body bg-dark text-white rounded-bottom">
+               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch" style="opacity:95%;">
+               <div class="card border-light"  >
+                   <div class="card-header text-center my-0 py-1" s><h4 class="my-0 py-0">Biomass</h4></div>
+                   <div class="card-body bg-dark text-white rounded-bottom" >
                    <h5>Steam biomass plant</h5>
                    <p class="" id="biomass">Burns biomass directly to produce high-pressure steam that drives a turbine generator to make electricity.</p>
                    <h5>Sewage gas power plant</h5>
@@ -319,10 +328,10 @@
                </div>
                </div>
                </div>
-               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch">
-                <div class="card border-light ">
-                    <div class="card-header text-center my-0 py-1"><h4 class="my-0 py-0">Wind & Geothermal</h4></div>
-                    <div class="card-body bg-dark text-white rounded-bottom">
+               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch"style="opacity:95%">
+                <div class="card border-light " >
+                    <div class="card-header text-center my-0 py-1" ><h4 class="my-0 py-0">Wind & Geothermal</h4></div>
+                    <div class="card-body bg-dark text-white rounded-bottom" >
                     <h5>Wind turbine</h5>
                     <p class="">An installation that converts the kinetic energy of wind into electrical energy.</p>
                     <h5>Geothermal power plant</h5>
@@ -365,7 +374,7 @@
                 <div class="row  bg-light">
                   <div class="col-md-12" style="margin-top:15px">
                     <h5 style="font-weight: 600;">Visualization</h5>
-                    <p>Visual representations help to understand and interpret complex data. This visualization tries to capture as many different angles and levels on the main indicators as possible, by allowing the selection of different functions used on the main dataset. The main levels are country-wide, canton-wide, municipality-wide. The main attributes are output in kW, production in kWh and remuneration in CHF. </p>
+                    <p>Visual representations help us to understand and interpret complex data. This visualization tries to capture as many different angles and levels on the main indicators as possible, by allowing the selection of different functions used on the main dataset. The main levels are country-wide, canton-wide, municipality-wide. The main attributes are output in kW, production in kWh and remuneration in CHF. </p>
                     <h5 style="font-weight: 600;">Specification</h5>
                     <span style="font-size:0.9vw; display:block;">The usable functions are as follows:</span>
                     <span style="font-size:0.9vw; display:block;">•	The <a style="font-weight:800">Highest</a> value for <a style="font-weight:800">a</a> recipient on the <a style="font-weight:800">selected level</a> and for a <a style="font-weight:800">selected attribute</a>. </span>
@@ -377,7 +386,7 @@
                     <p></p>
                     <p>While you can select dynamically from these functions, the colour bar below, the ticks as well as intervals change correspondingly. This and the colouring are mainly used for comparison of the values between the different cantons and municipalities. It must be noted that the colouring was done using a logarithmic scale since the outliers inside the dataset were so high that trying to use a linear scale proved futile. This causes colouring of the higher values to be more in line with the lower ones and might seem confusing, but a decision had to be made and the logarithmic scale seemed to be the best option. </p>
                     <p>While an area is selected the pie charts on the right shows the distribution of the count value into the different energy types and installation types. Energy and installation types which occur together are colour coded in the same way. E.g., photovoltaic energy has a colour yellow and is the parent of the plant types: attached, integrated, and detached photovoltaic plant, which are all coloured in different shades of yellow. Meanwhile right next to it, the name of the selection is shown and with it the value for the selected year, function and attribute that is being observed.</p>
-                    <p>Consult the representation on the tab "Scope & Functions" for a better understanding for a visualization of this.</p>
+                    <p>Consult the representation on the tab "Scope & Functions" for a better understanding.</p>
                   </div>
 
                 </div>
@@ -398,13 +407,13 @@
   top: 0;">
           
             <div class="container" id="home" style="height: 100%; overflow-x:scroll;">
-              <div class="content">
-                <div class="row bg-light">
-                  <div class="col-md-12 " style="margin-top:15px; margin-bottom: 15px;">
-                    <img src="./assets/Visualization description.drawio (1).png" style="width:1100px;height:490px;" alt="Italian Trulli">
+              <div class="content" style="opacity:95%">
+                <div class="row bg-light" style="opacity:95%">
+                  <div class="col-md-12 " style="margin-top:15px; margin-bottom: 15px; opacity: 95%;" >
+                    <img src="./assets/Visualization description.drawio (1).png" style="width:auto;height:auto; max-width: 100%;" alt="Italian Trulli">
                       
                     
-                    
+                    <!-- "width:1100px;height:490px;" -->
                   </div>
 
                 </div>
@@ -427,9 +436,9 @@
           <div class="container-fluid">
             <div class="row" style="padding-top:15px">
             <div class="col-xl-4 col-sm-6 px-1 d-flex align-items-stretch">
-            <div class="card border-light">
-                <div class="card-header text-center my-0 py-1"><h4 class="my-0 py-0">Country</h4></div>
-                <div class="card-body bg-dark text-white rounded-bottom">
+            <div class="card border-light" style="opacity:95%">
+                <div class="card-header text-center my-0 py-1" style="opacity:95%"><h4 class="my-0 py-0">Country</h4></div>
+                <div class="card-body bg-dark text-white rounded-bottom" style="opacity:95%">
                  <h5>More power more remuneration</h5>
                  <p >Since the first remuneration recipient entry (KEV) the dataset in 2011, the country wide sum of the Output in kW is nearly 8 times larger in 2021, while the Production in kWh has more than quadrupled. Remuneration on the other hand has its peak with a 4 times larger value in the first quarter of 2020 and then nearly halves from its previous gain in 2021. All the indicators seem to lose gain between 2020 and 2021, the reason for this is unknown.</p>
                  <h5>Continuous increase</h5>
@@ -445,9 +454,9 @@
             </div>
             </div>
             <div class="col-xl-4 col-sm-6 px-1 d-flex align-items-stretch">
-            <div class="card border-light">
-                <div class="card-header text-center my-0 py-1"><h4 class="my-0 py-0">Canton</h4></div>
-                <div class="card-body bg-dark text-white rounded-bottom">
+            <div class="card border-light" style="opacity:95%">
+                <div class="card-header text-center my-0 py-1" style="opacity:95%"><h4 class="my-0 py-0">Canton</h4></div>
+                <div class="card-body bg-dark text-white rounded-bottom" style="opacity:95%">
                  <h5>Drinking water hydropower plant</h5>
                  <p class="">Hydroelectricity production from a turbine utilizing water from the drinking water supply lines.</p>
                  <h5>Flow hydropower plant</h5>
@@ -465,9 +474,9 @@
             </div>
             </div>
             <div class="col-xl-4 col-sm-6 px-1 d-flex align-items-stretch">
-            <div class="card border-light" >
-                <div class="card-header text-center my-0 py-1"><h4 class="my-0 py-0">Municipality</h4></div>
-                <div class="card-body bg-dark text-white rounded-bottom">
+            <div class="card border-light"  style="opacity:95%">
+                <div class="card-header text-center my-0 py-1" style="opacity:95%"><h4 class="my-0 py-0">Municipality</h4></div>
+                <div class="card-body bg-dark text-white rounded-bottom" style="opacity:95%">
                 <h5>Steam biomass plant</h5>
 
             </div>
@@ -499,28 +508,29 @@
             <div class="content">
               
               <div class="row">
-                <div class="alert alert-info rounded">
-                <div class="col-md-12" style="text-align: left;" id="content2">
+                <div class="bg-light rounded" style="opacity:95%">
+                <div class="col-md-12 my-2" style="text-align: center;" id="content2" style="opacity:95%">
                   <h1 style="font-weight: 600;">Data sources</h1>
                   <h5 style="font-weight: 600;">Main data source:</h5>
                   <p>The dataset on Swiss recipients of the feed-in remuneration corresponds to the status as of 04 Mai
                     2022. The dataset contains all recipients of feed-in remuneration between 2011 and 2021 with varying
                     degree of data quality and following specifics:</p>
-                    <div class="container" style="text-align: center;">
+                    
+                    <div class="container border rounded" style="text-align: center;">
                       <div class="row">
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <h6>Energy Type</h6>
                         </div>
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <h6>Installation Type</h6>
                         </div>
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <h6>Output kW</h6>
                         </div>
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <p>Registration date</p>
                         </div>
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <p>Closing date</p>
                         </div>
                         
@@ -529,38 +539,38 @@
 
 
                       <div class="row">
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <h6>Year</h6>
                         </div>
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <h6>Canton and Municipality</h6>
                         </div>
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <h6>PLZ4</h6>
                         </div>
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <p>Launch date</hp>
                         </div>
-                        <div class="col-sm">
-                          <hp>Producer Specifics</hp>
+                        <div id="attr" class="col-sm">
+                          <p>Producer Specifics</p>
                         </div>
                       </div>
 
                       <div class="row">
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <h6>Production kW</h6>
                         </div>
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <h6>Remuneration CHF</h6>
                         </div>
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <p></p>
                         </div>
                         
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <p>Project Specifics</p>
                         </div>
-                        <div class="col-sm">
+                        <div id="attr" class="col-sm">
                           <p></p>
                         </div>
                       </div>
@@ -572,11 +582,12 @@
                     photovoltaics, wind energy, geothermal energy, biomass and waste. This dataset is created and being
                     maintained by the federal office of energy (BFE). Although contracts are still running, no new
                     registrations can be made. Link to the source of this dataset:
-                    https://opendata.swiss/de/dataset/bezugerinnen-und-bezuger-der-einspeisevergutung-kev.</p>
+                   <a href="https://opendata.swiss/de/dataset/bezugerinnen-und-bezuger-der-einspeisevergutung-kev" style="color: blue">opendata.swiss</a>.
+                  </p>
                   <h5 style="font-weight: 600;">Supporting data sources:</h5>
                   <h6 style="font-weight: 600;">GeoData</h6>
                   <p>The TopoJSON data required for generating the country, canton and municipality boundaries were
-                    taken from following Github: https://github.com/interactivethings/swiss-maps, which provides a
+                    taken from following Github: <a href="https://github.com/interactivethings/swiss-maps" style="color: blue">swiss-maps</a>, which provides a
                     mechanism to generate TopoJSON from publicly available swisstopo geodata, created and maintained by
                     the federal office of topography. It also provided the necessary names, and the official
                     municipality identification number.
@@ -584,8 +595,8 @@
                   <h5 style="font-weight: 600;">Datalink</h5>
                   <p>To obtain a link between the individual renumeration recipient data and the geodata of the
                     municipalities, a third dataset had to be used, which allowed the transformation of PLZ4 numbers to
-                    municipality identification numbers. This official document can be found here:
-                    https://www.bfs.admin.ch/asset/de/do-t-09.02-gwr-37</p>
+                    municipality identification numbers. This official document can be found here: <a href="https://www.bfs.admin.ch/asset/de/do-t-09.02-gwr-37" style="color: blue">bfs.admin.ch</a>.
+                    </p>
                 </div>
               </div>
             </div>
@@ -597,9 +608,57 @@
       </div>
 
       
-      <div role="tabpanel" class="tab-pane fade" id="contact">
-        <div class="alert alert-info">E</div>
-        
+      <div role="tabpanel" class="tab-pane fade" style="position:absolute; width: 100%; height:100%" id="contact">
+        <div class="p-0 m-0 text-center bg-image" style="
+                      background-image: url('assets/gebaeude_solarpanels_photovoltaik_shutterstock_278061698_16-92.png');
+                      height: 100%; width:100%; background-size: contain; background-repeat: no-repeat;background-size: cover; display: block;
+position: absolute;
+left: 0;
+top: 0;">
+          <div class="container " style="height: 100%;">
+                <div class="content ">
+                  <div class="row ">
+                    <div class="col-md-13" style="margin-top:15px">
+
+                      <div class="row " style="flex-wrap:nowrap; justify-content: center;">
+              
+                        <div class="col mb-1 bg-dark rounded" style="border:2px; border-color:transparent; opacity: 95%;">
+                          <div class="mx-2 my-4 " style="color:white">
+                            <h5 style="font-weight: 600;">About the Project</h5>
+                            <p > This visualization was created during the Open Data Course at the University in Bern in 2021. Different Technologies were used in the creation of it including Javascript, Bootstrap and the D3.js library. Python with the Numpy and Pandas libaries were used for processing and preparing the data. The data about the Recipients of feed-in Remuneration was retrieved from <a href="https://opendata.swiss/de/dataset/bezugerinnen-und-bezuger-der-einspeisevergutung-kev" style="color: grey">Opendata.swiss</a> and the WebApp developed in consultation with a data coach from the federal office of energy (BfE) who also gave me the necessary feedback to improve it and guide it into the right direction.</p>
+                          </div>
+                        </div>
+                        
+          
+                      </div>
+
+                      <div class="row " style="flex-wrap:nowrap; justify-content: center;">
+          
+                        <div class="col bg-dark rounded" style="border:2px; border-color: transparent ; opacity: 95%;">
+                          <div class="mx-2 my-4 " style="color:white">
+                            <h5 style="font-weight: 600;">About me</h5>
+                            <p > I am Daniel Guggisberg currently studying in the third semester of my Master's Degree for Business Administration with a focus on information systems. I had previous programming knowledge due to a minor in Computer Science but during my day to day I don't generally get to program as much as I like to, so creating this was a joy.</p>
+                          <p >E-Mail: Daniel.Guggisberg@hotmail.ch  &nbsp; <a href="https://www.linkedin.com/in/daniel-guggisberg-26862a208/"><img src="./assets/58e91afdeb97430e81906504.png"  style="width:1.3vw"></img></p></a>
+
+                          </div>
+                        </div>
+                        
+                        <div class="col-md-auto bg-dark ml-1 rounded" style="border:2px; border-color:transparent ; opacity: 95%;">
+                          <h5></h5>
+                          <div class="mx-2 my-3 rounded"><img class="" src="./assets/_DSC5883v8.png" style="width:auto;height:auto; max-width: 8vw;" alt="Italian Trulli"></img></div>
+                        </div>
+     
+                      </div>
+                      
+
+                    
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+        </div>
       </div>
 
       <div role="tabpanel" class="tab-pane fade" id="references">

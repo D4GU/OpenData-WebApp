@@ -1167,9 +1167,9 @@ function updateValues(attribute, year, fnc, dataset) {
 
       d3.select('#mapseln').style("opacity",0)
       d3.select('#mapselv').style("opacity",0)
-      d3.selectAll('#background').attr("opacity",50+"%")
+      d3.selectAll('#background').style("opacity",50+"%")
     } else {
-      d3.selectAll('#background').attr("opacity",0)
+      d3.selectAll('#background').style("opacity",0)
       d3.select('#mapseln').style("opacity",1)
       d3.select('#mapselv').style("opacity",1)
       d3.select('svg#graph1').remove()

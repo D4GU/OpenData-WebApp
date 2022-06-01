@@ -12,21 +12,27 @@ $(document).ready(function () {
 
 $("select").on("change", function() {
   updateValues('', '', null, this.value)
+
   switch(this.value){
     case ('dataset1') :
+      d3.select('#mapselv').remove()
+      d3.select('#mapseln').remove()
       return visibilitytoggler(1)
     case ('dataset2') :
+      d3.select('#mapselv').remove()
+      d3.select('#mapseln').remove()
+      d3.selectAll('#background').remove()
       return visibilitytoggler(2)
     case ('dataset3') :
+      d3.select('#mapselv').remove()
+      d3.select('#mapseln').remove()
+      d3.selectAll('#background').remove()
+
+      
       return visibilitytoggler(3)
   }
 });
 
-// $(document).ready(function () {
-//   $('#change').click(function (e) {
-//     $('#first').toggleClass('active')
-//   });
-// });
 
 
 var mapContainer = d3.select('#map')
@@ -537,6 +543,20 @@ function updateDonutChart(temp) {
 }
 
 function createEnergiePie(dsvg, data_ready, arc, color, width, count) {
+  d3.select("#currentEnergydonut > g").append("rect")
+  .attr("id", "background")
+  .attr("width",500 +"px")
+  .attr("height",259.1 +"px")
+  .style("stroke-width", "0")
+  .style("border-radius",25+"px")
+  .style("opacity", 50+"%")
+  .style("fill", "white")
+  .attr("rx", 3)
+  .attr("ry", 3)
+  .attr("y", -144)
+  .attr("x", -145)
+
+
   dsvg
     .selectAll('allSlices')
     .data(data_ready)
@@ -637,10 +657,25 @@ d3.select("#currentEnergydonut > g").append("text")
   .style("font-family", 'Roboto, sans-serif')
 
   d3.select("#currentEnergydonut > g").append("text")
+
+ 
   
 }
 
 function createTypePie(dsvg, data_ready, arc, color, width, count) {
+  d3.select("#currentTypedonut > g").append("rect")
+        .attr("id", "background")
+        .attr("width",500 +"px")
+        .attr("height",275 +"px")
+        .style("stroke-width", "0")
+        .style("border-radius",25+"px")
+        .style("opacity", 50+"%")
+        .style("fill", "white")
+        .attr("rx", 3)
+        .attr("ry", 3)
+        .attr("y", -138)
+        .attr("x", -145)
+ 
   dsvg
     .selectAll('allSlices')
     .data(data_ready)
@@ -936,7 +971,6 @@ function updateValues(attribute, year, fnc, dataset) {
 
   // Key to access precalculated sets
   let identifier = staticattribute + staticyear
-  console.log(identifier, staticdataset, staticfnc)
   let selection = d3.selectAll('g#country').selectAll("*")  
   let selection2 = d3.selectAll('g#canton').selectAll("*")
   let selection3 = d3.selectAll('g#municipality').selectAll("*")
@@ -1130,9 +1164,12 @@ function updateValues(attribute, year, fnc, dataset) {
 
     if (staticdataset == 'dataset1') {
       areaChart()
+
       d3.select('#mapseln').style("opacity",0)
       d3.select('#mapselv').style("opacity",0)
+      d3.selectAll('#background').attr("opacity",50+"%")
     } else {
+      d3.selectAll('#background').attr("opacity",0)
       d3.select('#mapseln').style("opacity",1)
       d3.select('#mapselv').style("opacity",1)
       d3.select('svg#graph1').remove()
@@ -1216,6 +1253,7 @@ function getColorscale(min, max) {
 function showClickSelection(name, value) {
   d3.select('#mapseln').remove()
   d3.select('#mapselv').remove()
+  
   d3.select("div#statistics").append("text")
       .text(function (d) {
           return name;
@@ -1259,6 +1297,9 @@ function handleClick(d, i) {
   staticselection = d3.select(this)
   centroid = getBoundingBoxCenter(d3.select(this))
   updateDonutChart(d3.select(this))
+  if (staticdataset != dataset1) {
+    d3.selectAll('#Background').remove()
+  }
   showClickSelection(d3.select(this).attr("name"), d3.select(this).attr("currentObs"))
   d3.selectAll("path")
     .style("stroke-width", ".3")

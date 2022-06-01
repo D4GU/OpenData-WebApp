@@ -269,3 +269,7 @@ button:focus {
   border:4px #313639 !important;
   padding:0;
 }
+
+#references{
+  margin-bottom: 4px;
+}

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="./lib/loading/loading.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="./node_modules/jquery-csv/src/jquery.csv.js"></script>
+  <script src="./mapdata/jquery-csv/src/jquery.csv.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -151,8 +151,9 @@
       <div role="tabpanel" class="tab-pane fade" id="information" style="text-align:center">
         <ul id="subbar" class="nav nav-tabs ml-auto bg-secondary"
           style="border-bottom:0px; zoom:85%; justify-content:center" id="myTab">
+          
           <li class="nav-item" style="margin-top: 6px;" id="first">
-            <a class="nav-link active " data-toggle="tab" href="#Background">Background</a>
+            <a class="nav-link active" data-toggle="tab" href="#KEV">Background</a>
           </li>
           <li class="nav-item" style="margin-top: 6px;">
             <a class="nav-link" data-toggle="tab" href="#Categories">
@@ -163,20 +164,22 @@
               Manual</a>
           </li>
           <li class="nav-item" style="margin-top: 6px;">
-            <a class="nav-link " data-toggle="tab" href="#Implementation">Implementation</a>
-          </li>
-          <li class="nav-item" style="margin-top: 6px;">
             <a class="nav-link" data-toggle="tab" href="#Scope">
               Scope & Functions</a>
           </li>
           <li class="nav-item" style="margin-top: 6px;">
-            <a class="nav-link " data-toggle="tab" href="#Interpretation">Interpretation</a>
+            <a class="nav-link " data-toggle="tab" href="#Interpretation">Observations</a>
           </li>
+
+          <li class="nav-item" style="margin-top: 6px;">
+            <a class="nav-link " data-toggle="tab" href="#Implementation">Implementation</a>
+          </li>
+
         </ul>
 
 
         <div role="tabpanel" class="tab-pane fade active show" style="position:absolute; width: 100%; height:100%"
-          id="Background">
+          id="KEV">
           <div class="p-0 m-0 text-center bg-image" style="
                         background-image: url('assets/gebaeude_solarpanels_photovoltaik_shutterstock_278061698_16-92.png');
                         height: 100%; width:100%; background-size: contain; background-repeat: no-repeat;background-size: cover; display: block;
@@ -184,66 +187,58 @@
   left: 0;
   top: 0;">
 
-            
-              <div class="container" id="home" style="height: 100%;" >
-                <div class="content">
-                  <div class="row  bg-light">
-                    <div class="col-md-12" style="margin-top:15px">
-                      <h1 style="font-weight: 600;">Cost-covering feed-in remuneration (KEV)</h1>
-                      <h5 style="font-weight: 600;">What is it in short?</h5>
-                      <p>The abbreviation KEV stands for the German term "Kostendeckende Einspeisevergütung " or in
-                        English
-                        "cost-covering feed-in remuneration". It is a federal instrument used to promote electricity
-                        production from renewable energies.</p>
-                      <h5 style="font-weight: 600;">History</h5>
-                      <p>On June 26, 2009, a support system was created in Switzerland to increase the expansion of
-                        electricity generation from renewable sources. The goal of the federal government was to keep
-                        investments in the construction of plants for the generation of electricity from renewable
-                        energies
-                        as low as possible and to provide incentives for the rapid expansion of Switzerland's renewable
-                        energy infrastructure.
-                        The KEV subsidy program was very successful right from the start: an administrative bottleneck
-                        quickly formed for applications at the Swiss Federal Office of Energy. At times, more than
-                        37,000
-                        plants were waiting on a waiting list for the financing subsidies for plant construction, as the
-                        Aargauer Zeitung reported. It was just as quickly foreseeable that the legally available
-                        subsidies
-                        would be exhausted as early as 2018. However, with the Energy Strategy 2050, the parliament
-                        found a
-                        follow-up legislation that led to the replacement of the KEV by the Feed-in remuneration-system
-                        (EVS) and the introduction of the direct marketing obligation for certain energy sources and
-                        plant
-                        sizes.
-                      </p>
-                      <h5 style="font-weight: 600;">How does it work?</h5>
-                      <p>The KEV subsidies are and were financed by a pay-as-you-go surcharge on the high-voltage grids
-                        of
-                        CHF 0.015.- per kilowatt hour; with the new version of the Energy Act of January 1, 2018, this
-                        amount increased to CHF 0.023.- which is paid by all electricity consumers per kilowatt hour
-                        consumed. The grid surcharge fund thus fed was administered by the "Cost-covering feed-in
-                        remuneration" foundation until the beginning of 2018; since then, UVEK (Federal Department of
-                        the
-                        Environment, Transport, Energy and Communications) has taken over the administration. </p>
-                      <h5 style="font-weight: 600;">What methods of generating energy are/were supported and what are
-                        they?</h5>
-                      <p>The KEV subsidies are and were financed by a pay-as-you-go surcharge on the high-voltage grids
-                        of
-                        CHF 0.015.- per kilowatt hour; with the new version of the Energy Act of January 1, 2018, this
-                        amount increased to CHF 0.023.- which is paid by all electricity consumers per kilowatt hour
-                        consumed. The grid surcharge fund thus fed was administered by the "Cost-covering feed-in
-                        remuneration" foundation until the beginning of 2018; since then, UVEK (Federal Department of
-                        the
-                        Environment, Transport, Energy and Communications) has taken over the administration. </p>
-                    </div>
 
+            <div class="container" id="home" style="height: 100%;">
+              <div class="content">
+                <div class="row  bg-light">
+                  <div class="col-md-12" style="margin-top:15px">
+                    <h1 style="font-weight: 600;">Cost-covering feed-in remuneration (KEV)</h1>
+                    <h5 style="font-weight: 600;">What is it in short?</h5>
+                    <p>The abbreviation KEV stands for the German term "Kostendeckende Einspeisevergütung " or in
+                      English
+                      "cost-covering feed-in remuneration". It is a federal instrument used to promote electricity
+                      production from renewable energies.</p>
+                    <h5 style="font-weight: 600;">History</h5>
+                    <p>On June 26, 2009, a support system was created in Switzerland to increase the expansion of
+                      electricity generation from renewable sources. The goal of the federal government was to keep
+                      investments in the construction of plants for the generation of electricity from renewable
+                      energies
+                      as low as possible and to provide incentives for the rapid expansion of Switzerland's renewable
+                      energy infrastructure.
+                      The KEV subsidy program was very successful right from the start: an administrative bottleneck
+                      quickly formed for applications at the Swiss Federal Office of Energy. At times, more than
+                      37,000
+                      plants were waiting on a waiting list for the financing subsidies for plant construction, as the
+                      Aargauer Zeitung reported. It was just as quickly foreseeable that the legally available
+                      subsidies
+                      would be exhausted as early as 2018. However, with the Energy Strategy 2050, the parliament
+                      found a
+                      follow-up legislation that led to the replacement of the KEV by the Feed-in remuneration-system
+                      (EVS) and the introduction of the direct marketing obligation for certain energy sources and
+                      plant
+                      sizes.
+                    </p>
+                    <h5 style="font-weight: 600;">How does it work?</h5>
+                    <p>The KEV subsidies are and were financed by a pay-as-you-go surcharge on the high-voltage grids
+                      of
+                      CHF 0.015.- per kilowatt hour; with the new version of the Energy Act of January 1, 2018, this
+                      amount increased to CHF 0.023.- which is paid by all electricity consumers per kilowatt hour
+                      consumed. The grid surcharge fund thus fed was administered by the "Cost-covering feed-in
+                      remuneration" foundation until the beginning of 2018; since then, UVEK (Federal Department of
+                      the
+                      Environment, Transport, Energy and Communications) has taken over the administration. </p>
                   </div>
-                </div>
 
+                </div>
               </div>
 
-           
+            </div>
+          
+            
           </div>
         </div>
+
+
         <div role="tabpanel" class="tab-pane fade" style="position:absolute; width: 100%; height:100%" id="Categories">
           <div class="p-0 m-0 text-center bg-image" style="
                         background-image: url('assets/gebaeude_solarpanels_photovoltaik_shutterstock_278061698_16-92.png');
@@ -252,114 +247,169 @@
   left: 0;
   top: 0; z-index: 999">
 
-          
-          <div class="container-fluid">
-               <div class="row" style="padding-top:15px">
-               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch" style="opacity:95%;">
-               <div class="card border-light" >
-                   <div class="card-header text-center my-0 py-1"><h4 class="my-0 py-0">Photovoltaic</h4></div>
-                   <div class="card-body bg-dark text-white rounded-bottom">
-                    <h5>Attached photovoltaic plant</h5>
-                    <p >The solar PV system is directly integrated with the electricity infrastructure. This is the cheapest mode of going solar but you are still dependent on energy from the grid since you have no way of storing it.</p>
-                    <h5>Integrated photovoltaic plant</h5>
-                    <p >The solar PV system is directly integrated with the electricity infrastructure and has its own battery back-up to store excess electricity that is generated. More expensive but less dependence on the grid.
-                        </p>
-                    <h5>Detached photovoltaic plant</h5>
-                        <p >Completely detached from the electricity infrastructure, in this context it would probably still be able to feed energy but not consume any. Ideal for remote locations but generally the most pricey option.
-                        </p>
-                    <h5>More information</h5>
-                    <div class="list-group bg-dark">
-                      <a href="https://science.nasa.gov/science-news/science-at-nasa/2002/solarcells#:~:text=Photovoltaics%20is%20the%20direct%20conversion,of%20light%20and%20release%20electrons." class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;">
-                        <p>Photovoltaics</p>
-                      </a>
-                      <a href="https://minusco2.in/solarinsider/types-of-solar-pv-systems/" class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;"><p>Integrated, Attached, Detached</p></a>
-                    </div>
-               </div>
-               </div>
-               </div>
-               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch" style="opacity:95%;">
-               <div class="card border-light" >
-                   <div class="card-header text-center my-0 py-1" ><h4 class="my-0 py-0">Hydropower</h4></div>
-                   <div class="card-body bg-dark text-white rounded-bottom">
-                    <h5>Drinking water hydropower plant</h5>
-                    <p class="">Hydroelectricity production from a turbine utilizing water from the drinking water supply lines.</p>
-                    <h5>Flow hydropower plant</h5>
-                    <p class="">Hydroelectricity production from a turbine most commonly utilizing the current of a river.
-                        </p>
-                    <h5>Doping hydropower plant</h5>
-                        <p class="">Hydroelectricity production from a turbine most commonly utilizing a hydroelectric dam for blocking water. Electricity is produced by releasing water from the reservoir through a turbine, which activates a generator
-                        </p>
-                    <h5>Diversion hydropower plant</h5>
-                    <p class="">Channels a portion of a river through a canal and/or a penstock to utilize the natural decline of the riverbed elevation to produce energy.
-                    </p>
-                    <h5>More information</h5>
-                    <div class="list-group bg-dark">
-                      <a href="https://www.energy.gov/eere/water/types-hydropower-plants#:~:text=There%20are%20three%20types%20of,renewable%20energy%20to%20the%20grid." class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;">
-                        <p>Doping, Diversion</p>
-                      </a>
-                      <a href="https://www.hydropower.org/iha/discover-types-of-hydropower" class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;"><p>Flow</p></a>
-                      <a href="https://www.alpiq.com/power-generation/new-renewable-energy-sources/small-scale-hydropower-plants/tomils" class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;"><p>Drinking water</p></a>
-                    </div>
-                    
-               </div>
-               </div>
-               </div>
-               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch" style="opacity:95%;">
-               <div class="card border-light"  >
-                   <div class="card-header text-center my-0 py-1" s><h4 class="my-0 py-0">Biomass</h4></div>
-                   <div class="card-body bg-dark text-white rounded-bottom" >
-                   <h5>Steam biomass plant</h5>
-                   <p class="" id="biomass">Burns biomass directly to produce high-pressure steam that drives a turbine generator to make electricity.</p>
-                   <h5>Sewage gas power plant</h5>
-                   <p class="" id="biomass">Sewage sludge is loaded into airtight tanks called anaerobic digesters. As  bacteria digests the sewage, methane (a natural gas) is produced. The methane is piped into large engines which produce heat and electricity.
-                       </p>
-                   <h5>CHP power plant</h5>
-                    <p class="" id="biomass">Fuel cell CHP technology generates electricity by taking energy from fuel at a chemical level. It uses a steam reformer to convert methane in the gas supply into carbon dioxide and hydrogen. The hydrogen then reacts with oxygen in the fuel cell to produce electricity.
-                    </p>
-                    <h5>Wastewater power plant</h5>
-                    <p class="" id="biomass">Organic waste decomposes in an oxygen-free environment and releases methane gas. This methane can be captured and used to produce energy, instead of being released into the atmosphere.
-                    </p>
-                    <h5>Waste incineration plant</h5>
-                    <p class="" id="biomass">Waste-to-energy plants use garbage as a fuel for generating power, much like other power stations use coal, oil or natural gas. The burning of the waste heats water and the steam drives a turbine to generate electricity.
-                    </p>
-                    <h5>Landfill gas plant</h5>
-                    <p class="" id="biomass">Landfills are a method to dispose of municipal or household solid wastes. These wastes are held in oxygen-free environments and can produce large amounts of mainly methane gas, which in turn can be used to produce energy.
-                    </p>
-               </div>
-               </div>
-               </div>
-               <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch"style="opacity:95%">
-                <div class="card border-light " >
-                    <div class="card-header text-center my-0 py-1" ><h4 class="my-0 py-0">Wind & Geothermal</h4></div>
-                    <div class="card-body bg-dark text-white rounded-bottom" >
-                    <h5>Wind turbine</h5>
-                    <p class="">An installation that converts the kinetic energy of wind into electrical energy.</p>
-                    <h5>Geothermal power plant</h5>
-                    <p class="">Geothermal power plants use steam to produce electricity. The steam comes from reservoirs of hot water found a few miles or more below the earth's surface. The steam rotates a turbine that activates a generator, which produces electricity.
-                        </p>
-                    <h5>More Information</h5>
 
-                    <div class="list-group bg-dark">
-                      <a href="https://tinyurl.com/5bf5exk2" class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;">
-                        <p>Wind turbines</p>
-                      </a>
-                      <a href="https://tinyurl.com/3ev99r6h" class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1" style="color: white;"><p>Geothermal power plants</p></a>
+            <div class="container-fluid">
+              <div class="row" style="padding-top:15px">
+                <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch" style="opacity:95%;">
+                  <div class="card border-light">
+                    <div class="card-header text-center my-0 py-1">
+                      <h4 class="my-0 py-0">Photovoltaic</h4>
                     </div>
-                
-                     
-                    <span></span>
-                    
-                      
-                        
-              
+                    <div class="card-body bg-dark text-white rounded-bottom">
+                      <h5>Attached photovoltaic plant</h5>
+                      <p>The solar PV system is directly integrated with the electricity infrastructure. This is the
+                        cheapest mode of going solar but you are still dependent on energy from the grid since you have
+                        no way of storing it.</p>
+                      <h5>Integrated photovoltaic plant</h5>
+                      <p>The solar PV system is directly integrated with the electricity infrastructure and has its own
+                        battery back-up to store excess electricity that is generated. More expensive but less
+                        dependence on the grid.
+                      </p>
+                      <h5>Detached photovoltaic plant</h5>
+                      <p>Completely detached from the electricity infrastructure, in this context it would probably
+                        still be able to feed energy but not consume any. Ideal for remote locations but generally the
+                        most pricey option.
+                      </p>
+                      <h5>More information</h5>
+                      <div class="list-group bg-dark">
+                        <a href="https://science.nasa.gov/science-news/science-at-nasa/2002/solarcells#:~:text=Photovoltaics%20is%20the%20direct%20conversion,of%20light%20and%20release%20electrons."
+                          class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1"
+                          style="color: white;">
+                          <p>Photovoltaics</p>
+                        </a>
+                        <a href="https://minusco2.in/solarinsider/types-of-solar-pv-systems/"
+                          class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1"
+                          style="color: white;">
+                          <p>Integrated, Attached, Detached</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch" style="opacity:95%;">
+                  <div class="card border-light">
+                    <div class="card-header text-center my-0 py-1">
+                      <h4 class="my-0 py-0">Hydropower</h4>
+                    </div>
+                    <div class="card-body bg-dark text-white rounded-bottom">
+                      <h5>Drinking water hydropower plant</h5>
+                      <p class="">Hydroelectricity production from a turbine utilizing water from the drinking water
+                        supply lines.</p>
+                      <h5>Flow hydropower plant</h5>
+                      <p class="">Hydroelectricity production from a turbine most commonly utilizing the current of a
+                        river.
+                      </p>
+                      <h5>Doping hydropower plant</h5>
+                      <p class="">Hydroelectricity production from a turbine most commonly utilizing a hydroelectric dam
+                        for blocking water. Electricity is produced by releasing water from the reservoir through a
+                        turbine, which activates a generator
+                      </p>
+                      <h5>Diversion hydropower plant</h5>
+                      <p class="">Channels a portion of a river through a canal and/or a penstock to utilize the natural
+                        decline of the riverbed elevation to produce energy.
+                      </p>
+                      <h5>More information</h5>
+                      <div class="list-group bg-dark">
+                        <a href="https://www.energy.gov/eere/water/types-hydropower-plants#:~:text=There%20are%20three%20types%20of,renewable%20energy%20to%20the%20grid."
+                          class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1"
+                          style="color: white;">
+                          <p>Doping, Diversion</p>
+                        </a>
+                        <a href="https://www.hydropower.org/iha/discover-types-of-hydropower"
+                          class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1"
+                          style="color: white;">
+                          <p>Flow</p>
+                        </a>
+                        <a href="https://www.alpiq.com/power-generation/new-renewable-energy-sources/small-scale-hydropower-plants/tomils"
+                          class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1"
+                          style="color: white;">
+                          <p>Drinking water</p>
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
+                <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch" style="opacity:95%;">
+                  <div class="card border-light">
+                    <div class="card-header text-center my-0 py-1" s>
+                      <h4 class="my-0 py-0">Biomass</h4>
+                    </div>
+                    <div class="card-body bg-dark text-white rounded-bottom">
+                      <h5>Steam biomass plant</h5>
+                      <p class="" id="biomass">Burns biomass directly to produce high-pressure steam that drives a
+                        turbine generator to make electricity.</p>
+                      <h5>Sewage gas power plant</h5>
+                      <p class="" id="biomass">Sewage sludge is loaded into airtight tanks called anaerobic digesters.
+                        As bacteria digests the sewage, methane (a natural gas) is produced. The methane is piped into
+                        large engines which produce heat and electricity.
+                      </p>
+                      <h5>CHP power plant</h5>
+                      <p class="" id="biomass">Fuel cell CHP technology generates electricity by taking energy from fuel
+                        at a chemical level. It uses a steam reformer to convert methane in the gas supply into carbon
+                        dioxide and hydrogen. The hydrogen then reacts with oxygen in the fuel cell to produce
+                        electricity.
+                      </p>
+                      <h5>Wastewater power plant</h5>
+                      <p class="" id="biomass">Organic waste decomposes in an oxygen-free environment and releases
+                        methane gas. This methane can be captured and used to produce energy, instead of being released
+                        into the atmosphere.
+                      </p>
+                      <h5>Waste incineration plant</h5>
+                      <p class="" id="biomass">Waste-to-energy plants use garbage as a fuel for generating power, much
+                        like other power stations use coal, oil or natural gas. The burning of the waste heats water and
+                        the steam drives a turbine to generate electricity.
+                      </p>
+                      <h5>Landfill gas plant</h5>
+                      <p class="" id="biomass">Landfills are a method to dispose of municipal or household solid wastes.
+                        These wastes are held in oxygen-free environments and can produce large amounts of mainly
+                        methane gas, which in turn can be used to produce energy.
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                
-           </div>
-           </div>
-    
-        </div>
+                <div class="col-xl-3 col-sm-6 px-1 d-flex align-items-stretch" style="opacity:95%">
+                  <div class="card border-light ">
+                    <div class="card-header text-center my-0 py-1">
+                      <h4 class="my-0 py-0">Wind & Geothermal</h4>
+                    </div>
+                    <div class="card-body bg-dark text-white rounded-bottom">
+                      <h5>Wind turbine</h5>
+                      <p class="">An installation that converts the kinetic energy of wind into electrical energy.</p>
+                      <h5>Geothermal power plant</h5>
+                      <p class="">Geothermal power plants use steam to produce electricity. The steam comes from
+                        reservoirs of hot water found a few miles or more below the earth's surface. The steam rotates a
+                        turbine that activates a generator, which produces electricity.
+                      </p>
+                      <h5>More Information</h5>
+
+                      <div class="list-group bg-dark">
+                        <a href="https://tinyurl.com/5bf5exk2"
+                          class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1"
+                          style="color: white;">
+                          <p>Wind turbines</p>
+                        </a>
+                        <a href="https://tinyurl.com/3ev99r6h"
+                          class="list-group-item list-group-item-action bg-dark px-0 py-0 border-0 mb-1"
+                          style="color: white;">
+                          <p>Geothermal power plants</p>
+                        </a>
+                      </div>
+
+
+                      <span></span>
+
+
+
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
         </div>
         <div role="tabpanel" class="tab-pane fade" style="position:absolute; width: 100%; height:100%" id="Explanation">
           <div class="p-0 m-0 text-center bg-image" style="
@@ -368,24 +418,53 @@
   position: absolute;
   left: 0;
   top: 0;">
-          
+
             <div class="container" id="home" style="height: 100%;">
               <div class="content">
                 <div class="row  bg-light">
                   <div class="col-md-12" style="margin-top:15px">
                     <h5 style="font-weight: 600;">Visualization</h5>
-                    <p>Visual representations help us to understand and interpret complex data. This visualization tries to capture as many different angles and levels on the main indicators as possible, by allowing the selection of different functions used on the main dataset. The main levels are country-wide, canton-wide, municipality-wide. The main attributes are output in kW, production in kWh and remuneration in CHF. </p>
+                    <p>Visual representations help us to understand and interpret complex data. This visualization tries
+                      to capture as many different angles and levels on the main indicators as possible, by allowing the
+                      selection of different functions used on the main dataset. The main levels are country-wide,
+                      canton-wide, municipality-wide. The main attributes are output in kW, production in kWh and
+                      remuneration in CHF. </p>
                     <h5 style="font-weight: 600;">Specification</h5>
                     <span style="font-size:0.9vw; display:block;">The usable functions are as follows:</span>
-                    <span style="font-size:0.9vw; display:block;">•	The <a style="font-weight:800">Highest</a> value for <a style="font-weight:800">a</a> recipient on the <a style="font-weight:800">selected level</a> and for a <a style="font-weight:800">selected attribute</a>. </span>
-                    <span style="font-size:0.9vw; display:block;"> • The <a style="font-weight:800">Lowest</a> value for <a style="font-weight:800">a</a> recipient on the <a style="font-weight:800">selected level</a> and for a <a style="font-weight:800">selected attribute</a>.</span>
-                    <span style="font-size:0.9vw; display:block;">•	The <a style="font-weight:800">Mean</a> of <a style="font-weight:800">all</a> recipients on the <a style="font-weight:800">selected level</a> and for a <a style="font-weight:800">selected attribute</a> .</span>
-                    <span style="font-size:0.9vw; display:block;">•	The <a style="font-weight:800">Standard deviation</a> of <a style="font-weight:800">all</a> recipients on the <a style="font-weight:800">selected level</a> and for a <a style="font-weight:800">selected attribute.</a></span>
-                    <span style="font-size:0.9vw; display:block;">•	The <a style="font-weight:800">Count</a> of <a style="font-weight:800">all</a> recipients on the <a style="font-weight:800">selected level</a> and for a <a style="font-weight:800">selected attribute</a>.</span>
-                    <span style="font-size:0.9vw; display:block;">•	The <a style="font-weight:800">Sum</a> of <a style="font-weight:800">all</a> recipients on the <a style="font-weight:800">selected level</a> and for a <a style="font-weight:800">selected attribute</a>.</span>
+                    <span style="font-size:0.9vw; display:block;">• The <a style="font-weight:800">Highest</a> value for
+                      <a style="font-weight:800">a</a> recipient on the <a style="font-weight:800">selected level</a>
+                      and for a <a style="font-weight:800">selected attribute</a>. </span>
+                    <span style="font-size:0.9vw; display:block;"> • The <a style="font-weight:800">Lowest</a> value for
+                      <a style="font-weight:800">a</a> recipient on the <a style="font-weight:800">selected level</a>
+                      and for a <a style="font-weight:800">selected attribute</a>.</span>
+                    <span style="font-size:0.9vw; display:block;">• The <a style="font-weight:800">Mean</a> of <a
+                        style="font-weight:800">all</a> recipients on the <a style="font-weight:800">selected level</a>
+                      and for a <a style="font-weight:800">selected attribute</a> .</span>
+                    <span style="font-size:0.9vw; display:block;">• The <a style="font-weight:800">Standard
+                        deviation</a> of <a style="font-weight:800">all</a> recipients on the <a
+                        style="font-weight:800">selected level</a> and for a <a style="font-weight:800">selected
+                        attribute.</a></span>
+                    <span style="font-size:0.9vw; display:block;">• The <a style="font-weight:800">Count</a> of <a
+                        style="font-weight:800">all</a> recipients on the <a style="font-weight:800">selected level</a>
+                      and for a <a style="font-weight:800">selected attribute</a>.</span>
+                    <span style="font-size:0.9vw; display:block;">• The <a style="font-weight:800">Sum</a> of <a
+                        style="font-weight:800">all</a> recipients on the <a style="font-weight:800">selected level</a>
+                      and for a <a style="font-weight:800">selected attribute</a>.</span>
                     <p></p>
-                    <p>While you can select dynamically from these functions, the colour bar below, the ticks as well as intervals change correspondingly. This and the colouring are mainly used for comparison of the values between the different cantons and municipalities. It must be noted that the colouring was done using a logarithmic scale since the outliers inside the dataset were so high that trying to use a linear scale proved futile. This causes colouring of the higher values to be more in line with the lower ones and might seem confusing, but a decision had to be made and the logarithmic scale seemed to be the best option. </p>
-                    <p>While an area is selected the pie charts on the right shows the distribution of the count value into the different energy types and installation types. Energy and installation types which occur together are colour coded in the same way. E.g., photovoltaic energy has a colour yellow and is the parent of the plant types: attached, integrated, and detached photovoltaic plant, which are all coloured in different shades of yellow. Meanwhile right next to it, the name of the selection is shown and with it the value for the selected year, function and attribute that is being observed.</p>
+                    <p>While you can select dynamically from these functions, the colour bar below, the ticks as well as
+                      intervals change correspondingly. This and the colouring are mainly used for comparison of the
+                      values between the different cantons and municipalities. It must be noted that the colouring was
+                      done using a logarithmic scale since the outliers inside the dataset were so high that trying to
+                      use a linear scale proved futile. This causes colouring of the higher values to be more in line
+                      with the lower ones and might seem confusing, but a decision had to be made and the logarithmic
+                      scale seemed to be the best option. </p>
+                    <p>While an area is selected the pie charts on the left show the distribution of the count value
+                      into the different energy types and installation types. Energy and installation types which occur
+                      together are colour coded in the same way. E.g., photovoltaic energy has a colour yellow and is
+                      the parent of the plant types: attached, integrated, and detached photovoltaic plant, which are
+                      all coloured in different shades of yellow. Meanwhile right next to it, the name of the selection
+                      is shown and with it the value for the selected year, function and attribute that is being
+                      observed.</p>
                     <p>Consult the representation on the tab "Scope & Functions" for a better understanding.</p>
                   </div>
 
@@ -405,14 +484,15 @@
   position: absolute;
   left: 0;
   top: 0;">
-          
+
             <div class="container" id="home" style="height: 100%; overflow-x:scroll;">
               <div class="content" style="opacity:95%">
                 <div class="row bg-light" style="opacity:95%">
-                  <div class="col-md-12 " style="margin-top:15px; margin-bottom: 15px; opacity: 95%;" >
-                    <img src="./assets/Visualization description.drawio (1).png" style="width:auto;height:auto; max-width: 100%;" alt="Italian Trulli">
-                      
-                    
+                  <div class="col-md-12 " style="margin-top:15px; margin-bottom: 15px; opacity: 95%;">
+                    <img src="./assets/Visualization description.drawio (1).png"
+                      style="width:auto;height:auto; max-width: 100%;" alt="Italian Trulli">
+
+
                     <!-- "width:1100px;height:490px;" -->
                   </div>
 
@@ -425,75 +505,166 @@
 
           </div>
         </div>
-        <div role="tabpanel" class="tab-pane fade" style="position:absolute; width: 100%; height:100%" id="Interpretation">
+        <div role="tabpanel" class="tab-pane fade" style="position:absolute; width: 100%; height:100%"
+          id="Interpretation">
           <div class="p-0 m-0 text-center bg-image" style="
                         background-image: url('./assets/hydropower.png');
                         height: 100%; width:100%; background-size: contain; background-repeat: no-repeat;background-size: cover; display: block;
   position: absolute;
   left: 0;
   top: 0;">
-          
-          <div class="container-fluid">
-            <div class="row" style="padding-top:15px">
-            <div class="col-xl-4 col-sm-6 px-1 d-flex align-items-stretch">
-            <div class="card border-light" style="opacity:95%">
-                <div class="card-header text-center my-0 py-1" style="opacity:95%"><h4 class="my-0 py-0">Country</h4></div>
-                <div class="card-body bg-dark text-white rounded-bottom" style="opacity:95%">
-                 <h5>More power more remuneration</h5>
-                 <p >Since the first remuneration recipient entry (KEV) the dataset in 2011, the country wide sum of the Output in kW is nearly 8 times larger in 2021, while the Production in kWh has more than quadrupled. Remuneration on the other hand has its peak with a 4 times larger value in the first quarter of 2020 and then nearly halves from its previous gain in 2021. All the indicators seem to lose gain between 2020 and 2021, the reason for this is unknown.</p>
-                 <h5>Continuous increase</h5>
-                 <p >The count of installations steadily increases from 2011 with 2’860 to 2016 with 12’385, nearly quadrupling its value, while falling completely flat after that and only increasing by a few 200s every year. This may be due to a stop of accepting new contracts.
-                     </p>
-                 <h5>Detached photovoltaic plant</h5>
-                     <p >Solar cells are installed separate from any structure
-                     </p>
-                 <h5>More information</h5>
-                 <p >Links...
-                 </p>
-            </div>
-            </div>
-            </div>
-            <div class="col-xl-4 col-sm-6 px-1 d-flex align-items-stretch">
-            <div class="card border-light" style="opacity:95%">
-                <div class="card-header text-center my-0 py-1" style="opacity:95%"><h4 class="my-0 py-0">Canton</h4></div>
-                <div class="card-body bg-dark text-white rounded-bottom" style="opacity:95%">
-                 <h5>Drinking water hydropower plant</h5>
-                 <p class="">Hydroelectricity production from a turbine utilizing water from the drinking water supply lines.</p>
-                 <h5>Flow hydropower plant</h5>
-                 <p class="">Hydroelectricity production from a turbine most commonly utilizing the current of a river.
-                     </p>
-                 <h5>Doping hydropower plant</h5>
-                     <p class="">Hydroelectricity production from a turbine most commonly utilizing a hydroelectric dam for blocking water and increasing water pressure.
-                     </p>
-                 <h5>Diversion hydropower plant</h5>
-                 <p class="">Channels a portion of a river through a canal and/or a penstock to utilize the natural decline of the riverbed elevation to produce energy.
-                 </p>
-                 <h5>More information</h5>
-                 
-            </div>
-            </div>
-            </div>
-            <div class="col-xl-4 col-sm-6 px-1 d-flex align-items-stretch">
-            <div class="card border-light"  style="opacity:95%">
-                <div class="card-header text-center my-0 py-1" style="opacity:95%"><h4 class="my-0 py-0">Municipality</h4></div>
-                <div class="card-body bg-dark text-white rounded-bottom" style="opacity:95%">
-                <h5>Steam biomass plant</h5>
 
+            <div class="container-fluid">
+              <div class="row" style="padding-top:15px">
+                <div class="col-xl-4 col-sm-6 px-1 d-flex align-items-stretch">
+                  <div class="card border-light" style="opacity:95%">
+                    <div class="card-header text-center my-0 py-1" style="opacity:95%">
+                      <h4 class="my-0 py-0">Country</h4>
+                    </div>
+                    <div class="card-body bg-dark text-white rounded-bottom" style="opacity:95%">
+                      <h5>More power more remuneration</h5>
+                      <p>Since the first remuneration recipient entry (KEV) the dataset in 2011, the country wide sum of
+                        the Output in kW is nearly 8 times larger in 2021, while the Production in kWh has more than
+                        quadrupled. Remuneration on the other hand has its peak with a 4 times larger value in the first
+                        quarter of 2020 and then nearly halves from its previous gain in 2021. All the indicators seem
+                        to lose gain between 2020 and 2021, the reason for this is unknown.</p>
+                      <h5>Continuous increase</h5>
+                      <p>The count of installations steadily increases from 2011 with 2’860 to 2016 with 12’385, nearly
+                        quadrupling its value, while falling completely flat after that and only increasing by a few
+                        200s every year. This may be due to a stop of accepting new contracts.
+                      </p>
+                      <h5>And then came the light</h5>
+                      <p> While in 2011 there were 2440 photovoltaic installations registered as recipients of feed-in
+                        remunerations which at this time equals about 6/7th of all installations. In 2021 there are
+                        12069 photovoltaic installations, with a share of about 11/12th of all installations. With approximately 5x as
+                        many installations photovoltaic ones also received a much larger percentual increase than all the other
+                        types, with the next larger one being around 3x as many.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 col-sm-6 px-1 d-flex align-items-stretch">
+                  <div class="card border-light" style="opacity:95%">
+                    <div class="card-header text-center my-0 py-1" style="opacity:95%">
+                      <h4 class="my-0 py-0">Canton</h4>
+                    </div>
+                    <div class="card-body bg-dark text-white rounded-bottom" style="opacity:95%">
+                      <h5>A sustainable Bern</h5>
+                      <p class="">Starting from 2013 on and overtaking Graubünden, Bern seems to have the highest
+                        possible output, not only for all entries summed up, but also for an individual entry. Even
+                        though this is the case, for the actual amount produce in kWh it is alway competing directly
+                        with Graubünden and from 2018 on even with Wallis. Even though Bern has around 4 times as many
+                        installations than the opposition.</p>
+                      <h5>Polarization</h5>
+                      <p class="">During all observed years, the southeast of Switzerland has the largest amount and
+                        percentage of hydropower installations registered, while the northwest has the highest
+                        percentage of solar installations. The middle of Switerland seems be a mixed bag of both, but
+                        increasingly using solar.
+                      </p>
+                      <h5>Outliers</h5>
+                      <p class=""> During all observed years, Graubünden seemed to have the largest standarddeviation of
+                        remuneration received, starting in 2011 with 1'800k and and in 2018 meeting with canton Uri and
+                        Wallis, all with a Remuneration standard deviation of around 600k. The same goes through for
+                        overall production in a year which were similarily high for their category.
+                      </p>
+
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 col-sm-6 px-1 d-flex align-items-stretch">
+                  <div class="card border-light" style="opacity:95%">
+                    <div class="card-header text-center my-0 py-1" style="opacity:95%">
+                      <h4 class="my-0 py-0">Municipality</h4>
+                    </div>
+                    <div class="card-body bg-dark text-white rounded-bottom" style="opacity:95%">
+                      <h5>Stagnated output</h5>
+                      <p class="">During all observed years there are more and more installations in muncipality were
+                        previously the output was low. Which reults in the map from being grey to more fully yellow. But
+                        the overall highest output from one installation has only gone up around 1k. This might also be
+                        due to a data error, where the PLZ4 was wrongly maintained since, the overal highest value on
+                        the country-level was around 10k larger in 2021.</p>
+                      <h5>Polarization</h5>
+                      <p class="">During all observed years, the southeast of Switzerland has the largest amount and
+                        percentage of hydropower installations registered, while the northwest has the highest
+                        percentage of solar installations. The middle of Switerland seems be a mixed bag of both, but
+                        increasingly using solar.
+                      </p>
+                      <h5>Domat</h5>
+                      <p class="">Domat seems to have the highest prodution entry over all observed years, with
+                        Lütschental, Grindelwald, Schattenwald und Meiringen being closely behind in the later years.
+                      </p>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
-            </div>
-            </div>
-             
-        </div>
-        </div>
 
 
 
           </div>
         </div>
 
-        <div role="tabpanel" class="tab-pane fade" id="Implementation">
-          <div class="alert alert-info">Test</div>
-          
+        <div role="tabpanel" class="tab-pane fade" style="position:absolute; width: 100%; height:100%"
+          id="Implementation">
+          <div class="p-0 m-0 text-center bg-image" style="
+                        background-image: url('./assets/470173003_highres.png');
+                        height: 100%; width:100%; background-size: contain; background-repeat: no-repeat;background-size: cover; display: block;
+  position: absolute;
+  left: 0;
+  top: 0;">
+
+            <div class="container" id="home" style="height: 100%;">
+              <div class="content">
+                <div class="row  bg-light">
+                  <div class="col-md-12" style="margin-top:15px">
+                    <h5 style="font-weight: 600;"> Familiarization with the D3js library and Bootstrap</h5>
+                    <p> To start the project I had to get into programming again and learn more about the d3js library.
+                      For this the exercises in the provided open data hackroom proved enough to cover the basics but
+                      most of it was done by experimenting with the different new functionalities that d3js presented to
+                      me. This together with the fact that I knew that I wanted to display something using maps, made me
+                      quickly prepare the basic TopoJSON maps and play around with how you can manipulate them with
+                      d3js. So the zooming, mouseover, onclick and all boundaries of the 3 levels were created quite
+                      quickly and I knew about the basics of how I could display data with them. Since I was already
+                      aware from the show room what the open data web app was supposed to look like or at least in what
+                      general direction it was supposed to go, I started already a little bit with the Web-Design using
+                      bootstrap. </p>
+                    <h5 style="font-weight: 600;">Data selection</h5>
+                    <p> So by this point I already had the maps prepared without data and a part of the design was done.
+                      During the Open Data Speed Dating Event on the 17 March 2022, where data coaches from different
+                      areas were presenting the data, I looked for data which would benefit from having it mapped to
+                      geograpical areas and which would have enough dimensions to allow further visualization other than
+                      mapping. This proved to be the case with the recipients of feed-in remuneration (KEV) dataset, so
+                      this was the one I chose.</p>
+                    <h5 style="font-weight: 600;">Completing the concept and starting implementation</h5>
+                    <p> After discussing the data with the data coach and having a look at it my self, I thought It
+                      would be interesting to create a dashboard with a time axis using the maps I already had, and show
+                      information about areas when they are clicked. To support this I had to first preprocess the
+                      dataset using python to bring it into a form that would enable this. This also included the
+                      transformation of the PLZ4 to GDENR, so that the identifiers would match and the data can be
+                      linked correctly. After that I added the chloropleth of the cantons for one attribute of the
+                      dataset and over all 11 years to the map. This was done quite quickly but then had to be expanded
+                      to support also the other attributes and levels of map. Further along a dynamic color scale was
+                      added, which color would need to fit the logarithmic scale of the map color. As a next step I
+                      wanted to support the different energy and plant types
+                      , so I had to integrate this somehow into the alreay very interactive visualization, which proved
+                      quite easy because it only depended on the count value and year.</p>
+                    <h5 style="font-weight: 600;">Finalization</h5>
+                    <p> After valuable feedback of the data coach, I streamlined the UI, fixed a few issues and added a
+                      different country overview with area charts over time, since only showing the map for the country
+                      level was nonsense. Then the text was written and included and a bit of Web-Design to the
+                      application was added to support it. On the 01 June 2022 in the late afternoon it was then
+                      uploaded to the <a href="https://opendata.iwi.unibe.ch/?orderBy=-date_publish&filter.$=bern" style="color:blue"></a>Open Data Showroom.</p>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
       <div role="tabpanel" class="tab-pane fade" style="position:absolute; width: 100%; height:100%" id="datasource">
@@ -504,18 +675,20 @@
           left: 0;
           top: 0;">
           <div class="container" style="margin-top:15px; height: 100%;">
-            
+
             <div class="content">
-              
+
               <div class="row">
                 <div class="bg-light rounded" style="opacity:95%">
-                <div class="col-md-12 my-2" style="text-align: center;" id="content2" style="opacity:95%">
-                  <h1 style="font-weight: 600;">Data sources</h1>
-                  <h5 style="font-weight: 600;">Main data source:</h5>
-                  <p>The dataset on Swiss recipients of the feed-in remuneration corresponds to the status as of 04 Mai
-                    2022. The dataset contains all recipients of feed-in remuneration between 2011 and 2021 with varying
-                    degree of data quality and following specifics:</p>
-                    
+                  <div class="col-md-12 my-2" style="text-align: center;" id="content2" style="opacity:95%">
+                    <h1 style="font-weight: 600;">Data sources</h1>
+                    <h5 style="font-weight: 600;">Main data source:</h5>
+                    <p>The dataset on Swiss recipients of the feed-in remuneration corresponds to the status as of 04
+                      Mai
+                      2022. The dataset contains all recipients of feed-in remuneration between 2011 and 2021 with
+                      varying
+                      degree of data quality and following specifics:</p>
+
                     <div class="container border rounded" style="text-align: center;">
                       <div class="row">
                         <div id="attr" class="col-sm">
@@ -533,8 +706,8 @@
                         <div id="attr" class="col-sm">
                           <p>Closing date</p>
                         </div>
-                        
-                        
+
+
                       </div>
 
 
@@ -566,7 +739,7 @@
                         <div id="attr" class="col-sm">
                           <p></p>
                         </div>
-                        
+
                         <div id="attr" class="col-sm">
                           <p>Project Specifics</p>
                         </div>
@@ -575,96 +748,176 @@
                         </div>
                       </div>
                     </div>
-                  <p></p>
-                  <p>For each year an entry is created for each running project with the up-do-date data for that year, which results to date in
-                    a csv file with 110’750 rows. The attributes highlighted in bold were the ones used in this project.
-                    This dataset includes entries from all following energy types: Hydropower (up to 10 megawatts MW),
-                    photovoltaics, wind energy, geothermal energy, biomass and waste. This dataset is created and being
-                    maintained by the federal office of energy (BFE). Although contracts are still running, no new
-                    registrations can be made. Link to the source of this dataset:
-                   <a href="https://opendata.swiss/de/dataset/bezugerinnen-und-bezuger-der-einspeisevergutung-kev" style="color: blue">opendata.swiss</a>.
-                  </p>
-                  <h5 style="font-weight: 600;">Supporting data sources:</h5>
-                  <h6 style="font-weight: 600;">GeoData</h6>
-                  <p>The TopoJSON data required for generating the country, canton and municipality boundaries were
-                    taken from following Github: <a href="https://github.com/interactivethings/swiss-maps" style="color: blue">swiss-maps</a>, which provides a
-                    mechanism to generate TopoJSON from publicly available swisstopo geodata, created and maintained by
-                    the federal office of topography. It also provided the necessary names, and the official
-                    municipality identification number.
-                  </p>
-                  <h5 style="font-weight: 600;">Datalink</h5>
-                  <p>To obtain a link between the individual renumeration recipient data and the geodata of the
-                    municipalities, a third dataset had to be used, which allowed the transformation of PLZ4 numbers to
-                    municipality identification numbers. This official document can be found here: <a href="https://www.bfs.admin.ch/asset/de/do-t-09.02-gwr-37" style="color: blue">bfs.admin.ch</a>.
+                    <p></p>
+                    <p>For each year an entry is created for each running project with the up-do-date data for that
+                      year, which results to date in
+                      a csv file with 110’750 rows. The attributes highlighted in bold were the ones used in this
+                      project.
+                      This dataset includes entries from all following energy types: Hydropower (up to 10 megawatts MW),
+                      photovoltaics, wind energy, geothermal energy, biomass and waste. This dataset is created and
+                      being
+                      maintained by the federal office of energy (BFE). Although contracts are still running, no new
+                      registrations can be made. Link to the source of this dataset:
+                      <a href="https://opendata.swiss/de/dataset/bezugerinnen-und-bezuger-der-einspeisevergutung-kev"
+                        style="color: blue">opendata.swiss</a>.
                     </p>
+                    <h5 style="font-weight: 600;">Supporting data sources:</h5>
+                    <h6 style="font-weight: 600;">GeoData</h6>
+                    <p>The TopoJSON data required for generating the country, canton and municipality boundaries were
+                      taken from following Github: <a href="https://github.com/interactivethings/swiss-maps"
+                        style="color: blue">swiss-maps</a>, which provides a
+                      mechanism to generate TopoJSON from publicly available swisstopo geodata, created and maintained
+                      by
+                      the federal office of topography. It also provided the necessary names, and the official
+                      municipality identification number.
+                    </p>
+                    <h6 style="font-weight: 600;">Data link</h6>
+                    <p>To obtain a link between the individual renumeration recipient data and the geodata of the
+                      municipalities, a third dataset had to be used, which allowed the transformation of PLZ4 numbers
+                      to
+                      municipality identification numbers. This official document can be found here: <a
+                        href="https://www.bfs.admin.ch/asset/de/do-t-09.02-gwr-37" style="color: blue">bfs.admin.ch</a>.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-            </div>
           </div>
-          
+
         </div>
-        
+
       </div>
 
-      
+
       <div role="tabpanel" class="tab-pane fade" style="position:absolute; width: 100%; height:100%" id="contact">
         <div class="p-0 m-0 text-center bg-image" style="
-                      background-image: url('assets/gebaeude_solarpanels_photovoltaik_shutterstock_278061698_16-92.png');
+                      background-image: url('assets/hydropower.png');
                       height: 100%; width:100%; background-size: contain; background-repeat: no-repeat;background-size: cover; display: block;
 position: absolute;
 left: 0;
-top: 0;">
+top: 0; z-index: 999;">
           <div class="container " style="height: 100%;">
-                <div class="content ">
-                  <div class="row ">
-                    <div class="col-md-13" style="margin-top:15px">
+            <div class="content ">
+              <div class="row ">
+                <div class="col-md-13" style="margin-top:15px">
 
-                      <div class="row " style="flex-wrap:nowrap; justify-content: center;">
-              
-                        <div class="col mb-1 bg-dark rounded" style="border:2px; border-color:transparent; opacity: 95%;">
-                          <div class="mx-2 my-4 " style="color:white">
-                            <h5 style="font-weight: 600;">About the Project</h5>
-                            <p > This visualization was created during the Open Data Course at the University in Bern in 2021. Different Technologies were used in the creation of it including Javascript, Bootstrap and the D3.js library. Python with the Numpy and Pandas libaries were used for processing and preparing the data. The data about the Recipients of feed-in Remuneration was retrieved from <a href="https://opendata.swiss/de/dataset/bezugerinnen-und-bezuger-der-einspeisevergutung-kev" style="color: grey">Opendata.swiss</a> and the WebApp developed in consultation with a data coach from the federal office of energy (BfE) who also gave me the necessary feedback to improve it and guide it into the right direction.</p>
-                          </div>
-                        </div>
-                        
-          
+                  <div class="row " style="flex-wrap:nowrap; justify-content: center;">
+
+                    <div class="col mb-1 bg-dark rounded" style="border:2px; border-color:transparent; opacity: 95%;">
+                      <div class="mx-2 my-4 " style="color:white">
+                        <h5 style="font-weight: 600;">About the project</h5>
+                        <p> This visualization was created during the Open Data Course at the University in Bern in
+                          2021. Different Technologies were used in the creation of it including Javascript, Bootstrap
+                          and the D3.js library. Python with the Numpy and Pandas libaries were used for processing and
+                          cleaning of the data. The data about the Recipients of feed-in Remuneration was retrieved from
+                          <a href="https://opendata.swiss/de/dataset/bezugerinnen-und-bezuger-der-einspeisevergutung-kev"
+                            style="color: gainsboro;">Opendata.swiss</a> and the WebApp developed in consultation with a
+                          data coach from the federal office of energy (BfE) who also gave me the necessary feedback to
+                          improve it and guide it into the right direction.</p>
+                          <p>With a little bit more time and effort it would have even be improved a little bit more by feeding it data directly from the API, since the script for transforming the data is already written. Additionaly the link between the energy / installation types and indicators could be made more clear as well as adding a leaderboard for showing entries, municipalities, cantons etc...</p>
                       </div>
+                    </div>
 
-                      <div class="row " style="flex-wrap:nowrap; justify-content: center;">
-          
-                        <div class="col bg-dark rounded" style="border:2px; border-color: transparent ; opacity: 95%;">
-                          <div class="mx-2 my-4 " style="color:white">
-                            <h5 style="font-weight: 600;">About me</h5>
-                            <p > I am Daniel Guggisberg currently studying in the third semester of my Master's Degree for Business Administration with a focus on information systems. I had previous programming knowledge due to a minor in Computer Science but during my day to day I don't generally get to program as much as I like to, so creating this was a joy.</p>
-                          <p >E-Mail: Daniel.Guggisberg@hotmail.ch  &nbsp; <a href="https://www.linkedin.com/in/daniel-guggisberg-26862a208/"><img src="./assets/58e91afdeb97430e81906504.png"  style="width:1.3vw"></img></p></a>
 
-                          </div>
-                        </div>
-                        
-                        <div class="col-md-auto bg-dark ml-1 rounded" style="border:2px; border-color:transparent ; opacity: 95%;">
-                          <h5></h5>
-                          <div class="mx-2 my-3 rounded"><img class="" src="./assets/_DSC5883v8.png" style="width:auto;height:auto; max-width: 8vw;" alt="Italian Trulli"></img></div>
-                        </div>
-     
+                  </div>
+
+                  <div class="row " style="flex-wrap:nowrap; justify-content: center;">
+
+                    <div class="col bg-dark rounded" style="border:2px; border-color: transparent ; opacity: 95%;">
+                      <div class="mx-2 my-4 " style="color:white">
+                        <h5 style="font-weight: 600;">About me</h5>
+                        <p> I am Daniel Guggisberg currently studying in the third semester of my Master's Degree for
+                          Business Administration with a focus on Information Systems. I had previous programming
+                          knowledge due to a minor in Computer Science but during my day-to-day I don't generally get to
+                          program as much as I like to, so creating this was a joy. </p>
+                        <p>E-Mail: Daniel.Guggisberg@hotmail.ch &nbsp; <a
+                            href="https://www.linkedin.com/in/daniel-guggisberg-26862a208/"><img
+                              src="./assets/58e91afdeb97430e81906504.png" style="width:1.3vw"></img></p></a>
+
                       </div>
-                      
+                    </div>
 
-                    
+                    <div class="col-md-auto bg-dark ml-1 rounded"
+                      style="border:2px; border-color:transparent ; opacity: 95%;">
+                      <h5></h5>
+                      <div class="mx-2 my-3 rounded"><img class="" src="./assets/_DSC5883v8.png"
+                          style="width:auto;height:auto; max-width: 8vw;" alt="Italian Trulli"></img></div>
                     </div>
 
                   </div>
+
+
+                  <div class="row " style="flex-wrap:nowrap; justify-content: center;">
+
+
+                    <div class="col mt-1 bg-dark rounded" style="border:2px; border-color:transparent; opacity: 95%;">
+                      <div class="mx-2 my-4 " style="color:white">
+                        <h5 style="font-weight: 600;">References</h5>
+                        <div class="row">
+                          <div class="col">
+                            <h6 style="font-weight: 600;">Background Pictures</h6>
+                            <p id="references"><a
+                                href="https://www.swissinfo.ch/eng/swiss-companies-told-to-brace-for-electricity-shortages/47034548"
+                                style="color: gainsboro;">Electricity Grid</a></p>
+                            <p id="references"><a
+                                href="https://www.propertycasualty360.com/2019/04/24/make-sure-your-roofs-warranty-remains-effective-under-those-solar-panels-414-154169/?slreturn=20220501065753"
+                                style="color: gainsboro;">Photovoltaic Roof</a></p>
+                            <p id="references"><a href="https://sinaumedia.com/geothermal-power-plant-work-system/"
+                                style="color: gainsboro;">Geothermal power plant</a></p>
+                            <p id="references"><a
+                                href="https://eos.org/research-spotlights/researchers-zero-in-on-methane-released-from-reservoirs"
+                                style="color: gainsboro;">Hydropower plant</a></p>
+                            <p id="references"><a
+                                href="https://www.shell.com/business-customers/lubricants-for-business/products/wind-power.html"
+                                style="color: gainsboro;">Wind turbines</a></p>
+                            <span>None of the background pictures used are my own works and all credit goes to the
+                              original creators.</span>
+                          </div>
+                          <div class="col">
+                            <h6 style="font-weight: 600;">Data</h6>
+                            <p id="references"> <a class="mr-1"
+                                href="https://opendata.swiss/de/dataset/bezugerinnen-und-bezuger-der-einspeisevergutung-kev"
+                                style="color: gainsboro;">Recipients of feed-in remuneration</a></p>
+                            <p id="references"> <a href="https://www.bfs.admin.ch/asset/de/do-t-09.02-gwr-37"
+                                style="color: gainsboro;">GDENR Transformation CSV</a></p>
+                            <p id="references"> <a href="https://fontawesome.com/" style="color: gainsboro;">UI
+                                Icons</a></p>
+                            <p id="references"> <a href="https://devdocs.io/d3/" style="color: gainsboro;">D3js
+                                information</a></p>
+                            <p id="references"> <a href="https://d3-graph-gallery.com/index.html"
+                                style="color: gainsboro;">Visualization inspiration</a></p>
+
+
+
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
 
-              </div>
-        </div>
-      </div>
 
-      <div role="tabpanel" class="tab-pane fade" id="references">
-        <div class="alert alert-info">references</div>
+
+
+
+
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
+  </div>
+
+  <div role="tabpanel" class="tab-pane fade" id="references">
+    <div class="alert alert-info">references</div>
+  </div>
+  </div>
   </div>
 
   </div>
